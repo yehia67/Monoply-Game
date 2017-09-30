@@ -9,10 +9,6 @@ package monoply.game;
  *
  * @author yehia
  */
-public class Players {
-    public int money = 1500 ,turns, place = 0; 
-     Dice dice;
-    void move(){
-         turns += dice.getDice();
-    }
+public class Dice {
+    
 }
