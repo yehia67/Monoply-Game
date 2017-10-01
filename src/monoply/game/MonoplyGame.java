@@ -26,8 +26,13 @@ public class MonoplyGame {
         Countries countries = new Countries();
         System.out.println("Welcom to our game");
         System.out.println("Please enter the no of players");
+        int playerNo;
         Scanner x = new Scanner(System.in);
-        int playerNo = x.nextInt();
+        playerNo = x.nextInt();
+        while (playerNo > 8 || playerNo < 2) {
+            System.out.println("Please enter a number between 2 & 8");
+            playerNo = x.nextInt();
+        }
         String playerName;
         for(int i = 1; i <= playerNo; ++i)
         {
