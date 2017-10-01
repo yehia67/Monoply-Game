@@ -22,6 +22,8 @@ public class MonoplyGame {
     public static void main(String args[]){
         ArrayList<Players> players= new ArrayList<Players>();
         //Dice dice = new Dice();
+        StartPage sp = new StartPage();
+        sp.Display();
         Random rand = new Random();
         Countries countries = new Countries();
         System.out.println("Welcom to our game");
