@@ -6,6 +6,7 @@
 package monoply.game;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -20,7 +21,8 @@ public class MonoplyGame {
     
     public static void main(String args[]){
         ArrayList<Players> players= new ArrayList<Players>();
-        Dice dice = new Dice();
+        //Dice dice = new Dice();
+        Random rand = new Random();
         Countries countries = new Countries();
         System.out.println("Welcom to our game");
         System.out.println("Please enter the no of players");
@@ -40,7 +42,7 @@ public class MonoplyGame {
         {
         System.out.println("press any key to roll the dices");
         o = x.next();
-        d = dice.getDice();
+        d = rand.nextInt(12) + 1;
         System.out.println("Dices = "+ d );
         players.get(i).place +=  d;
         Country defaultCountry = countries.getCountries(players.get(i).place);
