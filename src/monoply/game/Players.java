@@ -12,7 +12,15 @@ package monoply.game;
 public class Players {
     public int money = 1500 ,turns, place = 0; 
      Dice dice;
+     private String name;
     void move(){
          turns += dice.getDice();
+    }
+    void setName(String n)
+    {
+        name = n;
+    }
+    String getName(){
+        return name;
     }
 }
