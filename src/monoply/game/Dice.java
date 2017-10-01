@@ -5,10 +5,16 @@
  */
 package monoply.game;
 
+import java.util.Random;
+
 /**
  *
  * @author yehia
  */
 public class Dice {
-    
+   private Random rand;
+   private final int dices = rand.nextInt(12) + 1;
+   int getDice(){
+       return dices;
+   }
 }
