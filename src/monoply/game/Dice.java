@@ -12,7 +12,7 @@ import java.util.Random;
  * @author yehia
  */
 public class Dice {
-   private Random rand;
+   private Random rand = new Random();
    private final int dices = rand.nextInt(12) + 1;
    int getDice(){
        return dices;

@@ -20,8 +20,8 @@ public class MonoplyGame {
     
     public static void main(String args[]){
         ArrayList<Players> players= new ArrayList<Players>();
-        Dice dice;
-         Country[] country;
+        Dice dice = new Dice();
+        Countries countries = new Countries();
         System.out.println("Welcom to our game");
         System.out.println("Please enter the no of players");
         Scanner x = new Scanner(System.in);
@@ -29,11 +29,64 @@ public class MonoplyGame {
         String playerName;
         for(int i = 1; i <= playerNo; ++i)
         {
-            System.out.println("Please enter Player" + i +"name" );
+            System.out.println("Please enter Player " + i +" name" );
             playerName = x.next();
            Players playe = new Players(playerName);
            players.add(playe);
         }
+        int i = 0, d;
+        String o;
+        while(true)
+        {
+        System.out.println("press any key to roll the dices");
+        o = x.next();
+        d = dice.getDice();
+        System.out.println("Dices = "+ d );
+        players.get(i).place +=  d;
+        Country defaultCountry = countries.getCountries(players.get(i).place);
+        System.out.println("Weclome to "+ defaultCountry.getName());
+        if(defaultCountry.isOwner(players.get(i).name)){
+            System.out.println("Weclome to your place Mr. " +players.get(i).name);
+        }
+        else if(defaultCountry.checkAvailable())
+        {
+             System.out.println("Dear Mr. " +players.get(i).name);
+             System.out.println("you can buy " + defaultCountry.getName() + " for just "
+                      + defaultCountry.getPrice() + "$"  );
+             System.out.println("To buy it press Y else press any button");
+             String y = x.next();
+             if(y.equals("y") || y.equals("Y") )
+             {
+                 if(players.get(i).money >= defaultCountry.getPrice())
+                 {
+                     players.get(i).money -= defaultCountry.getPrice();
+                     System.out.println("Congratulation you have succufuly buy that city");
+                     System.out.println("your credit now is =  " + players.get(i).money +"$" );
+                     defaultCountry.sold();
+                     
+                 }
+                 else
+             {
+                 System.out.println("Sorry you don't have enought money to buy this city");
+             }
+             }
+             
+        }
+        else{
+            players.get(i).money -= defaultCountry.getTotalFees();
+         System.out.println("You pay   " + defaultCountry.getTotalFees()+"$" + "for vistimg "
+                 + "our beautiful country"); 
+            System.out.println("your credit now is =  " + players.get(i).money +"$" );
+         
+        }
+        System.out.println("Next TURN!!");
+        if(i == playerNo)    
+        {
+                i = 0;
+            }
+        
+        }
+        
         
     }
     

@@ -89,4 +89,9 @@ public class Countries {
         countries[index] = new Country(400, 400, Color.BLUE,
                 2, "Mayfair");
     }
+Country getCountries(int index)
+{
+    return countries[index];
+}
+
 }
