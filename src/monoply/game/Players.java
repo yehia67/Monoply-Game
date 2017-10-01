@@ -16,11 +16,14 @@ public class Players {
     void move(){
          turns += dice.getDice();
     }
-    void setName(String n)
+    Players(String n){
+        name = n;
+    }
+    /*void setName(String n)
     {
         name = n;
     }
     String getName(){
         return name;
-    }
+    }*/
 }
