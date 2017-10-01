@@ -82,6 +82,7 @@ public class MonoplyGame {
          
         }
         System.out.println("Next TURN!!");
+        i++;
         if(i == playerNo)    
         {
                 i = 0;
