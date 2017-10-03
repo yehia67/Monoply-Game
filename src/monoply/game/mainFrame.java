@@ -15,12 +15,16 @@ public class mainFrame extends javax.swing.JFrame {
     
     public static playPanel p = new playPanel();
     public static startPanel sp = new startPanel();
+    public static GamePlayPanel gp = new GamePlayPanel();
     
     public mainFrame() {
         initComponents();
         mainPanel.add(sp);
         mainPanel.add(p);
+        mainPanel.add(gp);
         p.setVisible(false);
+        gp.setVisible(false);
+        this.pack();
     }
 
     /**

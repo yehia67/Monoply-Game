@@ -17,6 +17,7 @@ public class playPanel extends javax.swing.JPanel {
      */
     public playPanel() {
         initComponents();
+        player3TextField.setVisible(false);
     }
 
     /**
@@ -218,6 +219,8 @@ public class playPanel extends javax.swing.JPanel {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
+        setVisible(false);
+        mainFrame.gp.setVisible(true);
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
