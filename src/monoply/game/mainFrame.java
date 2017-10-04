@@ -6,25 +6,24 @@ package monoply.game;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author n0krashy
  */
 public class mainFrame extends javax.swing.JFrame {
-    
+
     public static playPanel p = new playPanel();
     public static startPanel sp = new startPanel();
     public static GamePlayPanel gp = new GamePlayPanel(4);
-    
+
     public mainFrame() {
         initComponents();
         mainPanel.add(sp);
         mainPanel.add(p);
         mainPanel.add(gp);
-        sp.setVisible(false);
+        sp.setVisible(true);
         p.setVisible(false);
-        gp.setVisible(true);
+        gp.setVisible(false);
         this.pack();
     }
 
@@ -40,6 +39,7 @@ public class mainFrame extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 700));
         setSize(new java.awt.Dimension(500, 500));
 
         mainPanel.setLayout(new java.awt.GridBagLayout());
@@ -55,9 +55,8 @@ public class mainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

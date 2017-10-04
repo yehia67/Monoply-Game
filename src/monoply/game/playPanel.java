@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package monoply.game;
-import monoply.game.mainFrame;
 
 /**
  *
@@ -17,7 +16,6 @@ public class playPanel extends javax.swing.JPanel {
      */
     public playPanel() {
         initComponents();
-        player3TextField.setVisible(false);
     }
 
     /**
@@ -43,7 +41,7 @@ public class playPanel extends javax.swing.JPanel {
         nextButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
-        spinner.setModel(new javax.swing.SpinnerNumberModel(2, 2, 8, 1));
+        spinner.setModel(new javax.swing.SpinnerNumberModel(8, 2, 8, 1));
         spinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spinnerStateChanged(evt);

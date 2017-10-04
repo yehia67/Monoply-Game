@@ -7,15 +7,14 @@ package monoply.game;
 
 /**
  *
- * @author 
+ * @author
  */
 public class Places {
- 
-      Coordinates coords;
-    public Places(Coordinates c)
-    {
-        this.coords=c;
+
+    Coordinates coords;
+
+    public Places(Coordinates c) {
+        this.coords = c;
     }
-    
-  
+
 }

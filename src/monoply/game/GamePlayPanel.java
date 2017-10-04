@@ -65,22 +65,20 @@ public class GamePlayPanel extends GamePanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-     int diceNumber = Dice.getDice();
-       jLabel1.setText(diceNumber + "");
-       
-        int firstPlace =  players.get(turn).place;
-        int secondPlace = (firstPlace + diceNumber)%placesArr.size();
+        int diceNumber = Dice.getDice();
+        jLabel1.setText(diceNumber + "");
+
+        int firstPlace = players.get(turn).place;
+        int secondPlace = (firstPlace + diceNumber) % placesArr.size();
         players.get(turn).x = placesArr.get(secondPlace).coords.x;
         players.get(turn).y = placesArr.get(secondPlace).coords.y;
-        players.get(turn).place = secondPlace; 
-        
-             
-        
-        turn = (turn+1)%players.size();
-        
+        players.get(turn).place = secondPlace;
+
+        turn = (turn + 1) % players.size();
+
         this.repaint();
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

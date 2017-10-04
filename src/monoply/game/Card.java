@@ -4,14 +4,16 @@
  * and open the template in the editor.
  */
 package monoply.game;
+
 /**
  *
  * @author eslam
  */
 public class Card {
-    private String name ;
+
+    private String name;
     private String Description;
-    private int type ;
+    private int type;
 
     public Card(String name, String Description, int type) {
         this.name = name;

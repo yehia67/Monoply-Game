@@ -12,19 +12,22 @@ import java.awt.Color;
  * @author yehia
  */
 public class Player {
-    public int money = 1500 ,turns, place = 0;
+
+    public int money = 1500, turns, place = 0;
     public int x, y;
     public Color color;
-     Dice dice;
-     public String name;
-    void move(){
-         place += dice.getDice();
+    Dice dice;
+    public String name;
+
+    void move() {
+        place += dice.getDice();
     }
-    public Player(String n, int x, int y, Color c){
+
+    public Player(String n, int x, int y, Color c) {
         name = n;
         this.x = x;
         this.y = y;
         this.color = c;
     }
-    
+
 }

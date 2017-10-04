@@ -26,23 +26,7 @@ public class MonoplyGame {
         mF.setVisible(true);
         Random rand = new Random();
       //  Countries countries = new Countries();
-        /*System.out.println("Welcom to our game");
-        System.out.println("Please enter the no of players");
-        int playerNo;
-        Scanner x = new Scanner(System.in);
-        playerNo = x.nextInt();
-        while (playerNo > 8 || playerNo < 2) {
-            System.out.println("Please enter a number between 2 & 8");
-            playerNo = x.nextInt();
-        }
-        String playerName;
-        for(int i = 1; i <= playerNo; ++i)
-        {
-            System.out.println("Please enter Player " + i +" name" );
-            playerName = x.next();
-           Player playe = new Player(playerName);
-           players.add(playe);
-        }
+        /*
         int i = 0, d;
         String o;
         while(true)
