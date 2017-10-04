@@ -5,16 +5,17 @@
  */
 package monoply.game;
 
-import java.util.Random;
-
 /**
  *
- * @author yehia
+ * @author 
  */
-public class Dice {
-   private static Random rand = new Random();
-   
-   public static int getDice(){
-       return rand.nextInt(12) + 1;
-   }
+public class Places {
+ 
+      Coordinates coords;
+    public Places(Coordinates c)
+    {
+        this.coords=c;
+    }
+    
+  
 }

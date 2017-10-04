@@ -20,13 +20,13 @@ public class MonoplyGame {
      */
     
     public static void main(String args[]){
-        ArrayList<Players> players= new ArrayList<Players>();
+        ArrayList<Player> players= new ArrayList<Player>();
         //Dice dice = new Dice();
         mainFrame mF = new mainFrame();
         mF.setVisible(true);
         Random rand = new Random();
-        Countries countries = new Countries();
-        System.out.println("Welcom to our game");
+      //  Countries countries = new Countries();
+        /*System.out.println("Welcom to our game");
         System.out.println("Please enter the no of players");
         int playerNo;
         Scanner x = new Scanner(System.in);
@@ -40,7 +40,7 @@ public class MonoplyGame {
         {
             System.out.println("Please enter Player " + i +" name" );
             playerName = x.next();
-           Players playe = new Players(playerName);
+           Player playe = new Player(playerName);
            players.add(playe);
         }
         int i = 0, d;
@@ -98,6 +98,6 @@ public class MonoplyGame {
         }
         
         
-    }
+   */ }
     
 }

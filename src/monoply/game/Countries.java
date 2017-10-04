@@ -1,4 +1,4 @@
-package monoply.game;
+/*package monoply.game;
 
 import java.awt.Color;
 
@@ -95,3 +95,4 @@ Country getCountries(int index)
 }
 
 }
+*/

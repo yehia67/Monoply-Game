@@ -8,20 +8,20 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 
-public class SpecialPlaces {
+public class SpecialPlaces extends Places{
     int location;                    //to be modified
     String name;                     //name of the special location ex utility,Income tax
     SpecialCards Cards;
     
     
-    public SpecialPlaces(int loc, String nm){
-        this.location=loc;
-        this.name=nm;
+    public SpecialPlaces(String name, Coordinates c){
+       super(c);
+        this.name=name;
     }
     
     
     //adds the effect of each specialplace based on location
-    public void placesIntoAction(Players p1 ,Players p2,playerlocation){
+    public void placesIntoAction(Player p1 ,Player p2,playerlocation){
         
         //position is to be taken first pos
         

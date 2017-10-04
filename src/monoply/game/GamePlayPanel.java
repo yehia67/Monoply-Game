@@ -14,7 +14,8 @@ public class GamePlayPanel extends GamePanel {
     /**
      * Creates new form GamePlayPanel
      */
-    public GamePlayPanel() {
+    public GamePlayPanel(int playersCount) {
+        super(playersCount);
         initComponents();
     }
 
@@ -27,19 +28,64 @@ public class GamePlayPanel extends GamePanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        jButton1.setText("Roll Dice!");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(211, 211, 211)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addComponent(jLabel1)))
+                .addContainerGap(604, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(319, 319, 319)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addContainerGap(538, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+     int diceNumber = Dice.getDice();
+       jLabel1.setText(diceNumber + "");
+       
+        int firstPlace =  players.get(turn).place;
+        int secondPlace = (firstPlace + diceNumber)%placesArr.size();
+        players.get(turn).x = placesArr.get(secondPlace).coords.x;
+        players.get(turn).y = placesArr.get(secondPlace).coords.y;
+        players.get(turn).place = secondPlace; 
+        
+             
+        
+        turn = (turn+1)%players.size();
+        
+        this.repaint();
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
