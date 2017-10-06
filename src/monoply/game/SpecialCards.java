@@ -41,7 +41,7 @@ public class SpecialCards {
         Collections.shuffle(chest);
         Collections.shuffle(chance);
     }
-    public void performAction (Players player)
+    public void performAction (Player player)
     {  //Actions to be edited 
         if (DrawnCard.getType()==1){
             switch(DrawnCard.getName()){
@@ -84,7 +84,7 @@ public class SpecialCards {
             }
         }
     }
-    public void DrawCard (int type, Players Player)
+    public void DrawCard (int type, Player Player)
     {
         if (type ==1)
         {

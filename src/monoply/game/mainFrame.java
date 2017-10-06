@@ -1,5 +1,11 @@
 package monoply.game;
 
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.HeadlessException;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,10 +20,12 @@ public class mainFrame extends javax.swing.JFrame {
 
     public static playPanel p = new playPanel();
     public static startPanel sp = new startPanel();
-    public static GamePlayPanel gp = new GamePlayPanel(4);
+    public static GamePanel gp = new GamePanel();
 
     public mainFrame() {
         initComponents();
+        GridBagConstraints c = new GridBagConstraints();
+        
         mainPanel.add(sp);
         mainPanel.add(p);
         mainPanel.add(gp);
@@ -39,8 +47,8 @@ public class mainFrame extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 700));
-        setSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(new java.awt.Dimension(700, 700));
+        setSize(new java.awt.Dimension(700, 700));
 
         mainPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -48,16 +56,11 @@ public class mainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1057, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
         pack();
@@ -102,6 +105,6 @@ public class mainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel mainPanel;
+    public static javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }
