@@ -6,6 +6,8 @@
 package monoply.game;
 
 
+
+
 /**
  *
  * @author mahmoud
@@ -15,8 +17,12 @@ public class GamePanel extends javax.swing.JPanel {
     /**
      * Creates new form GamePlayPanel
      */
+ 
     public GamePanel() {
         initComponents();
+        hideButton();
+    
+        
     }
 
     /**
@@ -35,6 +41,11 @@ public class GamePanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDoubleBuffered(false);
         setPreferredSize(new java.awt.Dimension(700, 700));
@@ -70,11 +81,13 @@ public class GamePanel extends javax.swing.JPanel {
                 .addGap(215, 215, 215))
         );
 
-        jLabel1.setText("Score");
+        jLabel1.setText("Player 1 ");
 
-        jLabel2.setText("player1:");
+        jLabel2.setText("Money : 1500$");
 
-        jLabel3.setText("50");
+        jLabel3.setText("Money : 1500$");
+
+        jLabel4.setText("Player 2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,23 +96,66 @@ public class GamePanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
+                    .addComponent(jLabel2)
                     .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTextField1.setText("Welcome to our game");
+
+        jButton1.setText("Y");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("N");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -109,24 +165,44 @@ public class GamePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BoardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 120, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(154, 154, 154)))
+                .addGap(0, 115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    Player player = new Player();
+    
+    public void hideButton(){
+        jButton1.setVisible(false);
+        jButton2.setVisible(false);
+    }
+    public void showButton(){
+        jButton1.setVisible(true);
+        jButton2.setVisible(true);
+    }
+    
     private void rollDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollDiceButtonActionPerformed
         // TODO add your handling code here:
         int diceNumber = Dice.getDice();
+       
+        player.place += diceNumber;
         DiceResultLabel.setText(diceNumber + "");
-
+        
         int firstPlace = Board.players.get(Board.turn).place;
         int secondPlace = (firstPlace + diceNumber) % Board.placesArr.size();
         Board.players.get(Board.turn).x = Board.placesArr.get(secondPlace).coords.x;
@@ -136,17 +212,86 @@ public class GamePanel extends javax.swing.JPanel {
         Board.turn = (Board.turn + 1) % Board.players.size();
 
         this.repaint();
+           MysetText(player.place);
 
     }//GEN-LAST:event_rollDiceButtonActionPerformed
+   
+   
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:yes
+        if(country.getPrice() <= player.money)
+        {
+            
+            jTextField1.setText("coungratulation you get that country!!");
+              player.money -= country.getPrice();
+            jLabel2.setText("Money: "+player.money);
+            country.sold();
+            country.setOwner(player);
+            hideButton();
+        }
+        else
+        {
+            jTextField1.setText("Sorry u dont have money" );
+             hideButton();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+Country country;
+    private void MysetText(int i){
+        Board board = new Board();
+         
+         country = board.getPlace(i);
+        if(i == 10 || i == 30)// jail
+        {
+            
+        }else if(i == 4 || i == 38) // taxes
+        {
+            
+        }
+        else if( i == 20) // bus
+        {
+            
+        }else if(i == 2 || i == 7 || i == 17 || i == 22 || i == 33 || i == 36)
+        {
+            
+        }
+        else if(i == 0)
+        {
+            jTextField1.setText("Start the new round and get 200$" );
+        }
+        else{
+            if(country.isOwner(player)){
+                jTextField1.setText("Welcome to your country " + country.getName() );
+                hideButton();
+            } 
+            else if(country.checkAvailable())
+            {
+               jTextField1.setText("You can buy our country for just " + country.getPrice()+"$" );
+               showButton();
+            }
+            else{
+                jTextField1.setText("Please pay " + country.getTotalFees()+"$ "+"for visting our country" );
+                player.money -= country.getTotalFees();
+            }
+        }
+            }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTextField1.setText("preese Roll Dice button to got to next turn" );
+        hideButton();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BoardPanel;
     private javax.swing.JLabel DiceResultLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton rollDiceButton;
     // End of variables declaration//GEN-END:variables
 }

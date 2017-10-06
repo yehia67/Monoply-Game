@@ -22,7 +22,7 @@ public class Player {
     void move() {
         place += dice.getDice();
     }
-
+   Player(){}
     public Player(String n, int x, int y, Color c) {
         name = n;
         this.x = x;

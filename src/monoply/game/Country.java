@@ -10,7 +10,7 @@ public class Country extends Places {
     private Color countryColor;
     private Player Owner;
     private boolean available = true;
-
+         
     public Country(int mPrice, int mFees, Color mCountryColor, String mName, Coordinates coords) {
         super(coords);
         price = mPrice;
@@ -19,6 +19,15 @@ public class Country extends Places {
 
         name = mName;
     }
+   void setOwner(Player O)
+   {
+       Owner = O;
+   }
+    Country() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
 
     boolean isOwner(Player o) {
         if (o == Owner) {

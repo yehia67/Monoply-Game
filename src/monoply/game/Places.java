@@ -12,9 +12,20 @@ package monoply.game;
 public class Places {
 
     Coordinates coords;
-
+    String Owner = "No One";
+    Places(){}   
     public Places(Coordinates c) {
         this.coords = c;
     }
-
+    
+   boolean isOwn(String player)
+   {
+       if(player.equalsIgnoreCase(Owner))
+       {
+           return true;
+       }
+       else{
+           return false;
+       }
+   }
 }
