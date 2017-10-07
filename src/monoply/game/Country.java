@@ -8,7 +8,7 @@ public class Country extends Places {
     private int price = 200;
     private int totalFees = 20;
     private Color countryColor;
-    private Player Owner;
+    public Player Owner;
     private boolean available = true;
          
     public Country(int mPrice, int mFees, Color mCountryColor, String mName, Coordinates coords) {

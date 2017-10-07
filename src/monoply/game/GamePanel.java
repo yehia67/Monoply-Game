@@ -5,6 +5,8 @@
  */
 package monoply.game;
 
+import java.util.ArrayList;
+import javax.swing.JLabel;
 import static monoply.game.playPanel.playersNumberSpinner;
 import static monoply.game.playPanel.player1TextField;
 import static monoply.game.playPanel.player2TextField;
@@ -22,10 +24,9 @@ import static monoply.game.playPanel.playersNumber;
  */
 public class GamePanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form GamePlayPanel
-     */
+    public  JLabel[] label;
     public GamePanel() {
+        this.label = new JLabel[]{Player1Money, Player2Money, Player3Money, Player4Money, Player5Money, Player6Money ,Player7Money, Player8Money};
         initComponents();
         hideButton();
     }
@@ -397,6 +398,10 @@ public class GamePanel extends javax.swing.JPanel {
         }
     }
 
+    
+        
+         
+        
     public void hideButton() {
         YButton.setVisible(false);
         NButton.setVisible(false);
@@ -406,11 +411,11 @@ public class GamePanel extends javax.swing.JPanel {
         YButton.setVisible(true);
         NButton.setVisible(true);
     }
-
+  int  lableNum = -1;
     private void rollDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollDiceButtonActionPerformed
         // TODO add your handling code here:
         int diceNumber = Dice.getDice();
-
+         
         currentPlayer = Board.players.get(Board.turn);
         DiceResultLabel.setText(diceNumber + "");
         
@@ -422,13 +427,18 @@ public class GamePanel extends javax.swing.JPanel {
         currentPlayer.y = Board.placesArr.get(secondPlace).coords.y;
         currentPlayer.place = secondPlace;
         System.out.println("second place : " + secondPlace);
-
-
+       int limit = playersNumber - 1;
+       
+        if(lableNum > limit )
+       {
+          lableNum = -1;
+       }
+      
         this.repaint();
         MysetText(currentPlayer.place);
-        
+        lableNum++;
         Board.turn = (Board.turn + 1) % Board.players.size();
-
+        
     }//GEN-LAST:event_rollDiceButtonActionPerformed
 
 
@@ -437,9 +447,10 @@ public class GamePanel extends javax.swing.JPanel {
         Country country = (Country) currentPlace;
         if (country.getPrice() <= currentPlayer.money) {
 
-            MessageTextField.setText("coungratulation you get that country!!");
+            MessageTextField.setText("coungratulation you get "+country.getName());
             currentPlayer.money -= country.getPrice();
-            Player1Money.setText("Money: " + currentPlayer.money);
+           label[lableNum].setText("Money: " +currentPlayer.money);
+           // Player1Money.setText("Money: " + currentPlayer.money);
             country.sold();
             country.setOwner(currentPlayer);
             hideButton();
@@ -469,14 +480,17 @@ public class GamePanel extends javax.swing.JPanel {
             if(currentPlace instanceof Country) {
                 Country country = (Country) currentPlace;
                 if (country.isOwner(currentPlayer)) {
-                    MessageTextField.setText("Welcome to your country " + country.getName());
+                    MessageTextField.setText("Welcome to " + country.getName());
                     hideButton();
                 } else if (country.checkAvailable()) {
-                    MessageTextField.setText("You can buy our country for just " + country.getPrice() + "$");
+                    MessageTextField.setText("You can buy " +country.getName() +"for just " + country.getPrice() + "$");
                     showButton();
                 } else {
                     MessageTextField.setText("Please pay " + country.getTotalFees() + "$ " + "for visting our country");
                     currentPlayer.money -= country.getTotalFees();
+                    country.Owner.money += country.getTotalFees();
+                    label[lableNum].setText("Money: " +currentPlayer.money);
+                    label[lableNum].setText("Money: " + country.Owner.money);
                     hideButton();
                 }
             }
