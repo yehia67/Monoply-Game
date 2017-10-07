@@ -5,12 +5,11 @@
  */
 package monoply.game;
 
-/**
- *
- * @author n0krashy
- */
 public class playPanel extends javax.swing.JPanel {
-
+    
+    public static GamePanel gp;
+    
+    public static int playersNumber;
     /**
      * Creates new form playPanel
      */
@@ -42,6 +41,7 @@ public class playPanel extends javax.swing.JPanel {
         backButton = new javax.swing.JButton();
 
         playersNumberSpinner.setModel(new javax.swing.SpinnerNumberModel(8, 2, 8, 1));
+        playersNumberSpinner.setToolTipText("");
         playersNumberSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 playersNumberSpinnerStateChanged(evt);
@@ -152,8 +152,8 @@ public class playPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void playersNumberSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_playersNumberSpinnerStateChanged
-        int value = (Integer) playersNumberSpinner.getValue();
-        switch (value) {
+        int playersNumber = (Integer) playersNumberSpinner.getValue();
+        switch (playersNumber) {
             case 2:
                 player3TextField.setVisible(false);
                 player4TextField.setVisible(false);
@@ -217,7 +217,11 @@ public class playPanel extends javax.swing.JPanel {
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        mainFrame.gp.setVisible(true);
+        playersNumber = (Integer) playersNumberSpinner.getValue();
+        gp = new GamePanel();
+        mainFrame.mainPanel.add(gp);
+        gp.setVisible(true);
+        gp.playersInfo();
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -229,14 +233,14 @@ public class playPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton nextButton;
-    private javax.swing.JTextField player1TextField;
-    private javax.swing.JTextField player2TextField;
-    private javax.swing.JTextField player3TextField;
-    private javax.swing.JTextField player4TextField;
-    private javax.swing.JTextField player5TextField;
-    private javax.swing.JTextField player6TextField;
-    private javax.swing.JTextField player7TextField;
-    private javax.swing.JTextField player8TextField;
+    public static javax.swing.JTextField player1TextField;
+    public static javax.swing.JTextField player2TextField;
+    public static javax.swing.JTextField player3TextField;
+    public static javax.swing.JTextField player4TextField;
+    public static javax.swing.JTextField player5TextField;
+    protected static javax.swing.JTextField player6TextField;
+    public static javax.swing.JTextField player7TextField;
+    public static javax.swing.JTextField player8TextField;
     private javax.swing.JLabel playersNamesLabel;
     private javax.swing.JLabel playersNumberLabel;
     public static javax.swing.JSpinner playersNumberSpinner;

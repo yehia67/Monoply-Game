@@ -26,9 +26,6 @@ public class Board extends JPanel {
     static ArrayList<Player> players = new ArrayList<Player>();
     static ArrayList<Places> placesArr = new ArrayList<Places>();
     public static int turn = 0;
-   public Board(){
-       
-   }
 
     
     public void rendercoords() {
@@ -106,7 +103,7 @@ public class Board extends JPanel {
             System.out.println("File not found");
         }
     }
-    public  Country getPlace(int i){
+    public static Country getPlace(int i){
         return (Country) placesArr.get(i);
     }
     @Override

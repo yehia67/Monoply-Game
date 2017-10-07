@@ -1,12 +1,5 @@
 package monoply.game;
 
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.HeadlessException;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,18 +13,13 @@ public class mainFrame extends javax.swing.JFrame {
 
     public static playPanel p = new playPanel();
     public static startPanel sp = new startPanel();
-    public static GamePanel gp = new GamePanel();
 
     public mainFrame() {
         initComponents();
-        GridBagConstraints c = new GridBagConstraints();
-        
         mainPanel.add(sp);
         mainPanel.add(p);
-        mainPanel.add(gp);
         sp.setVisible(true);
         p.setVisible(false);
-        gp.setVisible(false);
         this.pack();
     }
 
@@ -47,9 +35,10 @@ public class mainFrame extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 700));
+        setResizable(false);
         setSize(new java.awt.Dimension(700, 700));
 
+        mainPanel.setMinimumSize(new java.awt.Dimension(700, 700));
         mainPanel.setLayout(new java.awt.GridBagLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
