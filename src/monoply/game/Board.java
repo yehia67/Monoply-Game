@@ -103,8 +103,8 @@ public class Board extends JPanel {
             System.out.println("File not found");
         }
     }
-    public static Country getPlace(int i){
-        return (Country) placesArr.get(i);
+    public static Places getPlace(int i){
+        return placesArr.get(i);
     }
     @Override
     protected void paintComponent(Graphics g) {

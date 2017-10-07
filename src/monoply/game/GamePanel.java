@@ -258,7 +258,6 @@ public class GamePanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-    Player player = new Player();
 
     public void playersInfo() {
         switch (playersNumber) {
@@ -412,43 +411,47 @@ public class GamePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int diceNumber = Dice.getDice();
 
-        player.place += diceNumber;
+        currentPlayer = Board.players.get(Board.turn);
         DiceResultLabel.setText(diceNumber + "");
+        
+        System.out.println(Board.players.indexOf(currentPlayer));
 
-        int firstPlace = Board.players.get(Board.turn).place;
+        int firstPlace = currentPlayer.place;
         int secondPlace = (firstPlace + diceNumber) % Board.placesArr.size();
-        Board.players.get(Board.turn).x = Board.placesArr.get(secondPlace).coords.x;
-        Board.players.get(Board.turn).y = Board.placesArr.get(secondPlace).coords.y;
-        Board.players.get(Board.turn).place = secondPlace;
+        currentPlayer.x = Board.placesArr.get(secondPlace).coords.x;
+        currentPlayer.y = Board.placesArr.get(secondPlace).coords.y;
+        currentPlayer.place = secondPlace;
+        System.out.println("second place : " + secondPlace);
 
-        Board.turn = (Board.turn + 1) % Board.players.size();
 
         this.repaint();
-        MysetText(player.place);
+        MysetText(currentPlayer.place);
+        
+        Board.turn = (Board.turn + 1) % Board.players.size();
 
     }//GEN-LAST:event_rollDiceButtonActionPerformed
 
 
     private void YButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YButtonActionPerformed
         // TODO add your handling code here:yes
-        if (country.getPrice() <= player.money) {
+        Country country = (Country) currentPlace;
+        if (country.getPrice() <= currentPlayer.money) {
 
             MessageTextField.setText("coungratulation you get that country!!");
-            player.money -= country.getPrice();
-            Player1Money.setText("Money: " + player.money);
+            currentPlayer.money -= country.getPrice();
+            Player1Money.setText("Money: " + currentPlayer.money);
             country.sold();
-            country.setOwner(player);
+            country.setOwner(currentPlayer);
             hideButton();
         } else {
             MessageTextField.setText("Sorry u dont have money");
             hideButton();
         }
     }//GEN-LAST:event_YButtonActionPerformed
-    Country country;
 
     private void MysetText(int i) {
 
-        country = Board.getPlace(i);
+        currentPlace = Board.getPlace(i);
         if (i == 10 || i == 30)// jail
         {
 
@@ -463,15 +466,19 @@ public class GamePanel extends javax.swing.JPanel {
         } else if (i == 0) {
             MessageTextField.setText("Start the new round and get 200$");
         } else {
-            if (country.isOwner(player)) {
-                MessageTextField.setText("Welcome to your country " + country.getName());
-                hideButton();
-            } else if (country.checkAvailable()) {
-                MessageTextField.setText("You can buy our country for just " + country.getPrice() + "$");
-                showButton();
-            } else {
-                MessageTextField.setText("Please pay " + country.getTotalFees() + "$ " + "for visting our country");
-                player.money -= country.getTotalFees();
+            if(currentPlace instanceof Country) {
+                Country country = (Country) currentPlace;
+                if (country.isOwner(currentPlayer)) {
+                    MessageTextField.setText("Welcome to your country " + country.getName());
+                    hideButton();
+                } else if (country.checkAvailable()) {
+                    MessageTextField.setText("You can buy our country for just " + country.getPrice() + "$");
+                    showButton();
+                } else {
+                    MessageTextField.setText("Please pay " + country.getTotalFees() + "$ " + "for visting our country");
+                    currentPlayer.money -= country.getTotalFees();
+                    hideButton();
+                }
             }
         }
     }
@@ -480,7 +487,8 @@ public class GamePanel extends javax.swing.JPanel {
         hideButton();
     }//GEN-LAST:event_NButtonActionPerformed
 
-
+    private Places currentPlace;
+    private Player currentPlayer;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BoardPanel;
     private javax.swing.JLabel DiceResultLabel;

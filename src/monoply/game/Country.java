@@ -41,7 +41,7 @@ public class Country extends Places {
     }
 
     void sold() {
-        available = true;
+        available = false;
     }
 
     public String getName() {
