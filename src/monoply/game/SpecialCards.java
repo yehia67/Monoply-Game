@@ -21,15 +21,15 @@ public class SpecialCards {
         
         //chance
         chance.add(new Card ("Railroad","Advance to the nearest Railroad",1));
-        chance.add(new Card ("Decrease Money","for each house pay $25 for each hotel $100",1));
-        chance.add(new Card ("Broadwalk","Take a walk to the Broadwalk",1));
+        chance.add(new Card ("Decrease Money","for each house you own pay $25 for each hotel $100",1));
+        chance.add(new Card ("Broadwalk","Take a walk to the Broadwalk",1));//finished
         chance.add(new Card ("Utility","Advance token to nearst utility",1));
-        chance.add(new Card ("Go","If you pass go collect $200",1));
+        chance.add(new Card ("Go","Advance to \"GO\" \n Reminder: If you pass go collect $200",1));//finished
         //chest
-        chest.add(new Card ("Go to Jail","Go directly to jail",2));
+        chest.add(new Card ("Go to Jail","Go directly to jail",2));// finished
         chest.add(new Card ("Increase Money","From Sale of stock you get $45",2));//net2aked mnha
         chest.add(new Card ("Grand Opera Openning","collect $50 from every player",2));//half finished
-        chest.add(new Card ("GO","Advance to \"GO\"",2));
+        chest.add(new Card ("GO","Advance to \"GO\"",2));//finished
         FreeCard=new Card ("Freed","Get out of jail free",2);//finished
         chest.add(FreeCard);
     
@@ -50,13 +50,13 @@ public class SpecialCards {
                     
                     break;
                 case "Broadwalk":
-                    
+                    this.move(Board.getPlace(Board.placesArr.size()-1),player);
                     break;
                 case "Utility":
                     
                     break;
                 case "Go":
-                    
+                    this.move(Board.getPlace(0),player);
                     break;
                
             }
@@ -64,7 +64,7 @@ public class SpecialCards {
         else {
           switch(DrawnCard.getName()){
                 case "Go to Jail":
-                    
+                    this.move(Board.getPlace(10),player);
                     break;
                     
                 //increases money of current player   
@@ -79,7 +79,7 @@ public class SpecialCards {
                     
                     
                 case "GO":
-                    
+                    this.move(Board.getPlace(0),player);
                     break;
 
             }
@@ -126,6 +126,12 @@ public class SpecialCards {
     public void returnFreeCard(Player player){
         chance.add(FreeCard);
         player.HasJailCard=false;
+        
+    }
+    public void move (Places place , Player player)
+    {
+        player.x = place.coords.x;
+        player.y= place.coords.y;
         
     }
 }
