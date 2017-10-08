@@ -38,7 +38,7 @@ public class SpecialPlaces extends Places{
         }
         
         if(this.name=="LUXURY TAX"){
-            
+            currentPlayer.money-=75; 
         }
         
         if(this.name=="GO"){
