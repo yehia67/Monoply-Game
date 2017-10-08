@@ -56,7 +56,7 @@ public class Board extends JPanel {
 
         placesArr.add(new Country(220, 220, Color.RED, "Kentucky Avenue", new Coordinates(100, 50), 21));
         placesArr.add(new SpecialPlaces("Chance", new Coordinates(150, 50)));
-        placesArr.add(new Country(220, 220, Color.RED, "Indiana Avenue", new Coordinates(150, 50), 23));
+        placesArr.add(new Country(220, 220, Color.RED, "Indiana Avenue", new Coordinates(200, 50), 23));
         placesArr.add(new Country(240, 240, Color.RED, "Illinois Avenue", new Coordinates(250, 50), 24));
         placesArr.add(new SpecialPlaces("B&O RailRoad", new Coordinates(300, 50)));
         placesArr.add(new Country(260, 260, Color.YELLOW, "Atlantic Avenue", new Coordinates(350, 50), 26));
