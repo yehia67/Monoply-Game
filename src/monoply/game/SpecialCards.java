@@ -1,17 +1,14 @@
 package monoply.game;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 
 
 public class SpecialCards {
     ArrayList<Card> chest ;
     ArrayList<Card> chance;
+    Card FreeCard;
     Card DrawnCard ;
     public SpecialCards ()
     {
@@ -31,9 +28,10 @@ public class SpecialCards {
         //chest
         chest.add(new Card ("Go to Jail","Go directly to jail",2));
         chest.add(new Card ("Increase Money","From Sale of stock you get $45",2));
-        chest.add(new Card ("Grand Opera Openning","collect $50 from every player",2));
+        chest.add(new Card ("Grand Opera Openning","collect $50 from every player",2));//half finished
         chest.add(new Card ("GO","Advance to \"GO\"",2));
-        chest.add(new Card ("Freed","Get out of jail free",2));
+        FreeCard=new Card ("Freed","Get out of jail free",2);//finished
+        chest.add(FreeCard);
     
     }
     private void shuffleCards()
@@ -76,26 +74,14 @@ public class SpecialCards {
                     
                 //loops over arraylist and reduce money of each player  
                 case "Grand Opera Openning":
-                    for(int i=0;i<players.size();i++){
-                        if(players.get(i)==player)
-                            continue;
-                        else{
-                            players.get(i).money-=50;
-                            player.money+=50;
-                                    }
-                    }
+                   this.reduceMoney(player, players);
                     break;
                     
                     
                 case "GO":
                     
                     break;
-                    
-                    
-                case "Freed":
-                    
-                    break;
-               
+
             }
         }
     }
@@ -111,16 +97,34 @@ public class SpecialCards {
         else {
             this.DrawnCard = chance.get(0);
             
-            if(DrawnCard.getName()=="Freed")
+            if(DrawnCard.getName()=="Freed"){
                 Player.HasJailCard=true;
-            
+                chance.remove(DrawnCard);
+            }
+            else
             Collections.rotate(chance, -1);
         }
         //Display Message Here *DrawnCard.getDescription()*
         this.performAction(Player,players);
     }
    
-    public void reduceMoney(Player Player){
+    private void reduceMoney(Player player,ArrayList<Player> players){
+         for(int i=0;i<players.size();i++){
+                        if(players.get(i)==player)
+                            continue;
+                        else{
+                            if (players.get(i).money-50>=0){
+                            players.get(i).money-=50;
+                            player.money+=50;
+                            }
+                            else {
+                                //lost ////////////////////////////////////////////    
+                                    }
+                                    }
+                    }
+    }
+    public void returnFreeCard(){
+        chance.add(FreeCard);
         
     }
 }

@@ -29,6 +29,7 @@ public class Player {
         this.x = x;
         this.y = y;
         this.color = c;
+        this.HasJailCard= false;
     }
 
 }
