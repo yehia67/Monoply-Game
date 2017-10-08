@@ -27,7 +27,7 @@ public class SpecialCards {
         chance.add(new Card ("Go","If you pass go collect $200",1));
         //chest
         chest.add(new Card ("Go to Jail","Go directly to jail",2));
-        chest.add(new Card ("Increase Money","From Sale of stock you get $45",2));
+        chest.add(new Card ("Increase Money","From Sale of stock you get $45",2));//net2aked mnha
         chest.add(new Card ("Grand Opera Openning","collect $50 from every player",2));//half finished
         chest.add(new Card ("GO","Advance to \"GO\"",2));
         FreeCard=new Card ("Freed","Get out of jail free",2);//finished
@@ -123,8 +123,9 @@ public class SpecialCards {
                                     }
                     }
     }
-    public void returnFreeCard(){
+    public void returnFreeCard(Player player){
         chance.add(FreeCard);
+        player.HasJailCard=false;
         
     }
 }
