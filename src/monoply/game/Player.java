@@ -18,6 +18,7 @@ public class Player {
     public Color color;
     Dice dice;
     public String name;
+    public boolean HasJailCard;
 
     void move() {
         place += dice.getDice();

@@ -41,62 +41,86 @@ public class SpecialCards {
         Collections.shuffle(chest);
         Collections.shuffle(chance);
     }
-    public void performAction (Player player)
+    public void performAction (Player player,ArrayList<Player> players)
     {  //Actions to be edited 
         if (DrawnCard.getType()==1){
             switch(DrawnCard.getName()){
-                case "Go to Jail":
-                    player.money +=100;
+                case "Railroad":
+                    
                     break;
                 case "Decrease Money":
-                    player.money -=100;
+                    
                     break;
                 case "Broadwalk":
-                    player.money +=100;
+                    
                     break;
                 case "Utility":
-                    player.money -=100;
+                    
                     break;
-                case "Freed":
-                    player.money +=100;
+                case "Go":
+                    
                     break;
                
             }
         }
         else {
           switch(DrawnCard.getName()){
-                case "Railroad":
-                    player.money +=100;
+                case "Go to Jail":
+                    
                     break;
+                    
+                //increases money of current player   
                 case "Increase Money":
-                    player.money -=100;
+                    player.money+=45;
                     break;
+                    
+                //loops over arraylist and reduce money of each player  
                 case "Grand Opera Openning":
-                    player.money +=100;
+                    for(int i=0;i<players.size();i++){
+                        if(players.get(i)==player)
+                            continue;
+                        else{
+                            players.get(i).money-=50;
+                            player.money+=50;
+                                    }
+                    }
                     break;
+                    
+                    
                 case "GO":
-                    player.money -=100;
+                    
                     break;
-                case "Go":
-                    player.money +=100;
+                    
+                    
+                case "Freed":
+                    
                     break;
                
             }
         }
     }
-    public void DrawCard (int type, Player Player)
+    public void DrawCard (int type, Player Player,ArrayList<Player> players)
     {
         if (type ==1)
         {
             this.DrawnCard = chest.get(0);
+            
+
             Collections.rotate(chest, -1);
         }
         else {
             this.DrawnCard = chance.get(0);
+            
+            if(DrawnCard.getName()=="Freed")
+                Player.HasJailCard=true;
+            
             Collections.rotate(chance, -1);
         }
         //Display Message Here *DrawnCard.getDescription()*
-        this.performAction(Player);
+        this.performAction(Player,players);
     }
    
+    public void reduceMoney(Player Player){
+        
+    }
 }
