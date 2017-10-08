@@ -75,6 +75,8 @@ public class GamePanel extends javax.swing.JPanel {
         NButton = new javax.swing.JButton();
         YButton = new javax.swing.JButton();
         MessageTextField = new javax.swing.JTextField();
+        countriesComboBx = new javax.swing.JComboBox<>();
+        buildBtn = new javax.swing.JButton();
 
         setDoubleBuffered(false);
         setPreferredSize(new java.awt.Dimension(700, 700));
@@ -100,12 +102,12 @@ public class GamePanel extends javax.swing.JPanel {
                     .addGroup(BoardPanelLayout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(DiceResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(340, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         BoardPanelLayout.setVerticalGroup(
             BoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BoardPanelLayout.createSequentialGroup()
-                .addContainerGap(300, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(rollDiceButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DiceResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,6 +237,13 @@ public class GamePanel extends javax.swing.JPanel {
         MessageTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         MessageTextField.setText("Welcome to our game");
 
+        buildBtn.setText("Build");
+        buildBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buildBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,14 +253,16 @@ public class GamePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(YButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(NButton))
-                            .addComponent(MessageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(MessageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                            .addComponent(countriesComboBx, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buildBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -267,7 +278,11 @@ public class GamePanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(YButton)
                             .addComponent(NButton))
-                        .addGap(0, 0, 0)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(countriesComboBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buildBtn)
+                        .addGap(0, 244, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -409,10 +424,6 @@ public class GamePanel extends javax.swing.JPanel {
                 break;
         }
     }
-
-    
-        
-         
         
     public void hideButton() {
         YButton.setVisible(false);
@@ -430,6 +441,8 @@ public class GamePanel extends javax.swing.JPanel {
          
         currentPlayer = Board.players.get(Board.turn);
         DiceResultLabel.setText(diceNumber + "");
+        
+        updateCountriesComboBx();
         
         System.out.println(Board.players.indexOf(currentPlayer));
 
@@ -457,9 +470,11 @@ public class GamePanel extends javax.swing.JPanel {
             MessageTextField.setText("coungratulation you get "+country.getName());
             currentPlayer.money -= country.getPrice();
             labels[labelNum].setText("Money: " +currentPlayer.money);
-           // Player1Money.setText("Money: " + currentPlayer.money);
+            //Player1Money.setText("Money: " + currentPlayer.money);
             country.sold();
             country.setOwner(currentPlayer);
+            currentPlayer.addCountry(country);
+            updateCountriesComboBx();
             hideButton();
         } else {
             MessageTextField.setText("Sorry u dont have money");
@@ -486,16 +501,16 @@ public class GamePanel extends javax.swing.JPanel {
         }else if( i ==2 || i == 17 || i == 33)//chest
         {
             specialCards.DrawCard(1,currentPlayer,Board.players);
-            MessageTextField.setText(specialCards.DrawnCard.getDescription());
-             labels[labelNum].setText("Money: " +currentPlayer.money);
+            //MessageTextField.setText(specialCards.DrawnCard.getDescription());
+            labels[labelNum].setText("Money: " +currentPlayer.money);
             hideButton();
         }
         
         else if ( i == 7  || i == 22 || i == 36 ) //chance
         {
-           specialCards.DrawCard(0,currentPlayer,Board.players);
-            MessageTextField.setText(specialCards.DrawnCard.getDescription());
-             labels[labelNum].setText("Money: " +currentPlayer.money);
+           specialCards.DrawCard(0,currentPlayer, Board.players);
+            //MessageTextField.setText(specialCards.DrawnCard.getDescription());
+            labels[labelNum].setText("Money: " +currentPlayer.money);
             hideButton();
         } else if (i == 0) {
             MessageTextField.setText("Start the new round and get 200$");
@@ -509,8 +524,8 @@ public class GamePanel extends javax.swing.JPanel {
                 Country country = (Country) currentPlace;
                 if (country.isOwner(currentPlayer)) {
                     MessageTextField.setText("Welcome to " + country.getName());
-                    hideButton();
                     
+                    hideButton();
                 } else if (country.checkAvailable()) {
                     MessageTextField.setText("You can buy " +country.getName() +"for just " + country.getPrice() + "$");
                    
@@ -519,6 +534,7 @@ public class GamePanel extends javax.swing.JPanel {
                     MessageTextField.setText("Please pay " + country.getTotalFees() + "$ " + " for visting "+country.getName());
                     currentPlayer.money -= country.getTotalFees();
                     labels[labelNum].setText("Money: " +currentPlayer.money);
+                    
                     hideButton();
                 }
             }
@@ -529,6 +545,53 @@ public class GamePanel extends javax.swing.JPanel {
         hideButton();
     }//GEN-LAST:event_NButtonActionPerformed
 
+    private void buildBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildBtnActionPerformed
+        // TODO add your handling code here:
+        String text = (String) countriesComboBx.getSelectedItem();
+        
+        for(int i = 0; i < Board.placesArr.size(); i++) {
+            if(Board.placesArr.get(i) instanceof Country) {
+                Country country = (Country) Board.placesArr.get(i);
+                
+                if(country.getName().equals(text)) {
+                    if(country.getCanBuildHousesFlag()) {
+                        if(currentPlayer.money > country.getPrice()) {
+                            country.buildHouse();
+                        } else {
+                            System.out.println("You don't have enough money");
+                        }
+                    } else if(country.getCanBuildHotelFlag()) {
+                        if(currentPlayer.money > country.getPrice()) {
+                            country.buildHotel();
+                        } else {
+                            System.out.println("You don't have enough money");
+                        }
+                    } else {
+                        System.out.print("You have to get all the ");
+                        System.out.println("countries of the same color");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_buildBtnActionPerformed
+
+    private void updateCountriesComboBx() {
+        countriesComboBx.removeAllItems();
+        
+        CountriesGroup[] groups = currentPlayer.getGroupsArray();
+        
+        if(groups == null) {
+            System.out.println("hello");
+        }
+        
+        for(int i = 0; i < groups.length; i++) {
+            ArrayList<Country> countries = groups[i].getCountries();
+            for(int j = 0; j < countries.size(); j++) {
+                countriesComboBx.addItem(countries.get(j).getName());
+            }
+        }
+    }
+    
     private int labelNum;
     private Places currentPlace;
     private Player currentPlayer;
@@ -554,6 +617,8 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JLabel Player8Money;
     private javax.swing.JLabel Player8Name;
     private javax.swing.JButton YButton;
+    private javax.swing.JButton buildBtn;
+    private javax.swing.JComboBox<String> countriesComboBx;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton rollDiceButton;
     // End of variables declaration//GEN-END:variables

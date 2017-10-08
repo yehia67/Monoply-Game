@@ -29,13 +29,15 @@
                   <Group type="102" attributes="0">
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="YButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="NButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="MessageTextField" min="-2" pref="245" max="-2" attributes="0"/>
+                          <Component id="MessageTextField" pref="245" max="32767" attributes="0"/>
+                          <Component id="countriesComboBx" alignment="0" max="32767" attributes="0"/>
+                          <Component id="buildBtn" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -57,6 +59,11 @@
                           <Component id="YButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="NButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="countriesComboBx" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buildBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="244" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -317,6 +324,24 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Welcome to our game"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="countriesComboBx">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="buildBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Build"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buildBtnActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

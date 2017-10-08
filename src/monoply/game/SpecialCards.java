@@ -130,17 +130,18 @@ public class SpecialCards {
         player.HasJailCard=false;
         
     }
+    
     private void move (Places place , Player player)
     {
         player.x = place.coords.x;
         player.y= place.coords.y;
-        
     }
+    
     private void move2(Player player,int x)
     {
-        int index=0; ; 
+        int index=0;
         for (int i =0; i< Board.placesArr.size();i++){
-            if (player.x==Board.placesArr.get(i).coords.x && player.y==Board.placesArr.get(i).coords.y  )
+            if (player.x==Board.placesArr.get(i).coords.x && player.y==Board.placesArr.get(i).coords.y)
                 index = i;
         }
         if (x==1)
@@ -148,7 +149,7 @@ public class SpecialCards {
             if (index>=utilities[utilities.length-1] )
             {
                 this.move(Board.placesArr.get( utilities[0]), player);
-            }
+            } 
             else {
             for (int i =0; i<utilities.length;i++){
                if (index < utilities[i])
@@ -162,7 +163,7 @@ public class SpecialCards {
         }
         else 
         {
-            if (index>=utilities[railroads.length-1] )
+            if (index>=railroads[railroads.length-1] )
             {
                 this.move(Board.placesArr.get( railroads[0]), player);
             }
