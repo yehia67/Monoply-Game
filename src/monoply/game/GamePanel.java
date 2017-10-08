@@ -236,6 +236,11 @@ public class GamePanel extends javax.swing.JPanel {
 
         MessageTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         MessageTextField.setText("Welcome to our game");
+        MessageTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MessageTextFieldActionPerformed(evt);
+            }
+        });
 
         buildBtn.setText("Build");
         buildBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -451,6 +456,8 @@ public class GamePanel extends javax.swing.JPanel {
         currentPlayer.x = Board.placesArr.get(secondPlace).coords.x;
         currentPlayer.y = Board.placesArr.get(secondPlace).coords.y;
         currentPlayer.place = secondPlace;
+         System.out.println("first place : " + firstPlace);
+         System.out.println("Dice : " + diceNumber);
         System.out.println("second place : " + secondPlace);
         
         labelNum = Board.turn;
@@ -575,6 +582,10 @@ public class GamePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buildBtnActionPerformed
 
+    private void MessageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MessageTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MessageTextFieldActionPerformed
+
     private void updateCountriesComboBx() {
         countriesComboBx.removeAllItems();
         
@@ -590,15 +601,16 @@ public class GamePanel extends javax.swing.JPanel {
                 countriesComboBx.addItem(countries.get(j).getName());
             }
         }
+      
     }
-    
+      
     private int labelNum;
     private Places currentPlace;
     private Player currentPlayer;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BoardPanel;
     private javax.swing.JLabel DiceResultLabel;
-    private javax.swing.JTextField MessageTextField;
+    public static javax.swing.JTextField MessageTextField;
     private javax.swing.JButton NButton;
     private javax.swing.JLabel Player1Money;
     private javax.swing.JLabel Player1Name;
