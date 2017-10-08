@@ -52,13 +52,13 @@ public class SpecialCards {
                     
                     break;
                 case "Broadwalk":
-                    this.move(Board.getPlace(Board.placesArr.size()-1),player);
+                    this.move(Board.getPlace(Board.placesArr.size()-1),player,Board.placesArr.size()-1);
                     break;
                 case "Utility":
                      this.move2(player,1);
                     break;
                 case "Go":
-                    this.move(Board.getPlace(0),player);
+                    this.move(Board.getPlace(0),player,0);
                     break;
                
             }
@@ -66,7 +66,7 @@ public class SpecialCards {
         else {
           switch(DrawnCard.getName()){
                 case "Go to Jail":
-                    this.move(Board.getPlace(10),player);
+                    this.move(Board.getPlace(10),player,10);
                     break;
                     
                 //increases money of current player   
@@ -81,7 +81,7 @@ public class SpecialCards {
                     
                     
                 case "GO":
-                    this.move(Board.getPlace(0),player);
+                    this.move(Board.getPlace(0),player,0);
                     break;
 
             }
@@ -107,6 +107,7 @@ public class SpecialCards {
             Collections.rotate(chance, -1);
         }
         //Display Message Here *DrawnCard.getDescription()*
+        GamePanel.MessageTextField.setText(DrawnCard.getDescription());
         this.performAction(Player,players);
     }
    
@@ -131,10 +132,12 @@ public class SpecialCards {
         
     }
     
-    private void move (Places place , Player player)
+    private void move (Places place , Player player,int index)
     {
         player.x = place.coords.x;
         player.y= place.coords.y;
+        player.place= index;
+        playPanel.gp.repaint();
     }
     
     private void move2(Player player,int x)
@@ -148,13 +151,13 @@ public class SpecialCards {
         {
             if (index>=utilities[utilities.length-1] )
             {
-                this.move(Board.placesArr.get( utilities[0]), player);
+                this.move(Board.placesArr.get( utilities[0]), player, utilities[0]);
             } 
             else {
             for (int i =0; i<utilities.length;i++){
                if (index < utilities[i])
                {
-                   this.move(Board.placesArr.get( utilities[i]), player);
+                   this.move(Board.placesArr.get( utilities[i]), player, utilities[i]);
                    break;
                }
             }
@@ -165,13 +168,13 @@ public class SpecialCards {
         {
             if (index>=railroads[railroads.length-1] )
             {
-                this.move(Board.placesArr.get( railroads[0]), player);
+                this.move(Board.placesArr.get( railroads[0]), player, railroads[0]);
             }
             else {
            for (int i =0; i<railroads.length;i++){
                if (index < railroads[i])
                {
-                   this.move(Board.placesArr.get( railroads[i]), player);
+                   this.move(Board.placesArr.get( railroads[i]), player,railroads[i]);
                    break;
                }
             } 

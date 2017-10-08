@@ -77,6 +77,7 @@ public class GamePanel extends javax.swing.JPanel {
         MessageTextField = new javax.swing.JTextField();
         countriesComboBx = new javax.swing.JComboBox<>();
         buildBtn = new javax.swing.JButton();
+        playerLabel = new java.awt.Label();
 
         setDoubleBuffered(false);
         setPreferredSize(new java.awt.Dimension(700, 700));
@@ -236,6 +237,11 @@ public class GamePanel extends javax.swing.JPanel {
 
         MessageTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         MessageTextField.setText("Welcome to our game");
+        MessageTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MessageTextFieldActionPerformed(evt);
+            }
+        });
 
         buildBtn.setText("Build");
         buildBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -244,6 +250,8 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        playerLabel.setText("Player: 1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -251,7 +259,11 @@ public class GamePanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(playerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -260,7 +272,7 @@ public class GamePanel extends javax.swing.JPanel {
                                 .addComponent(YButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(NButton))
-                            .addComponent(MessageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                            .addComponent(MessageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                             .addComponent(countriesComboBx, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(buildBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -268,7 +280,9 @@ public class GamePanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(BoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(playerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -282,7 +296,7 @@ public class GamePanel extends javax.swing.JPanel {
                         .addComponent(countriesComboBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buildBtn)
-                        .addGap(0, 244, Short.MAX_VALUE)))
+                        .addGap(0, 252, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -451,10 +465,13 @@ public class GamePanel extends javax.swing.JPanel {
         currentPlayer.x = Board.placesArr.get(secondPlace).coords.x;
         currentPlayer.y = Board.placesArr.get(secondPlace).coords.y;
         currentPlayer.place = secondPlace;
+         System.out.println("first place : " + firstPlace);
+         System.out.println("Dice : " + diceNumber);
         System.out.println("second place : " + secondPlace);
         
         labelNum = Board.turn;
-        
+        MessageTextField.setText("");
+        this.playerLabel.setText("Player: "+(Board.turn+1));
         this.repaint();
         MysetText(currentPlayer.place);
         Board.turn = (Board.turn + 1) % Board.players.size();
@@ -575,6 +592,10 @@ public class GamePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buildBtnActionPerformed
 
+    private void MessageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MessageTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MessageTextFieldActionPerformed
+
     private void updateCountriesComboBx() {
         countriesComboBx.removeAllItems();
         
@@ -590,15 +611,16 @@ public class GamePanel extends javax.swing.JPanel {
                 countriesComboBx.addItem(countries.get(j).getName());
             }
         }
+      
     }
-    
+      
     private int labelNum;
     private Places currentPlace;
     private Player currentPlayer;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BoardPanel;
     private javax.swing.JLabel DiceResultLabel;
-    private javax.swing.JTextField MessageTextField;
+    public static javax.swing.JTextField MessageTextField;
     private javax.swing.JButton NButton;
     private javax.swing.JLabel Player1Money;
     private javax.swing.JLabel Player1Name;
@@ -620,6 +642,7 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JButton buildBtn;
     private javax.swing.JComboBox<String> countriesComboBx;
     private javax.swing.JPanel jPanel1;
+    private java.awt.Label playerLabel;
     private javax.swing.JButton rollDiceButton;
     // End of variables declaration//GEN-END:variables
 }
