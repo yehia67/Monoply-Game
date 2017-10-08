@@ -12,11 +12,48 @@ public class SpecialPlaces extends Places{
     int location;                    //to be modified
     String name;                     //name of the special location ex utility,Income tax
     SpecialCards Cards;
+    private boolean available = true;
     
     
     public SpecialPlaces(String name, Coordinates c){
        super(c);
         this.name=name;
+    }
+    
+    public void SpecialPlaceAction(Player currentPlayer, SpecialCards card,ArrayList<Player> players){
+        if(this.name=="Income Tax"){
+           currentPlayer.money-=200; 
+        }
+        
+        if(this.name=="Chance"){
+            card.DrawCard(1,currentPlayer,players);
+        }
+        
+        if(this.name=="COMMUNITY CHEST"){
+            card.DrawCard(2,currentPlayer,players);
+        }
+        
+        if(this.name=="Go to Jail"){
+            currentPlayer.money-=75; 
+        }
+        
+        if(this.name=="LUXURY TAX"){
+            
+        }
+        
+        if(this.name=="GO"){
+            
+        }
+        
+        if(this.name=="Parking"){
+            
+        }
+        
+        
+    }
+    
+    public void CardorChance(){
+        
     }
     
     
