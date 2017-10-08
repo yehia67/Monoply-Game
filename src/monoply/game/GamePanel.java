@@ -271,7 +271,7 @@ public class GamePanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+ SpecialCards specialCards = new SpecialCards();
     public void playersInfo() {
         switch (playersNumber) {
             case 2:
@@ -466,34 +466,57 @@ public class GamePanel extends javax.swing.JPanel {
             hideButton();
         }
     }//GEN-LAST:event_YButtonActionPerformed
-
+    
     private void MysetText(int i) {
-
-        currentPlace = Board.getPlace(i);
+        if(i !=2 || i != 17 || i != 33 || i != 7  || i != 22 || i != 36 )
+        { currentPlace = Board.getPlace(i);}
         if (i == 10 || i == 30)// jail
         {
-
+          
         } else if (i == 4 || i == 38) // taxes
         {
-
+            
+            MessageTextField.setText("You just paid 75$ Taxes" );
+            currentPlayer.money -= 75;
+            labels[labelNum].setText("Money: " +currentPlayer.money);
+            hideButton();
         } else if (i == 20) // bus
         {
 
-        } else if (i == 2 || i == 7 || i == 17 || i == 22 || i == 33 || i == 36) {
-
+        }else if( i ==2 || i == 17 || i == 33)//chest
+        {
+            specialCards.DrawCard(1,currentPlayer,Board.players);
+            MessageTextField.setText(specialCards.DrawnCard.getDescription());
+             labels[labelNum].setText("Money: " +currentPlayer.money);
+            hideButton();
+        }
+        
+        else if ( i == 7  || i == 22 || i == 36 ) //chance
+        {
+           specialCards.DrawCard(0,currentPlayer,Board.players);
+            MessageTextField.setText(specialCards.DrawnCard.getDescription());
+             labels[labelNum].setText("Money: " +currentPlayer.money);
+            hideButton();
         } else if (i == 0) {
             MessageTextField.setText("Start the new round and get 200$");
-        } else {
+            currentPlayer.money += 200;
+            labels[labelNum].setText("Money: " +currentPlayer.money);
+            hideButton();
+        } 
+        
+        else {
             if(currentPlace instanceof Country) {
                 Country country = (Country) currentPlace;
                 if (country.isOwner(currentPlayer)) {
                     MessageTextField.setText("Welcome to " + country.getName());
                     hideButton();
+                    
                 } else if (country.checkAvailable()) {
                     MessageTextField.setText("You can buy " +country.getName() +"for just " + country.getPrice() + "$");
+                   
                     showButton();
                 } else {
-                    MessageTextField.setText("Please pay " + country.getTotalFees() + "$ " + "for visting our country");
+                    MessageTextField.setText("Please pay " + country.getTotalFees() + "$ " + " for visting "+country.getName());
                     currentPlayer.money -= country.getTotalFees();
                     labels[labelNum].setText("Money: " +currentPlayer.money);
                     hideButton();
