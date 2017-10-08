@@ -6,10 +6,12 @@ import java.util.Collections;
 
 
 public class SpecialCards {
-    ArrayList<Card> chest ;
-    ArrayList<Card> chance;
-    Card FreeCard;
-    Card DrawnCard ;
+    private ArrayList<Card> chest ;
+    private ArrayList<Card> chance;
+    private Card FreeCard;
+    private Card DrawnCard ;
+    private int [] railroads = {5,15,25,35};
+    private int [] utilities = {12,28};
     public SpecialCards ()
     {
     chest = new ArrayList<Card>();
@@ -20,14 +22,14 @@ public class SpecialCards {
     private void createCards (){
         
         //chance
-        chance.add(new Card ("Railroad","Advance to the nearest Railroad",1));
+        chance.add(new Card ("Railroad","Advance to the nearest Railroad",1));//finished
         chance.add(new Card ("Decrease Money","for each house you own pay $25 for each hotel $100",1));
         chance.add(new Card ("Broadwalk","Take a walk to the Broadwalk",1));//finished
-        chance.add(new Card ("Utility","Advance token to nearst utility",1));
+        chance.add(new Card ("Utility","Advance token to nearst utility",1));//finished
         chance.add(new Card ("Go","Advance to \"GO\" \n Reminder: If you pass go collect $200",1));//finished
         //chest
         chest.add(new Card ("Go to Jail","Go directly to jail",2));// finished
-        chest.add(new Card ("Increase Money","From Sale of stock you get $45",2));//net2aked mnha
+        chest.add(new Card ("Increase Money","From Sale of stock you get $45",2));//finished
         chest.add(new Card ("Grand Opera Openning","collect $50 from every player",2));//half finished
         chest.add(new Card ("GO","Advance to \"GO\"",2));//finished
         FreeCard=new Card ("Freed","Get out of jail free",2);//finished
@@ -44,7 +46,7 @@ public class SpecialCards {
         if (DrawnCard.getType()==1){
             switch(DrawnCard.getName()){
                 case "Railroad":
-                    
+                    this.move2(player,2);
                     break;
                 case "Decrease Money":
                     
@@ -53,7 +55,7 @@ public class SpecialCards {
                     this.move(Board.getPlace(Board.placesArr.size()-1),player);
                     break;
                 case "Utility":
-                    
+                     this.move2(player,1);
                     break;
                 case "Go":
                     this.move(Board.getPlace(0),player);
@@ -128,10 +130,52 @@ public class SpecialCards {
         player.HasJailCard=false;
         
     }
-    public void move (Places place , Player player)
+    private void move (Places place , Player player)
     {
         player.x = place.coords.x;
         player.y= place.coords.y;
         
+    }
+    private void move2(Player player,int x)
+    {
+        int index=0; ; 
+        for (int i =0; i< Board.placesArr.size();i++){
+            if (player.x==Board.placesArr.get(i).coords.x && player.y==Board.placesArr.get(i).coords.y  )
+                index = i;
+        }
+        if (x==1)
+        {
+            if (index>=utilities[utilities.length-1] )
+            {
+                this.move(Board.placesArr.get( utilities[0]), player);
+            }
+            else {
+            for (int i =0; i<utilities.length;i++){
+               if (index < utilities[i])
+               {
+                   this.move(Board.placesArr.get( utilities[i]), player);
+                   break;
+               }
+            }
+            }
+
+        }
+        else 
+        {
+            if (index>=utilities[railroads.length-1] )
+            {
+                this.move(Board.placesArr.get( railroads[0]), player);
+            }
+            else {
+           for (int i =0; i<railroads.length;i++){
+               if (index < railroads[i])
+               {
+                   this.move(Board.placesArr.get( railroads[i]), player);
+                   break;
+               }
+            } 
+            }
+        }
+
     }
 }
