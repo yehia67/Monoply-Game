@@ -36,7 +36,10 @@ public class Country extends Places {
     Country() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+     public void SoldCountry(){
+         Owner.money += getPrice();
+         available = true;
+     }
     public void buildHouse() {
         if(canBuildHousesFlag) {
             price += 20;
