@@ -34,6 +34,15 @@ public class CountriesGroup {
         return countries;
     }
     
+    public String[] showCountries(){
+       int sz = countries.size();
+        String[] countriesName ;
+        countriesName = new String[sz];
+        for(int i = 0; i < countries.size(); i++) {
+           countriesName[i] =    countries.get(i).getName();
+            }
+      return countriesName;
+    }
     public int getSize() {
         return countries.size();
     }
