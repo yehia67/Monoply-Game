@@ -19,7 +19,9 @@ public class Player {
     public Color color;
     Dice dice;
     public String name;
+    
     public boolean HasJailCard;
+    private boolean inJail;
     
     private CountriesGroup[] groups = new CountriesGroup[8];
     
@@ -72,5 +74,13 @@ public class Player {
         } else {
             groups[7].addCountry(boughtCountry);
         }
+    }
+    
+    public void setInJail(boolean flag) {
+        inJail = flag;
+    }
+    
+    public boolean getInJail() {
+        return inJail;
     }
 }

@@ -5,8 +5,11 @@
  */
 package monoply.game;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 import static monoply.game.playPanel.playersNumberSpinner;
 import static monoply.game.playPanel.player1TextField;
 import static monoply.game.playPanel.player2TextField;
@@ -300,7 +303,7 @@ public class GamePanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
- SpecialCards specialCards = new SpecialCards();
+
     public void playersInfo() {
         switch (playersNumber) {
             case 2:
@@ -456,19 +459,28 @@ public class GamePanel extends javax.swing.JPanel {
         currentPlayer = Board.players.get(Board.turn);
         DiceResultLabel.setText(diceNumber + "");
         
-        updateCountriesComboBx();
+        while(currentPlayer.getInJail()) {
+            System.out.println("here");
+            currentPlayer.setInJail(false);
+            System.out.println(currentPlayer.place);
+            Board.turn = (Board.turn + 1) % Board.players.size();
+            currentPlayer = Board.players.get(Board.turn);
+        }
         
-        System.out.println(Board.players.indexOf(currentPlayer));
+        updateCountriesComboBx();
 
+        System.out.println(Board.players.indexOf(currentPlayer));
+        
+        System.out.println("Current has jail card : " + currentPlayer.HasJailCard);
         int firstPlace = currentPlayer.place;
         int secondPlace = (firstPlace + diceNumber) % Board.placesArr.size();
         currentPlayer.x = Board.placesArr.get(secondPlace).coords.x;
         currentPlayer.y = Board.placesArr.get(secondPlace).coords.y;
         currentPlayer.place = secondPlace;
-         System.out.println("first place : " + firstPlace);
-         System.out.println("Dice : " + diceNumber);
+        System.out.println("first place : " + firstPlace);
+        System.out.println("Dice : " + diceNumber);
         System.out.println("second place : " + secondPlace);
-        
+
         labelNum = Board.turn;
         MessageTextField.setText("");
         this.playerLabel.setText("Player: "+(Board.turn+1));
@@ -478,6 +490,7 @@ public class GamePanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_rollDiceButtonActionPerformed
 
+    
 
     private void YButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YButtonActionPerformed
         // TODO add your handling code here:yes
@@ -502,32 +515,38 @@ public class GamePanel extends javax.swing.JPanel {
     private void MysetText(int i) {
         if(i !=2 || i != 17 || i != 33 || i != 7  || i != 22 || i != 36 )
         { currentPlace = Board.getPlace(i);}
-        if (i == 10 || i == 30)// jail
+        if (i == 30)// jail
         {
-          
+            SpecialPlaces sp = (SpecialPlaces) Board.placesArr.get(30);
+            sp.SpecialPlaceAction(currentPlayer, specialCards, Board.players);
+            this.repaint();
         } else if (i == 4 || i == 38) // taxes
         {
-            
             MessageTextField.setText("You just paid 75$ Taxes" );
-            currentPlayer.money -= 75;
+            SpecialPlaces sp = (SpecialPlaces) Board.placesArr.get(i);
+            sp.SpecialPlaceAction(currentPlayer, specialCards, Board.players);
             labels[labelNum].setText("Money: " +currentPlayer.money);
             hideButton();
         } else if (i == 20) // bus
         {
-
         }else if( i ==2 || i == 17 || i == 33)//chest
         {
-            specialCards.DrawCard(1,currentPlayer,Board.players);
-            //MessageTextField.setText(specialCards.DrawnCard.getDescription());
+            //specialCards.DrawCard(1,currentPlayer,Board.players);
+            SpecialPlaces sp = (SpecialPlaces) Board.placesArr.get(i);
+            sp.SpecialPlaceAction(currentPlayer, specialCards, Board.players);
+            //MessageTextField.setText(specialCards.getDrawnCard().getDescription());
             labels[labelNum].setText("Money: " +currentPlayer.money);
+            this.repaint();
             hideButton();
         }
         
         else if ( i == 7  || i == 22 || i == 36 ) //chance
         {
-           specialCards.DrawCard(0,currentPlayer, Board.players);
-            //MessageTextField.setText(specialCards.DrawnCard.getDescription());
+            SpecialPlaces sp = (SpecialPlaces) Board.placesArr.get(i);
+            sp.SpecialPlaceAction(currentPlayer, specialCards, Board.players);
+            //MessageTextField.setText(specialCards.getDrawnCard().getDescription());
             labels[labelNum].setText("Money: " +currentPlayer.money);
+            this.repaint();
             hideButton();
         } else if (i == 0) {
             MessageTextField.setText("Start the new round and get 200$");
@@ -613,10 +632,12 @@ public class GamePanel extends javax.swing.JPanel {
         }
       
     }
-      
+    
+    private SpecialCards specialCards = new SpecialCards();
     private int labelNum;
     private Places currentPlace;
     private Player currentPlayer;
+    private Timer timer;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BoardPanel;
     private javax.swing.JLabel DiceResultLabel;

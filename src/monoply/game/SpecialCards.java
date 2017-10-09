@@ -66,6 +66,7 @@ public class SpecialCards {
         else {
           switch(DrawnCard.getName()){
                 case "Go to Jail":
+                    player.setInJail(true);
                     this.move(Board.getPlace(10),player,10);
                     break;
                     
@@ -181,5 +182,9 @@ public class SpecialCards {
             }
         }
 
+    }
+    
+    public Card getDrawnCard() {
+        return DrawnCard;
     }
 }

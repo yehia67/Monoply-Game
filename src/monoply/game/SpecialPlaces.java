@@ -36,7 +36,13 @@ public class SpecialPlaces extends Places{
         if(this.name=="Go to Jail"){
             currentPlayer.x=Board.getPlace(10).coords.x;
             currentPlayer.y=Board.getPlace(10).coords.y;
-            currentPlayer.place=10%Board.placesArr.size();
+            currentPlayer.place=10;
+            
+            if(currentPlayer.HasJailCard) {
+                Cards.returnFreeCard(currentPlayer);
+                currentPlayer.HasJailCard = false;
+                currentPlayer.setInJail(false);
+            }
         }
         
         if(this.name=="LUXURY TAX"){
@@ -50,8 +56,6 @@ public class SpecialPlaces extends Places{
         if(this.name=="Parking"){
             
         }
-        
-        
     }
 }
 
