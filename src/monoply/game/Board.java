@@ -106,7 +106,7 @@ public class Board extends JPanel {
     public static Places getPlace(int i){
         return placesArr.get(i);
     }
-       public Country findCountry(String s)
+       public static Country findCountry(String s)
        { 
             
            

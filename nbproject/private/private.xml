@@ -3,24 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/home/mahmoud/Projects/Monoply-Game/src/monoply/game/Country.java</file>
-            <file>file:/home/mahmoud/Projects/Monoply-Game/src/monoply/game/GamePanel.java</file>
-            <file>file:/home/mahmoud/Projects/Monoply-Game/src/monoply/game/Board.java</file>
-=======
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Card.java</file>
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Board.java</file>
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/GamePanel.java</file>
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Coordinates.java</file>
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/playPanel.java</file>
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/startPanel.java</file>
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/SpecialCards.java</file>
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/SpecialPlaces.java</file>
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/mainFrame.java</file>
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Dice.java</file>
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Places.java</file>
-            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Player.java</file>
->>>>>>> 9c7b96033886791f36e4fb1537679248a8c86996
+            <file>file:/home/yehia/Desktop/yehia/Projects/java/Monoply%20Game/src/monoply/game/Countries.java</file>
+            <file>file:/home/yehia/Desktop/yehia/Projects/java/Monoply%20Game/src/monoply/game/Board.java</file>
+            <file>file:/home/yehia/Desktop/yehia/Projects/java/Monoply%20Game/src/monoply/game/Country.java</file>
+            <file>file:/home/yehia/Desktop/yehia/Projects/java/Monoply%20Game/src/monoply/game/GamePanel.java</file>
         </group>
     </open-files>
 </project-private>
