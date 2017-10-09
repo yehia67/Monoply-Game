@@ -23,7 +23,7 @@ public class SpecialCards {
         
         //chance
         chance.add(new Card ("Railroad","Advance to the nearest Railroad",1));//finished
-        chance.add(new Card ("Decrease Money","for each house you own pay $25 for each hotel $100",1));
+        chance.add(new Card ("Decrease Money","for each house you own pay $25 for each hotel $100",1));// half finished
         chance.add(new Card ("Broadwalk","Take a walk to the Broadwalk",1));//finished
         chance.add(new Card ("Utility","Advance token to nearst utility",1));//finished
         chance.add(new Card ("Go","Advance to \"GO\" \n Reminder: If you pass go collect $200",1));//finished
@@ -49,7 +49,7 @@ public class SpecialCards {
                     this.move2(player,2);
                     break;
                 case "Decrease Money":
-                    
+                    this.pay(player);
                     break;
                 case "Broadwalk":
                     this.move(Board.getPlace(Board.placesArr.size()-1),player,Board.placesArr.size()-1);
@@ -132,7 +132,16 @@ public class SpecialCards {
         player.HasJailCard=false;
         
     }
-    
+    private void pay (Player p)
+    {
+        if (p.money-25*p.houses+100*p.hotels>=0)
+        {
+            p.money -= 25*p.houses+100*p.hotels;
+        }
+        else {
+            // ma3oosh floos 
+        }
+    }
     private void move (Places place , Player player,int index)
     {
         player.x = place.coords.x;
