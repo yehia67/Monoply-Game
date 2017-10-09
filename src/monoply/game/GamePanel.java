@@ -543,7 +543,7 @@ public int intialPlace=0;
             //if(!stop) {
                  if (intialPlace==secondPlace)
                 {
-                    currentPlayer.place++;
+                    currentPlayer.place=( currentPlayer.place+1)% Board.placesArr.size();;
                     currentPlayer.x = Board.placesArr.get(currentPlayer.place).coords.x;
                     currentPlayer.y = Board.placesArr.get(currentPlayer.place).coords.y;
                     gp.repaint();
@@ -554,11 +554,12 @@ public int intialPlace=0;
         gp.playerLabel.setText("Player: "+(Board.turn+1));
         //this.repaint();
         MysetText(currentPlayer.place);
-        Board.turn = (Board.turn + 1) % Board.players.size();
-         if((firstPlace+diceNumber)>39&&(secondPlace!=0)){
+        if((firstPlace+diceNumber)>39&&(secondPlace!=0)){
             currentPlayer.money+=200;
             labels[labelNum].setText("Money: " +currentPlayer.money);
         }
+        Board.turn = (Board.turn + 1) % Board.players.size();
+        
                 }
                  else {
                 gp.repaint();
