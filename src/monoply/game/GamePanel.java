@@ -480,6 +480,13 @@ public class GamePanel extends javax.swing.JPanel {
         System.out.println("first place : " + firstPlace);
         System.out.println("Dice : " + diceNumber);
         System.out.println("second place : " + secondPlace);
+        
+        if((firstPlace+diceNumber)>39&&(secondPlace!=0)){
+            currentPlayer.money+=200;
+            labels[labelNum].setText("Money: " +currentPlayer.money);
+        }
+        
+        System.out.println(currentPlayer+":"+currentPlayer.money);
 
         labelNum = Board.turn;
         MessageTextField.setText("");
