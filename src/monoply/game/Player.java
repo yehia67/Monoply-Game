@@ -20,7 +20,7 @@ public class Player {
     Dice dice;
     public String name;
     public boolean HasJailCard;
-    
+    public int houses,hotels;
     private CountriesGroup[] groups = new CountriesGroup[8];
     
     private void initGroups() {
@@ -48,7 +48,8 @@ public class Player {
         this.y = y;
         this.color = c;
         this.HasJailCard= false;
-        
+        houses = 0;
+        hotels=0;
         initGroups();
     }
     

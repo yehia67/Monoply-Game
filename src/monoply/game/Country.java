@@ -41,6 +41,7 @@ public class Country extends Places {
         if(canBuildHousesFlag) {
             price += 20;
             housesNumber++;
+            Owner.houses++;
             if(housesNumber >= 2) {
                 canBuildHousesFlag = false;
                 canBuildHotelFlag = true;
@@ -51,6 +52,7 @@ public class Country extends Places {
     public void buildHotel() {
         if(canBuildHotelFlag) {
             price += 20;
+            Owner.hotels++;
             canBuildHotelFlag = false;
         }
     }

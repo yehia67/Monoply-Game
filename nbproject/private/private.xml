@@ -5,10 +5,15 @@
         <group>
             <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Card.java</file>
             <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Board.java</file>
+            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/GamePanel.java</file>
+            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Coordinates.java</file>
             <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/playPanel.java</file>
+            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/startPanel.java</file>
             <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/SpecialCards.java</file>
             <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/SpecialPlaces.java</file>
             <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/mainFrame.java</file>
+            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Dice.java</file>
+            <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Places.java</file>
             <file>file:/D:/GitHub/Monoply-Game/src/monoply/game/Player.java</file>
         </group>
     </open-files>
