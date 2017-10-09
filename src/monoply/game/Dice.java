@@ -15,6 +15,7 @@ public class Dice {
    private static Random rand = new Random();
    
    public static int getDice(){
-       return rand.nextInt(11) + 2;
+      return rand.nextInt(11) + 2;
+       
    }
 }

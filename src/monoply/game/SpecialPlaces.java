@@ -25,11 +25,11 @@ public class SpecialPlaces extends Places{
            currentPlayer.money-=200; 
         }
         
-        if(this.name=="Chance"){
+        if(this.name.equalsIgnoreCase("Chance")){
             card.DrawCard(1,currentPlayer,players);
         }
         
-        if(this.name=="COMMUNITY CHEST"){
+        if(this.name.equalsIgnoreCase("COMMUNITY CHEST")){
             card.DrawCard(2,currentPlayer,players);
         }
         

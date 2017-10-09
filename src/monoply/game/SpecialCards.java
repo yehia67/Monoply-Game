@@ -90,7 +90,8 @@ public class SpecialCards {
     }
     public void DrawCard (int type, Player Player,ArrayList<Player> players)
     {
-        if (type ==1)
+        System.out.println("here");
+        if (type ==2)
         {
             this.DrawnCard = chest.get(0);
             
@@ -108,14 +109,15 @@ public class SpecialCards {
             Collections.rotate(chance, -1);
         }
         //Display Message Here *DrawnCard.getDescription()*
+        //DrawnCard=chance.get(2);
         GamePanel.MessageTextField.setText(DrawnCard.getDescription());
+        System.out.println("Drawn Card"+DrawnCard.getDescription());
         this.performAction(Player,players);
     }
    
     private void reduceMoney(Player player,ArrayList<Player> players){
          for(int i=0;i<players.size();i++){
-                        if(players.get(i)==player)
-                            continue;
+                        if(players.get(i)==player){}
                         else{
                             if (players.get(i).money-50>=0){
                             players.get(i).money-=50;
@@ -144,6 +146,7 @@ public class SpecialCards {
     }
     private void move (Places place , Player player,int index)
     {
+        System.out.println("here22");
         player.x = place.coords.x;
         player.y= place.coords.y;
         player.place= index;

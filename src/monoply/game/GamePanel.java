@@ -8,6 +8,8 @@ package monoply.game;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 import static monoply.game.playPanel.playersNumberSpinner;
@@ -26,7 +28,7 @@ import static monoply.game.playPanel.playersNumber;
  * @author mahmoud
  */
 public class GamePanel extends javax.swing.JPanel {
-
+public int intialPlace=0;
     private JLabel[] labels;
     public GamePanel() {
         initComponents();
@@ -454,7 +456,8 @@ public class GamePanel extends javax.swing.JPanel {
     
     private void rollDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollDiceButtonActionPerformed
         // TODO add your handling code here:
-        int diceNumber = Dice.getDice();
+        this.move();
+       /* int diceNumber = Dice.getDice();
          
         currentPlayer = Board.players.get(Board.turn);
         DiceResultLabel.setText(diceNumber + "");
@@ -479,18 +482,105 @@ public class GamePanel extends javax.swing.JPanel {
         currentPlayer.place = secondPlace;
         System.out.println("first place : " + firstPlace);
         System.out.println("Dice : " + diceNumber);
-        System.out.println("second place : " + secondPlace);
+        System.out.println("second place : " + secondPlace);*/
 
-        labelNum = Board.turn;
-        MessageTextField.setText("");
-        this.playerLabel.setText("Player: "+(Board.turn+1));
-        this.repaint();
-        MysetText(currentPlayer.place);
-        Board.turn = (Board.turn + 1) % Board.players.size();
+       
         
     }//GEN-LAST:event_rollDiceButtonActionPerformed
+    private void move (){
+        int diceNumber = Dice.getDice();
+         
+        currentPlayer = Board.players.get(Board.turn);
+        DiceResultLabel.setText(diceNumber + "");
+        
+        while(currentPlayer.getInJail()) {
+            System.out.println("here");
+            currentPlayer.setInJail(false);
+            System.out.println(currentPlayer.place);
+            Board.turn = (Board.turn + 1) % Board.players.size();
+            currentPlayer = Board.players.get(Board.turn);
+        }
+        
+        updateCountriesComboBx();
 
-    
+        System.out.println(Board.players.indexOf(currentPlayer));
+        
+        System.out.println("Current has jail card : " + currentPlayer.HasJailCard);
+        
+        int firstPlace = currentPlayer.place;
+         intialPlace = (firstPlace)% Board.placesArr.size();;
+        int secondPlace = (firstPlace + diceNumber) % Board.placesArr.size();
+        GamePanel gp = this;
+ 
+            
+                 //while (moves<=diceNumber){
+                      
+               // System.out.println("moves "+moves);
+          
+       // boolean stop = false;
+                       Timer timer = new Timer(200, new ActionListener() {
+                           private boolean stop = false;
+                           
+                          
+                           @Override
+        public void actionPerformed(ActionEvent e) {
+            //if(!stop) {
+                 if (intialPlace==secondPlace)
+                {
+                    currentPlayer.place++;
+                    currentPlayer.x = Board.placesArr.get(currentPlayer.place).coords.x;
+                    currentPlayer.y = Board.placesArr.get(currentPlayer.place).coords.y;
+                    gp.repaint();
+((Timer)e.getSource()).stop();  
+   System.out.println("Player place : " + currentPlayer.place);
+    labelNum = Board.turn;
+        MessageTextField.setText("");
+        gp.playerLabel.setText("Player: "+(Board.turn+1));
+        //this.repaint();
+        MysetText(currentPlayer.place);
+        Board.turn = (Board.turn + 1) % Board.players.size();
+                }
+                 else {
+                gp.repaint();
+                gp.animate();
+                 }
+              //  stop  =true;
+           // } else {
+                //((Timer)e.getSource()).stop();
+           // }
+                    }
+    });
+    //timer.setRepeats(true);
+   // timer.setDelay(50);
+    timer.start();
+        
+       
+        
+         
+        
+       
+        
+        
+                // }
+        
+             
+        
+        
+       // currentPlayer.place = secondPlace;
+        System.out.println("first place : " + firstPlace);
+        System.out.println("Dice : " + diceNumber);
+        System.out.println("second place : " + secondPlace);
+    }
+    public void animate ( )
+    {
+                        currentPlayer.x = Board.placesArr.get(intialPlace).coords.x;
+        currentPlayer.y = Board.placesArr.get(intialPlace).coords.y;
+        currentPlayer.place=intialPlace;
+        intialPlace= (intialPlace+1)% Board.placesArr.size();
+         System.out.println("place "+intialPlace);
+        
+       
+    }
 
     private void YButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YButtonActionPerformed
         // TODO add your handling code here:yes
