@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.Timer;
+import static monoply.game.Board.findCountry;
 import static monoply.game.playPanel.playersNumberSpinner;
 import static monoply.game.playPanel.player1TextField;
 import static monoply.game.playPanel.player2TextField;
@@ -92,6 +93,7 @@ public int intialPlace=0;
         countriesComboBx = new javax.swing.JComboBox<>();
         buildBtn = new javax.swing.JButton();
         playerLabel = new java.awt.Label();
+        jButton1 = new javax.swing.JButton();
 
         setDoubleBuffered(false);
         setPreferredSize(new java.awt.Dimension(700, 700));
@@ -266,6 +268,13 @@ public int intialPlace=0;
 
         playerLabel.setText("Player: 1");
 
+        jButton1.setText("SELL");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -286,8 +295,11 @@ public int intialPlace=0;
                                 .addComponent(YButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(NButton))
-                            .addComponent(MessageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                            .addComponent(countriesComboBx, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(MessageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(countriesComboBx, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))
                             .addComponent(buildBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -307,10 +319,12 @@ public int intialPlace=0;
                             .addComponent(YButton)
                             .addComponent(NButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(countriesComboBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(countriesComboBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buildBtn)
-                        .addGap(0, 252, Short.MAX_VALUE)))
+                        .addGap(0, 246, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -726,6 +740,22 @@ public int intialPlace=0;
         // TODO add your handling code here:
     }//GEN-LAST:event_MessageTextFieldActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         String x =  countriesComboBx.getSelectedItem().toString();
+        Country country =  findCountry(x);
+        if(country == null)
+        {
+            MessageTextField.setText("there is No Country to sell");
+        }
+        else{
+            MessageTextField.setText("You sell "+ country.getName() 
+                    +"for just "+ country.getPrice()+"$" );
+            
+            country.SoldCountry();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void updateCountriesComboBx() {
         countriesComboBx.removeAllItems();
         
@@ -773,6 +803,7 @@ public int intialPlace=0;
     private javax.swing.JButton YButton;
     private javax.swing.JButton buildBtn;
     private javax.swing.JComboBox<String> countriesComboBx;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label playerLabel;
     private javax.swing.JButton rollDiceButton;
