@@ -45,7 +45,16 @@ public class GamePanel extends javax.swing.JPanel {
         labels[6] = Player7Money;
         labels[7] = Player8Money;
     }
-
+      public void Sell(){
+          showButton();
+          CountriesGroup[] countriesGroup = currentPlayer.getGroupsArray();
+          String[] countriesName =  countriesGroup[0].showCountries();
+           
+          
+          
+          
+          MessageTextField.setText("You don't Have Money, if u want to buy ");
+      }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
