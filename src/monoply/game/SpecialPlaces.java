@@ -22,7 +22,7 @@ public class SpecialPlaces extends Places{
     
     public void SpecialPlaceAction(Player currentPlayer, SpecialCards card,ArrayList<Player> players){
         if(this.name=="Income Tax"){
-           currentPlayer.money-=200; 
+           currentPlayer.money-=75; 
         }
         
         if(this.name.equalsIgnoreCase("Chance")){

@@ -106,6 +106,20 @@ public class Board extends JPanel {
     public static Places getPlace(int i){
         return placesArr.get(i);
     }
+       public Country findCountry(String s)
+       { 
+            
+           
+           for(int i = 0; i < placesArr.size(); ++i)
+           {
+               Country country = (Country) placesArr.get(i);
+               if(s.equalsIgnoreCase(country.getName()))
+               {
+                   return country;
+               }
+           }
+       return null ;
+       }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
