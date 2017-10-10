@@ -576,8 +576,8 @@ public int intialPlace=0;
                 {
                     rollDiceButton.setEnabled(true);
                     currentPlayer.place=( currentPlayer.place+1)% Board.placesArr.size();;
-                    currentPlayer.x = Board.placesArr.get(currentPlayer.place).coords.x;
-                    currentPlayer.y = Board.placesArr.get(currentPlayer.place).coords.y;
+                    currentPlayer.x = Board.placesArr.get(currentPlayer.place).coords.x + (Board.players.indexOf(currentPlayer) * Board.placesArr.get(currentPlayer.place).offsetX);
+                    currentPlayer.y = Board.placesArr.get(currentPlayer.place).coords.y + (Board.players.indexOf(currentPlayer) * Board.placesArr.get(currentPlayer.place).offsetY);
                     gp.repaint();
 ((Timer)e.getSource()).stop();  
    System.out.println("Player place : " + currentPlayer.place);
@@ -626,8 +626,8 @@ public int intialPlace=0;
     }
     public void animate ( )
     {
-                        currentPlayer.x = Board.placesArr.get(intialPlace).coords.x;
-        currentPlayer.y = Board.placesArr.get(intialPlace).coords.y;
+                        currentPlayer.x = Board.placesArr.get(intialPlace).coords.x + (Board.turn * Board.placesArr.get(intialPlace).offsetX);
+        currentPlayer.y = Board.placesArr.get(intialPlace).coords.y + (Board.turn * Board.placesArr.get(intialPlace).offsetY);
         currentPlayer.place=intialPlace;
         intialPlace= (intialPlace+1)% Board.placesArr.size();
          System.out.println("place "+intialPlace);

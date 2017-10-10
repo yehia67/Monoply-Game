@@ -13,9 +13,14 @@ public class Places {
 
     Coordinates coords;
     String Owner = "No One";
+    public int offsetX, offsetY;
+    
     Places(){}   
-    public Places(Coordinates c) {
+    
+    public Places(Coordinates c, int offX, int offY) {
         this.coords = c;
+        offsetX = offX;
+        offsetY = offY;
     }
     
    boolean isOwn(String player)

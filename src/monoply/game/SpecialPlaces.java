@@ -15,8 +15,8 @@ public class SpecialPlaces extends Places{
     private boolean available = true;
     
     
-    public SpecialPlaces(String name, Coordinates c){
-       super(c);
+    public SpecialPlaces(String name, Coordinates c, int offX, int offY){
+       super(c, offX, offY);
         this.name=name;
     }
     

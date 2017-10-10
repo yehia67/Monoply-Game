@@ -10,6 +10,9 @@ public class Country extends Places {
     private Color countryColor;
     public Player Owner;
     
+    private int offsetX = 0;
+    private int offsetY = 0;
+    
     private int index;
     
     private int housesNumber = 0;
@@ -19,8 +22,8 @@ public class Country extends Places {
     private boolean canBuildHotelFlag = false;
          
     public Country(int mPrice, int mFees, Color mCountryColor, String mName, 
-            Coordinates coords, int mIndex) {
-        super(coords);
+            Coordinates coords, int mIndex, int offX, int offY) {
+        super(coords, offX, offY);
         price = mPrice;
         totalFees = mFees;
         countryColor = mCountryColor;
