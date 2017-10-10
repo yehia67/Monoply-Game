@@ -528,6 +528,7 @@ public int intialPlace=0;
         
     }//GEN-LAST:event_rollDiceButtonActionPerformed
     private void move (){
+        rollDiceButton.setEnabled(false);
         int dice1Num = dice1.getDice();
         int dice2Num = dice2.getDice();
         diceNumber = dice1Num + dice2Num;
@@ -573,6 +574,7 @@ public int intialPlace=0;
             //if(!stop) {
                  if (intialPlace==secondPlace)
                 {
+                    rollDiceButton.setEnabled(true);
                     currentPlayer.place=( currentPlayer.place+1)% Board.placesArr.size();;
                     currentPlayer.x = Board.placesArr.get(currentPlayer.place).coords.x;
                     currentPlayer.y = Board.placesArr.get(currentPlayer.place).coords.y;
