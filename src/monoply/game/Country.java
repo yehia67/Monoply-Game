@@ -39,6 +39,7 @@ public class Country extends Places {
      public void SoldCountry(){
          Owner.money += getPrice();
          available = true;
+         Owner = null;
      }
     public void buildHouse() {
         if(canBuildHousesFlag) {

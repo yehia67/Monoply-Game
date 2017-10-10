@@ -743,17 +743,28 @@ public int intialPlace=0;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          String x =  countriesComboBx.getSelectedItem().toString();
-        Country country =  findCountry(x);
-        if(country == null)
-        {
-            MessageTextField.setText("there is No Country to sell");
+         CountriesGroup[] groups = currentPlayer.getGroupsArray();
+         for(int i = 0; i < groups.length; i++) {
+            ArrayList<Country> countries = groups[i].getCountries();
+            for(int j = 0; j < countries.size(); j++) {
+               if( x.equalsIgnoreCase(countries.get(j).getName()))
+                       {
+                           countriesComboBx.removeItem(countriesComboBx.getSelectedItem());
+                           countries.get(j).SoldCountry();
+                              MessageTextField.setText("You sell "+  
+                                      countries.get(j).getName() 
+                    +"for just "+  countries.get(j).getPrice()+"$" );
+                    currentPlayer.money += countries.get(j).getPrice();
+                    labels[labelNum].setText("Money: " +currentPlayer.money);       
+                       }
+            }
         }
-        else{
-            MessageTextField.setText("You sell "+ country.getName() 
-                    +"for just "+ country.getPrice()+"$" );
+         
+       
+         
             
-            country.SoldCountry();
-        }
+            
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void updateCountriesComboBx() {
