@@ -5,17 +5,46 @@
  */
 package monoply.game;
 
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
  * @author yehia
  */
-public class Dice {
-   private static Random rand = new Random();
-   
-   public static int getDice(){
-      return rand.nextInt(11) + 2;
-       
-   }
+public class Dice extends JPanel{
+    private Random rand = new Random();
+    private JLabel lbl= new JLabel();
+    private String []s={"Dice1.gif","Dice2.gif","Dice3.gif","Dice4.gif","Dice5.gif","Dice6.gif"};
+
+    public Dice(){
+        this.setVisible(false);
+        this.setLayout(new GridLayout(0, 1));
+        lbl.setText("");
+        this.setOpaque(true);
+        this.add(lbl);
+    }
+
+    public int getDice(){
+        if(!this.isVisible()) {
+            this.setVisible(true);
+        }
+        
+        int num = rand.nextInt(6) + 1;
+        ImageIcon origIcon = new ImageIcon(s[num - 1]);
+        Dice d = this;
+        
+        lbl.setIcon(new ImageIcon(origIcon.getImage()
+            .getScaledInstance(30, 30,
+                    Image.SCALE_SMOOTH)));
+        
+        return num;
+    }
 }

@@ -70,6 +70,8 @@ public int intialPlace=0;
         BoardPanel = new Board(playersNumber);
         rollDiceButton = new javax.swing.JButton();
         DiceResultLabel = new javax.swing.JLabel();
+        dice1 = new monoply.game.Dice();
+        dice2 = new monoply.game.Dice();
         jPanel1 = new javax.swing.JPanel();
         Player1Name = new javax.swing.JLabel();
         Player1Money = new javax.swing.JLabel();
@@ -114,21 +116,30 @@ public int intialPlace=0;
             .addGroup(BoardPanelLayout.createSequentialGroup()
                 .addGroup(BoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BoardPanelLayout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(rollDiceButton))
+                        .addGap(119, 119, 119)
+                        .addComponent(DiceResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(BoardPanelLayout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(DiceResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(139, 139, 139)
+                        .addGroup(BoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rollDiceButton)
+                            .addGroup(BoardPanelLayout.createSequentialGroup()
+                                .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(456, Short.MAX_VALUE))
         );
         BoardPanelLayout.setVerticalGroup(
             BoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BoardPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(rollDiceButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(87, Short.MAX_VALUE)
                 .addComponent(DiceResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(215, 215, 215))
+                .addGap(18, 18, 18)
+                .addComponent(rollDiceButton)
+                .addGap(18, 18, 18)
+                .addGroup(BoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dice1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dice2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(369, 369, 369))
         );
 
         Player1Name.setText("Player1 ");
@@ -295,7 +306,7 @@ public int intialPlace=0;
                                 .addComponent(YButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(NButton))
-                            .addComponent(MessageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                            .addComponent(MessageTextField)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(countriesComboBx, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -324,7 +335,7 @@ public int intialPlace=0;
                             .addComponent(jButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buildBtn)
-                        .addGap(0, 246, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -518,7 +529,13 @@ public int intialPlace=0;
         
     }//GEN-LAST:event_rollDiceButtonActionPerformed
     private void move (){
-        int diceNumber = Dice.getDice();
+        int dice1Num = dice1.getDice();
+        int dice2Num = dice2.getDice();
+        diceNumber = dice1Num + dice2Num;
+        
+        if(dice1Num == dice2Num) {
+            diceNumber = diceNumber * 2;
+        }
          
         currentPlayer = Board.players.get(Board.turn);
         DiceResultLabel.setText(diceNumber + "");
@@ -548,7 +565,7 @@ public int intialPlace=0;
                // System.out.println("moves "+moves);
           
        // boolean stop = false;
-                       Timer timer = new Timer(200, new ActionListener() {
+                       Timer timer = new Timer(500, new ActionListener() {
                            private boolean stop = false;
                            
                           
@@ -779,6 +796,7 @@ public int intialPlace=0;
     private Places currentPlace;
     private Player currentPlayer;
     private Timer timer;
+    private int diceNumber;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BoardPanel;
     private javax.swing.JLabel DiceResultLabel;
@@ -803,6 +821,8 @@ public int intialPlace=0;
     private javax.swing.JButton YButton;
     private javax.swing.JButton buildBtn;
     private javax.swing.JComboBox<String> countriesComboBx;
+    private monoply.game.Dice dice1;
+    private monoply.game.Dice dice2;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label playerLabel;
