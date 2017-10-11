@@ -35,8 +35,9 @@ public class mainFrame extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1200, 1200));
         setResizable(false);
-        setSize(new java.awt.Dimension(700, 700));
+        setSize(new java.awt.Dimension(1, 700));
 
         mainPanel.setMinimumSize(new java.awt.Dimension(700, 700));
         mainPanel.setLayout(new java.awt.GridBagLayout());
