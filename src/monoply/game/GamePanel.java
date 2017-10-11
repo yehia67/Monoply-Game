@@ -775,12 +775,15 @@ public int intialPlace=0;
             for(int j = 0; j < countries.size(); j++) {
                if( x.equalsIgnoreCase(countries.get(j).getName()))
                        {
-                           countriesComboBx.removeItem(countriesComboBx.getSelectedItem());
+                           
+                           //countriesComboBx.removeItem(countriesComboBx.getSelectedItem());
                            countries.get(j).SoldCountry();
                               MessageTextField.setText("You sell "+  
                                       countries.get(j).getName() 
                     +"for just "+  countries.get(j).getPrice()+"$" );
                     currentPlayer.money += countries.get(j).getPrice();
+                    countries.remove(countries.get(i));
+                    updateCountriesComboBx();
                     labels[labelNum].setText("Money: " +currentPlayer.money);       
                        }
             }
