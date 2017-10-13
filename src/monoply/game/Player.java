@@ -66,7 +66,18 @@ public class Player {
                     allTiles[secondPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
                     MonopolyBoardPanel.RollButton.setEnabled(true);
                     currentPlayer.place = (currentPlayer.place + 1) % allTiles.length;
-                    System.out.println("place: "+currentPlayer.place);
+                    System.out.println("place: " + currentPlayer.place);
+
+                    if (currentPlayer.place == 30) {
+                        GoToJail.GoToJailAction(currentPlayer);
+                    } else if (currentPlayer.place == 2 || currentPlayer.place == 17 || currentPlayer.place == 33) {
+                        panel.cards.DrawCard(2, currentPlayer, panel.players);
+                    } else if (currentPlayer.place == 7 || currentPlayer.place == 22 || currentPlayer.place == 36) {
+                        panel.cards.DrawCard(1, currentPlayer, panel.players);
+
+                    }
+                    MainPanel b = (MainPanel) panel.getParent();
+                    b.currentPanel.UpdateCurrentDetails();
                     ((Timer) e.getSource()).stop();
                     if ((secondPlace) > 39 && (secondPlace != 0)) {
                         currentPlayer.money += 200;
@@ -77,23 +88,8 @@ public class Player {
 
             }
         });
-
-        timer.start();
-        if (this.place==30)
-        {
-            GoToJail.GoToJailAction(this);
-        }
-        else if (this.place==2||this.place==17||this.place==33)
-        {
-            panel.cards.DrawCard(2, this, panel.players);
-        }
-        else if (this.place==7||this.place==22||this.place==36)
-        {
-            panel.cards.DrawCard(1, this, panel.players);
-   
-        }
-        MainPanel b = (MainPanel) panel.getParent();
-        b.currentPanel.UpdateCurrentDetails();
+ timer.start();
+      
 
     }
 
