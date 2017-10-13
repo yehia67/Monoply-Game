@@ -184,7 +184,6 @@ public class MonopolyBoardPanel extends JPanel{
      MainPanel  b = (MainPanel)this.getParent();
         b.currentPanel.UpdateCurrentDetails();*/
         
-        turn= (turn+1)%this.Playernumber;
   
     }
     

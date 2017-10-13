@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 import static monoply.game.GamePanel.MessageTextField;
 import static monoply.game.MonopolyBoardPanel.allTiles;
+import static monoply.game.MonopolyBoardPanel.turn;
 
 /**
  *
@@ -78,6 +79,8 @@ public class Player {
                     MainPanel b = (MainPanel) panel.getParent();
                     b.currentPanel.UpdateCurrentDetails();
                     MonopolyBoardPanel.RollButton.setEnabled(true);
+                    turn= (turn+1)%panel.players.size();
+
                     ((Timer) e.getSource()).stop();
                     if ((secondPlace) > 39 && (secondPlace != 0)) {
                         currentPlayer.money += 200;
