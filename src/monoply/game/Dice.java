@@ -19,17 +19,17 @@ import javax.swing.Timer;
  *
  * @author yehia
  */
-public class Dice extends JPanel{
+public class Dice extends JLabel{
     private Random rand = new Random();
-    private JLabel lbl= new JLabel();
+    
     private String []s={"Dice1.gif","Dice2.gif","Dice3.gif","Dice4.gif","Dice5.gif","Dice6.gif"};
 
     public Dice(){
         this.setVisible(false);
         this.setLayout(new GridLayout(0, 1));
-        lbl.setText("");
+        this.setText("");
         this.setOpaque(true);
-        this.add(lbl);
+       
     }
 
     public int getDice(){
@@ -41,7 +41,7 @@ public class Dice extends JPanel{
         ImageIcon origIcon = new ImageIcon(s[num - 1]);
         Dice d = this;
         
-        lbl.setIcon(new ImageIcon(origIcon.getImage()
+        this.setIcon(new ImageIcon(origIcon.getImage()
             .getScaledInstance(30, 30,
                     Image.SCALE_SMOOTH)));
         

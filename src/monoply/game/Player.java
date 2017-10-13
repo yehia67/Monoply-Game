@@ -14,12 +14,10 @@ import java.util.ArrayList;
  */
 public class Player {
 
-    public int money = 1500, turns, place = 0;
-    public int x, y;
-    public Color color;
+    public int money = 1500, place = 0;
+   
     Dice dice;
     public String name;
-    
     public boolean HasJailCard;
     
     private boolean inJail;
@@ -43,14 +41,13 @@ public class Player {
     }
 
     void move() {
+        
         place += dice.getDice();
+        
     }
     
-    public Player(String n, int x, int y, Color c) {
+    public Player(String n) {
         name = n;
-        this.x = x;
-        this.y = y;
-        this.color = c;
         this.HasJailCard= false;
         houses = 0;
         hotels=0;
@@ -86,4 +83,6 @@ public class Player {
     public boolean getInJail() {
         return inJail;
     }
+    
+  
 }

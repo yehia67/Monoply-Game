@@ -260,7 +260,7 @@ public int intialPlace=0;
                                         .addComponent(jButton1)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(buildBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,7 +307,7 @@ public int intialPlace=0;
                         .addGap(2, 2, 2)
                         .addComponent(MessageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(YButton)
                             .addComponent(NButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -328,7 +328,7 @@ public int intialPlace=0;
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -541,9 +541,7 @@ public int intialPlace=0;
         int dice2Num = dice2.getDice();
         diceNumber = dice1Num + dice2Num;
         
-        if(dice1Num == dice2Num) {
-            diceNumber = diceNumber * 2;
-        }
+        
          
         currentPlayer = Board.players.get(Board.turn);
         DiceResultLabel.setText(diceNumber + "");
@@ -598,6 +596,7 @@ public int intialPlace=0;
             currentPlayer.money+=200;
             labels[labelNum].setText("Money: " +currentPlayer.money);
         }
+        if(!(dice1Num == dice2Num))
         Board.turn = (Board.turn + 1) % Board.players.size();
         
                 }
