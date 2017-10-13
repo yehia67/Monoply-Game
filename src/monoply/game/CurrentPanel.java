@@ -11,7 +11,9 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Random;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,14 +28,15 @@ import javax.swing.JTextField;
 
 public class CurrentPanel extends JPanel{
  
-    public JLabel TileImageLabel;    
+    public JLabel TileImageLabel; 
+    public ImageIcon currImage;
     public String test1;
      public CurrentPanel() {
               System.out.println("Current Constructor");
         init();
     }
      
-    private void init()
+    public void init()
     {
    
       this.setLayout(new GridLayout(8,1));
@@ -48,20 +51,59 @@ public class CurrentPanel extends JPanel{
     TileImageLabel = new JLabel();
   TileImageLabel.setSize(new Dimension(50,50));
   System.out.println("/"+ MonopolyBoardPanel.allTiles[0].imgName+ ".png");
-    TileImageLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/"+ MonopolyBoardPanel.allTiles[0].imgName)).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
-    this.add(TileImageLabel);
-   
+   try{
+               currImage = new ImageIcon(ImageIO.read(new File("Monopoly Board/" 
+                    + MonopolyBoardPanel.allTiles[0].imgName)));
+                       }
+               catch(Exception ex){
+                  System.out.println("Failed man");
+               }
+
+           this.TileImageLabel.setIcon(currImage);
+        
+           this.add(TileImageLabel);
     }
+   
+    
+    
     
     public void UpdateCurrentDetails()
     {
-          int location = MonopolyBoardPanel.players.get(MonopolyBoardPanel.returnTurn()).place;
+        int location = MonopolyBoardPanel.players.get(MonopolyBoardPanel.returnTurn()).place;
+     try{
+               currImage = new ImageIcon(ImageIO.read(new File("Monopoly Board/" 
+                    + MonopolyBoardPanel.allTiles[location].imgName)));
+                       }
+               catch(Exception ex){
+                   
+               }
+         
     
-         if(location>= 0 && location<11)
-    {
-          ImageIcon currImg = new ImageIcon(new ImageIcon(getClass().getResource("/"+ MonopolyBoardPanel.allTiles[location].imgName+ ".png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-           this.TileImageLabel.setIcon(currImg);
-    }
+       if(location>=0 && location<11)
+       this.TileImageLabel.setIcon(currImage);
+       
+       else if(location>=11 && location <20)
+       {
+           
+           RotatedIcon ri = new RotatedIcon(currImage, 270.0);
+           this.TileImageLabel.setIcon(ri);
+       
+       }
+       
+       else if(location>=20 && location <=30)
+       {
+           
+           RotatedIcon ri = new RotatedIcon(currImage, 180.0);
+           this.TileImageLabel.setIcon(ri);
+       
+       }
+       else if(location>30 && location<=39)
+       {
+            RotatedIcon ri = new RotatedIcon(currImage, 90.0);
+           this.TileImageLabel.setIcon(ri);
+       
+       }
+    
  
     }
     

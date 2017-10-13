@@ -14,31 +14,34 @@ import javax.swing.JPanel;
  * @author mahmoud
  */
 public class MainPanel extends JPanel {
-    private CurrentPanel currentpanel;
-    private MonopolyBoardPanel board;
-    private PlayerPanel playerpanel;
-     private JPanel westPanel;
-    private JPanel eastPanel;
-    private JPanel northPanel;
-    private JPanel southPanel;
-    int turn;
+   
+    public MonopolyBoardPanel board;
+   
+     public CurrentPanel currentPanel;
+    public PlayerPanel playerPanel;
+    
+    public int turn;
     public MainPanel() {
         this.setLayout(new BorderLayout());
        board = new MonopolyBoardPanel(4);
-        westPanel = new CurrentPanel();
-     
+        currentPanel = new CurrentPanel();
+      
+
         this.add(board);
-         eastPanel = new PlayerPanel();
+         playerPanel = new PlayerPanel();
          
        
-        this.add(westPanel, BorderLayout.WEST);
+        this.add(currentPanel, BorderLayout.WEST);
           this.add(board, BorderLayout.CENTER);
         
-        this.add(eastPanel, BorderLayout.EAST);
+        this.add(playerPanel, BorderLayout.EAST);
        
-         
-        
+       
+      
     }
     
+   
+    
+
    
 }

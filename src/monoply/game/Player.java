@@ -34,6 +34,7 @@ public class Player {
         groups[5] = new CountriesGroup(3); //orange
         groups[6] = new CountriesGroup(3); //blue
         groups[7] = new CountriesGroup(2); //brown
+        
     }
     
     public CountriesGroup[] getGroupsArray() {

@@ -62,6 +62,7 @@ public class MonopolyBoardPanel extends JPanel{
 
     
     public MonopolyBoardPanel(int playerNumber) {
+        
         this.Playernumber=playerNumber;
              System.out.println("MonopolyBoard Constructor");
         init();
@@ -132,6 +133,7 @@ public class MonopolyBoardPanel extends JPanel{
        RollButton = new JButton("Roll Dice");
          Dice dice1 = new Dice();
         Dice dice2 = new Dice();
+        
         centerPart.add(dice1);
         centerPart.add(dice2);
         RollButton.addActionListener(new ActionListener(){
@@ -156,7 +158,8 @@ public class MonopolyBoardPanel extends JPanel{
     
     public void move (int diceNumber){
      
-        currentPlayer = this.players.get(this.turn);
+       currentPlayer = this.players.get(this.turn);
+      
        
         while(currentPlayer.getInJail()) {
             currentPlayer.setInJail(false);
@@ -173,17 +176,31 @@ public class MonopolyBoardPanel extends JPanel{
         allTiles[secondPlace].GetLabels()[this.turn].setVisible(true);
         
         players.get(turn).place=secondPlace;
+        
+       
+     MainPanel  b = (MainPanel)this.getParent();
+        b.currentPanel.UpdateCurrentDetails();
+        
         turn= (turn+1)%this.Playernumber;
-        
-       //this.getParent()
-        
+  
     }
     
-  
+ 
     
     public static int returnTurn()
     {
         return MonopolyBoardPanel.turn;
     }
+    
+    public static void setTurn(int turn)
+    {
+       MonopolyBoardPanel.turn = turn;
+    }
+    
+     public static Tile[] getTileArr()
+    {
+        return MonopolyBoardPanel.allTiles;
+    }
+    
     
 }
