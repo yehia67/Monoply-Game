@@ -104,20 +104,20 @@ public class MonopolyBoardPanel extends JPanel{
        
         northPanel.setLayout(new GridLayout(1, 11));
         
-            allIndex=southTilesNames.length+westTilesNames.length+northTilesNames.length-1;
+            allIndex=southTilesNames.length+westTilesNames.length;
         for(int i = 0; i<northTilesNames.length ; i++) {
             allTiles[allIndex] = new Tile(northTilesNames[i]);
             northPanel.add(allTiles[allIndex]);
-            allIndex--;
+            allIndex++;
         }
      
         eastPanel = new JPanel();
         eastPanel.setLayout(new GridLayout(9, 1));
-        allIndex=southTilesNames.length+ westTilesNames.length + northTilesNames.length+eastTilesNames.length-1;
+        allIndex=southTilesNames.length+ westTilesNames.length + northTilesNames.length;
        for(int i = 0; i<eastTilesNames.length ; i++) {
             allTiles[allIndex] = new Tile(eastTilesNames[i]);
             eastPanel.add(allTiles[allIndex]);
-            allIndex--;
+            allIndex++;
         }
         
         
