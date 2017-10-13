@@ -6,7 +6,12 @@
 package monoply.game;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.Timer;
+import static monoply.game.GamePanel.MessageTextField;
+import static monoply.game.MonopolyBoardPanel.allTiles;
 
 /**
  *
@@ -19,9 +24,10 @@ public class Player {
     Dice dice;
     public String name;
     public boolean HasJailCard;
-    
+    private MonopolyBoardPanel panel;
     private boolean inJail;
-    
+    private int jailOffset;
+    private int intialPlace;
     public int houses,hotels;
     private CountriesGroup[] groups = new CountriesGroup[8];
     
@@ -41,17 +47,71 @@ public class Player {
         return groups;
     }
 
-    void move() {
+    void move(int place) {
+        intialPlace = this.place;
+        int secondPlace = (place) % allTiles.length;
+
+        /*allTiles[firstPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(false);
+        allTiles[secondPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
         
-        place += dice.getDice();
-        
+        this.place=secondPlace;*/
+        Player currentPlayer = this;
+
+        Timer timer = new Timer(500, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (intialPlace == secondPlace) {
+                    System.out.println("Stopped");
+                    allTiles[secondPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
+                    MonopolyBoardPanel.RollButton.setEnabled(true);
+                    currentPlayer.place = (currentPlayer.place + 1) % allTiles.length;
+                    System.out.println("place: "+currentPlayer.place);
+                    ((Timer) e.getSource()).stop();
+                    if ((secondPlace) > 39 && (secondPlace != 0)) {
+                        currentPlayer.money += 200;
+                    }
+                } else {
+                    currentPlayer.animate();
+                }
+
+            }
+        });
+
+        timer.start();
+        if (this.place==30)
+        {
+            GoToJail.GoToJailAction(this);
+        }
+        else if (this.place==2||this.place==17||this.place==33)
+        {
+            panel.cards.DrawCard(2, this, panel.players);
+        }
+        else if (this.place==7||this.place==22||this.place==36)
+        {
+            panel.cards.DrawCard(1, this, panel.players);
+   
+        }
+        MainPanel b = (MainPanel) panel.getParent();
+        b.currentPanel.UpdateCurrentDetails();
+
     }
-    
+
+      public void animate ()
+    {
+        System.out.println("Here");
+        this.place=intialPlace;
+        allTiles[intialPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(false);
+        intialPlace= (intialPlace+1)%allTiles.length;
+        allTiles[intialPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
+        System.out.println("Intial Place: "+intialPlace);
+    }
     public Player(String n) {
         name = n;
         this.HasJailCard= false;
         houses = 0;
         hotels=0;
+        jailOffset=0;
         initGroups();
     }
     
@@ -84,6 +144,18 @@ public class Player {
     public boolean getInJail() {
         return inJail;
     }
-    
+
+    public void setJailOffset(int jailOffset) {
+        this.jailOffset = jailOffset;
+    }
+
+    public int getJailOffset() {
+        return jailOffset;
+    }
+
+    public void setPanel(MonopolyBoardPanel panel) {
+        this.panel = panel;
+    }
+  
   
 }

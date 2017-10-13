@@ -31,6 +31,7 @@ public class MonoplyGame {
         frame.add(new MainPanel());
         frame.setSize(500, 400);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Random rand = new Random();
       }
     

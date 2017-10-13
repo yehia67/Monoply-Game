@@ -24,19 +24,19 @@ import static monoply.game.GamePanel.MessageTextField;
 public class MonopolyBoardPanel extends JPanel{
     private int Playernumber;
     private static Tile centerTile;
-    private static int turn=0;
+    public static int turn=0;
     private JPanel eastPanel;
     private JPanel westPanel;
     private JPanel northPanel;
     private JPanel southPanel;
-    private JButton RollButton;
+    public static JButton RollButton;
     private Dice dice1;
     private Dice dice2;
     private int diceNumber;
     Player currentPlayer;
     public static ArrayList<Player> players = new ArrayList<Player>();
-    
-    
+    private Jail jail;
+    public static SpecialCards cards;
     public static Tile[] allTiles = new Tile[40];
     
     private String[] southTilesNames = {"Jail.png", "Connecticut Avenue.png",
@@ -69,9 +69,12 @@ public class MonopolyBoardPanel extends JPanel{
         for(int i =0; i<playerNumber; i++)
         {
            players.add(new Player("Dummy-Name"));
+           players.get(i).setPanel(this);
            allTiles[0].GetLabels()[i].setVisible(true);
         
         }
+        cards=new SpecialCards();
+        
       
     }
     
@@ -144,6 +147,7 @@ public class MonopolyBoardPanel extends JPanel{
          int dice1Num = dice1.getDice();
         int dice2Num = dice2.getDice();
         diceNumber = dice1Num + dice2Num;
+        RollButton.setEnabled(false);
     MonopolyBoardPanel.this.move(diceNumber);
         
             }
@@ -162,13 +166,12 @@ public class MonopolyBoardPanel extends JPanel{
       
        
         while(currentPlayer.getInJail()) {
-            currentPlayer.setInJail(false);
+           jail.jailAction(currentPlayer);
             Board.turn = (Board.turn + 1) % this.players.size();
             currentPlayer = Board.players.get(Board.turn);
         }
-        
-  
-        int firstPlace = currentPlayer.place;
+        currentPlayer.move(currentPlayer.place+diceNumber);
+      /*  int firstPlace = currentPlayer.place;
     
         int secondPlace = (firstPlace + diceNumber) % allTiles.length;
         
@@ -179,7 +182,7 @@ public class MonopolyBoardPanel extends JPanel{
         
        
      MainPanel  b = (MainPanel)this.getParent();
-        b.currentPanel.UpdateCurrentDetails();
+        b.currentPanel.UpdateCurrentDetails();*/
         
         turn= (turn+1)%this.Playernumber;
   
