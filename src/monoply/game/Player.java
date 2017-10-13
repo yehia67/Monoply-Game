@@ -64,7 +64,6 @@ public class Player {
                 if (intialPlace == secondPlace) {
                     System.out.println("Stopped");
                     allTiles[secondPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
-                    MonopolyBoardPanel.RollButton.setEnabled(true);
                     currentPlayer.place = (currentPlayer.place + 1) % allTiles.length;
                     System.out.println("place: " + currentPlayer.place);
 
@@ -78,6 +77,7 @@ public class Player {
                     }
                     MainPanel b = (MainPanel) panel.getParent();
                     b.currentPanel.UpdateCurrentDetails();
+                    MonopolyBoardPanel.RollButton.setEnabled(true);
                     ((Timer) e.getSource()).stop();
                     if ((secondPlace) > 39 && (secondPlace != 0)) {
                         currentPlayer.money += 200;
