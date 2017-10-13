@@ -110,7 +110,7 @@ public class SpecialCards {
         }
         //Display Message Here *DrawnCard.getDescription()*
         //DrawnCard=chance.get(2);
-        GamePanel.MessageTextField.setText(DrawnCard.getDescription());
+        //GamePanel.MessageTextField.setText(DrawnCard.getDescription());
         System.out.println("Drawn Card"+DrawnCard.getDescription());
         this.performAction(Player,players);
     }
