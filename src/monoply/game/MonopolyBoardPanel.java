@@ -6,6 +6,7 @@
 package monoply.game;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -81,48 +82,24 @@ public class MonopolyBoardPanel extends JPanel{
     private void init() {
       
         this.setLayout(new BorderLayout());
-        int allIndex=southTilesNames.length-1;
         JPanel centerPart = new MonopolyCenterPanel("Mid-Part.png");
         
         southPanel = new JPanel();   //0 - 10
         southPanel.setLayout(new GridLayout(1, 11));
-        for(int i = 0; i<southTilesNames.length ; i++) {
-            allTiles[allIndex] = new Tile(southTilesNames[i]);
-            southPanel.add(allTiles[allIndex]);
-            allIndex--;
-        }
+        initSouthPanel();
         
-         westPanel = new JPanel();
-        
+        westPanel = new JPanel();
         westPanel.setLayout(new GridLayout(9, 1));
-      
-            allIndex=southTilesNames.length + westTilesNames.length-1;
-        for(int i = 0; i<westTilesNames.length ; i++) {
-            allTiles[allIndex] = new Tile(westTilesNames[i]);
-            westPanel.add(allTiles[allIndex]);
-            allIndex--;
-        }
+        initWestPanel();
+        
         
         northPanel = new JPanel();
-        
-       
         northPanel.setLayout(new GridLayout(1, 11));
-        
-            allIndex=southTilesNames.length+westTilesNames.length;
-        for(int i = 0; i<northTilesNames.length ; i++) {
-            allTiles[allIndex] = new Tile(northTilesNames[i]);
-            northPanel.add(allTiles[allIndex]);
-            allIndex++;
-        }
+        initNorthPanel();
      
         eastPanel = new JPanel();
         eastPanel.setLayout(new GridLayout(9, 1));
-        allIndex=southTilesNames.length+ westTilesNames.length + northTilesNames.length;
-       for(int i = 0; i<eastTilesNames.length ; i++) {
-            allTiles[allIndex] = new Tile(eastTilesNames[i]);
-            eastPanel.add(allTiles[allIndex]);
-            allIndex++;
-        }
+        initEastPanel();
         
         
         
@@ -158,7 +135,123 @@ public class MonopolyBoardPanel extends JPanel{
              
     }
     
+    private void initSouthPanel() {
+        int allIndex=southTilesNames.length-1;
+        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[0]);
+        allTiles[allIndex--] = new Country(120, 120, Color.CYAN,
+                "Connecticut Avenue", southTilesNames[1]);
+        allTiles[allIndex--] = new Country(100, 100, Color.CYAN, 
+                "Vermont Avenue", southTilesNames[2]);
+        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[3]);
+        allTiles[allIndex--] = new Country(100, 100, Color.CYAN,
+                "Oriental Avenue", southTilesNames[4]);
+        allTiles[allIndex--] = new PropertyTile(southTilesNames[5], 
+                200, "Reading Railroad");
+        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[6]);
+        allTiles[allIndex--] = new Country(60, 60, Color.WHITE,
+                "Baltic Avenue", southTilesNames[7]);
+        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[8]);
+        allTiles[allIndex--] = new Country(60, 60, Color.WHITE,
+                "Mediterranean Avenue", southTilesNames[9]);
+        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[10]);
+        
+        allIndex = southTilesNames.length-1;
+        
+        for(int i = 0; i<southTilesNames.length ; i++) {
+            southPanel.add(allTiles[allIndex]);
+            allIndex--;
+        }
+    }
     
+    private void initWestPanel() {
+        int allIndex = southTilesNames.length + westTilesNames.length - 1;
+        
+        allTiles[allIndex--] = new Country(200, 200, Color.ORANGE,
+                "New York Avenue", westTilesNames[0]);
+        allTiles[allIndex--] = new Country(180, 180, Color.ORANGE,
+                "Tenessee Avenue", westTilesNames[1]);
+        allTiles[allIndex--] = new NonPropertyTile(westTilesNames[2]);
+        allTiles[allIndex--] = new Country(180, 180, Color.ORANGE,
+                "St. James Place", westTilesNames[3]);
+        allTiles[allIndex--] = new PropertyTile(westTilesNames[4], 
+                200, "Pensylvania Railroad");
+        allTiles[allIndex--] = new Country(160, 160, Color.PINK,
+                "Virginia Avenue", westTilesNames[5]);
+        allTiles[allIndex--] = new Country(140, 140, Color.PINK,
+                "States Avenue", westTilesNames[6]);
+        allTiles[allIndex--] = new PropertyTile(westTilesNames[7],
+                150, "Electric Company");
+        allTiles[allIndex--] = new Country(140, 140, Color.PINK,
+                "St. Charles Place", westTilesNames[8]);
+        
+        allIndex = southTilesNames.length + westTilesNames.length - 1;
+        
+        for(int i = 0; i<westTilesNames.length ; i++) {
+            westPanel.add(allTiles[allIndex]);
+            allIndex--;
+        }
+    }
+    
+    private void initNorthPanel() {
+        int allIndex=southTilesNames.length + westTilesNames.length;
+        
+        allTiles[allIndex++] = new NonPropertyTile(northTilesNames[0]);
+        allTiles[allIndex++] = new Country(220, 220, Color.RED,
+                "Kentucky Avenue", northTilesNames[1]);
+        allTiles[allIndex++] = new NonPropertyTile(northTilesNames[2]);
+        allTiles[allIndex++] = new Country(220, 220, Color.RED,
+                "Indiana Avenue", northTilesNames[3]);
+        allTiles[allIndex++] = new Country(240, 240, Color.RED,
+                "Illinois Avenue", northTilesNames[4]);
+        allTiles[allIndex++] = new PropertyTile(northTilesNames[5],
+                200, "B. & O. Railroad");
+        allTiles[allIndex++] = new Country(260, 260, Color.YELLOW,
+                "Atlantic Avenue", northTilesNames[6]);
+        allTiles[allIndex++] = new Country(260, 260, Color.YELLOW,
+                "Ventnor Avenue", northTilesNames[7]);
+        allTiles[allIndex++] = new PropertyTile(northTilesNames[8],
+                150, "Water Works");
+        allTiles[allIndex++] = new Country(280, 280, Color.YELLOW,
+                "Marvin Gardens", northTilesNames[9]);
+        allTiles[allIndex++] = new NonPropertyTile(northTilesNames[10]);
+        
+        allIndex=southTilesNames.length + westTilesNames.length;
+        
+        for(int i = 0; i<northTilesNames.length ; i++) {
+            northPanel.add(allTiles[allIndex]);
+            allIndex++;
+        }
+    }
+    
+    private void initEastPanel() {
+        int allIndex = southTilesNames.length + westTilesNames.length + 
+                northTilesNames.length;
+        
+        allTiles[allIndex++] = new Country(300, 300, Color.GREEN,
+                "Pacific Avenue", eastTilesNames[0]);
+        allTiles[allIndex++] = new Country(300, 300, Color.GREEN,
+                "North Carolina Avenue", eastTilesNames[1]);
+        allTiles[allIndex++] = new NonPropertyTile(eastTilesNames[2]);
+        allTiles[allIndex++] = new Country(320, 320, Color.GREEN,
+                "Pensylvania Avenue", eastTilesNames[3]);
+        allTiles[allIndex++] = new PropertyTile(eastTilesNames[4],
+                200, "Short Line");
+        allTiles[allIndex++] = new NonPropertyTile(eastTilesNames[5]);
+        allTiles[allIndex++] = new Country(350, 350, Color.BLUE,
+                "Park Place", eastTilesNames[6]);
+        allTiles[allIndex++] = new NonPropertyTile(eastTilesNames[7]);
+        allTiles[allIndex++] = new Country(400, 400, Color.BLUE,
+                "Boardwalk", eastTilesNames[8]);
+        
+        allIndex = southTilesNames.length + westTilesNames.length + 
+                northTilesNames.length;
+        
+        for(int i = 0; i<eastTilesNames.length ; i++) {
+            allTiles[allIndex] = new Tile(eastTilesNames[i]);
+            eastPanel.add(allTiles[allIndex]);
+            allIndex++;
+        }
+    }
     
     public void move (int diceNumber){
      

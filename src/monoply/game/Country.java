@@ -2,18 +2,10 @@ package monoply.game;
 
 import java.awt.Color;
 
-public class Country extends Places {
+public class Country extends PropertyTile {
 
-    private String name;
-    private int price;
     private int totalFees;
     private Color countryColor;
-    public Player Owner;
-    
-    private int offsetX = 0;
-    private int offsetY = 0;
-    
-    private int index;
     
     private int housesNumber = 0;
     
@@ -21,34 +13,27 @@ public class Country extends Places {
     private boolean canBuildHousesFlag = false;
     private boolean canBuildHotelFlag = false;
          
-    public Country(int mPrice, int mFees, Color mCountryColor, String mName, 
-            Coordinates coords, int mIndex, int offX, int offY) {
-        super(coords, offX, offY);
-        price = mPrice;
+    public Country(int mPrice, int mFees, Color mCountryColor, String mName,
+            String imgName) {
+        super(imgName, mPrice, mName);
         totalFees = mFees;
         countryColor = mCountryColor;
-
-        name = mName;
-        
-        index = mIndex;
     }
-   void setOwner(Player O)
-   {
-       Owner = O;
-   }
-    Country() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void setOwner(Player player)
+    {
+        super.setOwner(player);
+        super.getOwner().money -= totalFees;
     }
      public void SoldCountry(){
-         Owner.money += getPrice();
+         super.getOwner().money += getPrice();
          available = true;
-         Owner = null;
+         super.setOwner(null);
      }
     public void buildHouse() {
         if(canBuildHousesFlag) {
-            price += 20;
             housesNumber++;
-            Owner.houses++;
+            super.getOwner().houses++;
             if(housesNumber >= 2) {
                 canBuildHousesFlag = false;
                 canBuildHotelFlag = true;
@@ -58,14 +43,13 @@ public class Country extends Places {
     
     public void buildHotel() {
         if(canBuildHotelFlag) {
-            price += 20;
-            Owner.hotels++;
+            super.getOwner().hotels++;
             canBuildHotelFlag = false;
         }
     }
 
     boolean isOwner(Player o) {
-        if (o == Owner) {
+        if (o == super.getOwner()) {
             return true;
         }
         return false;
@@ -77,14 +61,6 @@ public class Country extends Places {
 
     void sold() {
         available = false;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     public int getTotalFees() {
