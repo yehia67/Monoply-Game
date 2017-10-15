@@ -9,8 +9,11 @@ package monoply.game;
  *
  * @author mahmoud
  */
-public class NonPropertyTile extends Tile {
+public abstract class NonPropertyTile extends Tile {
     public NonPropertyTile(String imgName) {
         super(imgName);
     }
+
+    
+    
 }

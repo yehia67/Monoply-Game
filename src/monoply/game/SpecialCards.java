@@ -67,7 +67,8 @@ public class SpecialCards {
           switch(DrawnCard.getName()){
                 case "Go to Jail":
                     this.move(player,10);
-                    Jail.setInjail(player);
+                    Jail jail = (Jail)MonopolyBoardPanel.allTiles[10];
+                    jail.setInjail(player);
                     break;
                     
                 //increases money of current player   

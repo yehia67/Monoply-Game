@@ -81,14 +81,15 @@ public class Player {
                     currentPlayer.place = (currentPlayer.place + 1) % allTiles.length;
                     System.out.println("place: " + currentPlayer.place);
 
-                    if (currentPlayer.place == 30) {
-                        GoToJail.GoToJailAction(currentPlayer);
+                    /*if (currentPlayer.place == 30) {
+                        MonopolyBoardPanel.GoJail.performAction(currentPlayer);
                     } else if (currentPlayer.place == 2 || currentPlayer.place == 17 || currentPlayer.place == 33) {
                         panel.cards.DrawCard(2, currentPlayer, panel.players);
                     } else if (currentPlayer.place == 7 || currentPlayer.place == 22 || currentPlayer.place == 36) {
                         panel.cards.DrawCard(1, currentPlayer, panel.players);
 
-                    }
+                    }*/
+                    allTiles[secondPlace].performAction(currentPlayer);
                     MainPanel b = (MainPanel) panel.getParent();
                     b.currentPanel.UpdateCurrentDetails();
                     MonopolyBoardPanel.RollButton.setEnabled(true);
@@ -146,6 +147,16 @@ public class Player {
             groups[5].addCountry(boughtCountry);
         } else {
             groups[7].addCountry(boughtCountry);
+        }
+    }
+    public void payRent (Player owner, int fees)
+    {
+        if (this.money- fees >= 0){
+            owner.money+= fees;
+            this.money-= fees;
+        }
+        else {
+            //Sell properties
         }
     }
     

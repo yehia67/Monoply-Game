@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  */
 
 
-public class Tile extends JPanel{
+ public abstract class  Tile extends JPanel{
     private BufferedImage backgroundImage;
     public String imgName;
     private JLabel[] playerImgs = new JLabel[4];
@@ -117,4 +117,8 @@ public class Tile extends JPanel{
     {
         return this.playerImgs;
     }
+     public abstract void performAction(Player player);
+         
+     
+    
 }

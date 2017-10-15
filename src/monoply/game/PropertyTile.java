@@ -9,7 +9,7 @@ package monoply.game;
  *
  * @author mahmoud
  */
-public class PropertyTile extends Tile {
+public abstract class PropertyTile extends Tile {
     private Player owner;
     private String name;
     private int price;
@@ -37,4 +37,5 @@ public class PropertyTile extends Tile {
     public int getPrice() {
         return price;
     }
+
 }

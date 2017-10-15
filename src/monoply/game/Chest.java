@@ -9,16 +9,15 @@ package monoply.game;
  *
  * @author eslam
  */
-public class GoToJail extends NonPropertyTile  {
+public class Chest extends NonPropertyTile {
 
-    public GoToJail(String imgName) {
+    public Chest(String imgName) {
         super(imgName);
     }
+
     @Override
-    public void performAction(Player player)
-    {
-        player.move(10);
-        Jail jail = (Jail)MonopolyBoardPanel.allTiles[10];
-       jail.setInjail(player);
+    public void performAction(Player player) {
+        MonopolyBoardPanel.cards.DrawCard(2, player, MonopolyBoardPanel.players);
     }
+    
 }

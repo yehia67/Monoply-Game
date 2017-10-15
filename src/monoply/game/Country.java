@@ -85,4 +85,13 @@ public class Country extends PropertyTile {
     public int getHousesNumber() {
         return housesNumber;
     }
+
+    @Override
+    public void performAction(Player player) {
+        if (!(player==this.getOwner()))
+        {
+           player.payRent(this.getOwner(), this.getTotalFees());
+        }
+        
+    }
 }

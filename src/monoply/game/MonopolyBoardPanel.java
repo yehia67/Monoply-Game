@@ -36,7 +36,8 @@ public class MonopolyBoardPanel extends JPanel{
     private int diceNumber;
     public static Player currentPlayer;
     public static ArrayList<Player> players = new ArrayList<Player>();
-    private Jail jail;
+    //public static Jail jail;
+    //public static GoToJail GoJail;
     public static SpecialCards cards;
     public static Tile[] allTiles = new Tile[40];
     
@@ -137,12 +138,12 @@ public class MonopolyBoardPanel extends JPanel{
     
     private void initSouthPanel() {
         int allIndex=southTilesNames.length-1;
-        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[0]);
+        allTiles[allIndex--] = new Jail(southTilesNames[0]);
         allTiles[allIndex--] = new Country(120, 120, Color.CYAN,
                 "Connecticut Avenue", southTilesNames[1]);
         allTiles[allIndex--] = new Country(100, 100, Color.CYAN, 
                 "Vermont Avenue", southTilesNames[2]);
-        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[3]);
+        allTiles[allIndex--] = new Chance(southTilesNames[3]);
         allTiles[allIndex--] = new Country(100, 100, Color.CYAN,
                 "Oriental Avenue", southTilesNames[4]);
         allTiles[allIndex--] = new PropertyTile(southTilesNames[5], 
@@ -150,7 +151,7 @@ public class MonopolyBoardPanel extends JPanel{
         allTiles[allIndex--] = new NonPropertyTile(southTilesNames[6]);
         allTiles[allIndex--] = new Country(60, 60, Color.WHITE,
                 "Baltic Avenue", southTilesNames[7]);
-        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[8]);
+        allTiles[allIndex--] = new Chest(southTilesNames[8]);
         allTiles[allIndex--] = new Country(60, 60, Color.WHITE,
                 "Mediterranean Avenue", southTilesNames[9]);
         allTiles[allIndex--] = new NonPropertyTile(southTilesNames[10]);
@@ -170,7 +171,7 @@ public class MonopolyBoardPanel extends JPanel{
                 "New York Avenue", westTilesNames[0]);
         allTiles[allIndex--] = new Country(180, 180, Color.ORANGE,
                 "Tenessee Avenue", westTilesNames[1]);
-        allTiles[allIndex--] = new NonPropertyTile(westTilesNames[2]);
+        allTiles[allIndex--] = new Chest(westTilesNames[2]);
         allTiles[allIndex--] = new Country(180, 180, Color.ORANGE,
                 "St. James Place", westTilesNames[3]);
         allTiles[allIndex--] = new PropertyTile(westTilesNames[4], 
@@ -195,10 +196,10 @@ public class MonopolyBoardPanel extends JPanel{
     private void initNorthPanel() {
         int allIndex=southTilesNames.length + westTilesNames.length;
         
-        allTiles[allIndex++] = new NonPropertyTile(northTilesNames[0]);
+        allTiles[allIndex++] = new Jail(northTilesNames[0]);
         allTiles[allIndex++] = new Country(220, 220, Color.RED,
                 "Kentucky Avenue", northTilesNames[1]);
-        allTiles[allIndex++] = new NonPropertyTile(northTilesNames[2]);
+        allTiles[allIndex++] = new Chance(northTilesNames[2]);
         allTiles[allIndex++] = new Country(220, 220, Color.RED,
                 "Indiana Avenue", northTilesNames[3]);
         allTiles[allIndex++] = new Country(240, 240, Color.RED,
@@ -213,7 +214,7 @@ public class MonopolyBoardPanel extends JPanel{
                 150, "Water Works");
         allTiles[allIndex++] = new Country(280, 280, Color.YELLOW,
                 "Marvin Gardens", northTilesNames[9]);
-        allTiles[allIndex++] = new NonPropertyTile(northTilesNames[10]);
+        allTiles[allIndex++] = new GoToJail(northTilesNames[10]);
         
         allIndex=southTilesNames.length + westTilesNames.length;
         
@@ -231,12 +232,12 @@ public class MonopolyBoardPanel extends JPanel{
                 "Pacific Avenue", eastTilesNames[0]);
         allTiles[allIndex++] = new Country(300, 300, Color.GREEN,
                 "North Carolina Avenue", eastTilesNames[1]);
-        allTiles[allIndex++] = new NonPropertyTile(eastTilesNames[2]);
+        allTiles[allIndex++] = new Chest(eastTilesNames[2]);
         allTiles[allIndex++] = new Country(320, 320, Color.GREEN,
                 "Pensylvania Avenue", eastTilesNames[3]);
         allTiles[allIndex++] = new PropertyTile(eastTilesNames[4],
                 200, "Short Line");
-        allTiles[allIndex++] = new NonPropertyTile(eastTilesNames[5]);
+        allTiles[allIndex++] = new Chance(eastTilesNames[5]);
         allTiles[allIndex++] = new Country(350, 350, Color.BLUE,
                 "Park Place", eastTilesNames[6]);
         allTiles[allIndex++] = new NonPropertyTile(eastTilesNames[7]);
@@ -246,11 +247,11 @@ public class MonopolyBoardPanel extends JPanel{
         allIndex = southTilesNames.length + westTilesNames.length + 
                 northTilesNames.length;
         
-        for(int i = 0; i<eastTilesNames.length ; i++) {
+      /*  for(int i = 0; i<eastTilesNames.length ; i++) {
             allTiles[allIndex] = new Tile(eastTilesNames[i]);
             eastPanel.add(allTiles[allIndex]);
             allIndex++;
-        }
+        }*/
     }
     
     public void move (int diceNumber){
@@ -259,7 +260,7 @@ public class MonopolyBoardPanel extends JPanel{
       
        
         while(currentPlayer.getInJail()) {
-           jail.jailAction(currentPlayer);
+           allTiles[10].performAction(currentPlayer);
             Board.turn = (Board.turn + 1) % this.players.size();
             currentPlayer = Board.players.get(Board.turn);
         }

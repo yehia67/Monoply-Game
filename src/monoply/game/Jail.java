@@ -10,11 +10,14 @@ package monoply.game;
  *
  * @author eslam
  */
-public class Jail {
+public class Jail extends NonPropertyTile {
 
-    public Jail() {
+    public Jail(String imgName) {     
+        super(imgName);
+
     }
-    public static void jailAction(Player player)
+    @Override
+    public  void performAction(Player player)
     {
         if(player.getJailOffset()>1)
         {
@@ -27,7 +30,7 @@ public class Jail {
         }
         
     }
-    public static void setInjail(Player player){
+    public  void setInjail(Player player){
         if (player.HasJailCard){
             MonopolyBoardPanel.cards.returnFreeCard(player);
         }
@@ -36,4 +39,5 @@ public class Jail {
             player.setJailOffset(2);
         }
     }
+    
 }
