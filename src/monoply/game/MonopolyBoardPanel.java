@@ -146,15 +146,14 @@ public class MonopolyBoardPanel extends JPanel{
         allTiles[allIndex--] = new Chance(southTilesNames[3]);
         allTiles[allIndex--] = new Country(100, 100, Color.CYAN,
                 "Oriental Avenue", southTilesNames[4]);
-        allTiles[allIndex--] = new PropertyTile(southTilesNames[5], 
-                200, "Reading Railroad");
-        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[6]);
+       allTiles[allIndex--] =  new RailRoad(southTilesNames[5],50,"Reading RailRoad");
+        allTiles[allIndex--] = new Taxes(southTilesNames[6],200);
         allTiles[allIndex--] = new Country(60, 60, Color.WHITE,
                 "Baltic Avenue", southTilesNames[7]);
         allTiles[allIndex--] = new Chest(southTilesNames[8]);
         allTiles[allIndex--] = new Country(60, 60, Color.WHITE,
                 "Mediterranean Avenue", southTilesNames[9]);
-        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[10]);
+        //allTiles[allIndex--] = new NonPropertyTile(southTilesNames[10]);
         
         allIndex = southTilesNames.length-1;
         
@@ -174,14 +173,12 @@ public class MonopolyBoardPanel extends JPanel{
         allTiles[allIndex--] = new Chest(westTilesNames[2]);
         allTiles[allIndex--] = new Country(180, 180, Color.ORANGE,
                 "St. James Place", westTilesNames[3]);
-        allTiles[allIndex--] = new PropertyTile(westTilesNames[4], 
-                200, "Pensylvania Railroad");
+         allTiles[allIndex--] =  new RailRoad(westTilesNames[4],50,"PENNSYLVANIA RAILROAD");
         allTiles[allIndex--] = new Country(160, 160, Color.PINK,
                 "Virginia Avenue", westTilesNames[5]);
         allTiles[allIndex--] = new Country(140, 140, Color.PINK,
                 "States Avenue", westTilesNames[6]);
-        allTiles[allIndex--] = new PropertyTile(westTilesNames[7],
-                150, "Electric Company");
+        allTiles[allIndex--] = new Utilties ("Electric Company.png" ,150,"Electric Company");
         allTiles[allIndex--] = new Country(140, 140, Color.PINK,
                 "St. Charles Place", westTilesNames[8]);
         
@@ -204,14 +201,12 @@ public class MonopolyBoardPanel extends JPanel{
                 "Indiana Avenue", northTilesNames[3]);
         allTiles[allIndex++] = new Country(240, 240, Color.RED,
                 "Illinois Avenue", northTilesNames[4]);
-        allTiles[allIndex++] = new PropertyTile(northTilesNames[5],
-                200, "B. & O. Railroad");
+        allTiles[allIndex++] =   new RailRoad(  northTilesNames[5],50,"B&O RailRoad");
         allTiles[allIndex++] = new Country(260, 260, Color.YELLOW,
                 "Atlantic Avenue", northTilesNames[6]);
         allTiles[allIndex++] = new Country(260, 260, Color.YELLOW,
                 "Ventnor Avenue", northTilesNames[7]);
-        allTiles[allIndex++] = new PropertyTile(northTilesNames[8],
-                150, "Water Works");
+        allTiles[allIndex++] =new Utilties ("Water Selection.png",150,"Water Works");
         allTiles[allIndex++] = new Country(280, 280, Color.YELLOW,
                 "Marvin Gardens", northTilesNames[9]);
         allTiles[allIndex++] = new GoToJail(northTilesNames[10]);
@@ -235,19 +230,21 @@ public class MonopolyBoardPanel extends JPanel{
         allTiles[allIndex++] = new Chest(eastTilesNames[2]);
         allTiles[allIndex++] = new Country(320, 320, Color.GREEN,
                 "Pensylvania Avenue", eastTilesNames[3]);
-        allTiles[allIndex++] = new PropertyTile(eastTilesNames[4],
-                200, "Short Line");
+        allTiles[allIndex++] = new RailRoad(eastTilesNames[4],50,"SHORT LINE");
         allTiles[allIndex++] = new Chance(eastTilesNames[5]);
         allTiles[allIndex++] = new Country(350, 350, Color.BLUE,
                 "Park Place", eastTilesNames[6]);
-        allTiles[allIndex++] = new NonPropertyTile(eastTilesNames[7]);
+        allTiles[allIndex++] = new Taxes(eastTilesNames[7],100);
         allTiles[allIndex++] = new Country(400, 400, Color.BLUE,
                 "Boardwalk", eastTilesNames[8]);
         
         allIndex = southTilesNames.length + westTilesNames.length + 
                 northTilesNames.length;
         
-
+        for(int i = 0; i< eastTilesNames.length ; i++) {
+            eastPanel.add(allTiles[allIndex]);
+            allIndex++;
+        }
     }
     
     public void move (int diceNumber){

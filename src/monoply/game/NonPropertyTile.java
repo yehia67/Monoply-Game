@@ -13,7 +13,4 @@ public abstract class NonPropertyTile extends Tile {
     public NonPropertyTile(String imgName) {
         super(imgName);
     }
-
-    
-    
 }
