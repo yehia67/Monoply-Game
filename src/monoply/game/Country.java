@@ -20,11 +20,6 @@ public class Country extends PropertyTile {
         countryColor = mCountryColor;
     }
     
-    public void setOwner(Player player)
-    {
-        super.setOwner(player);
-        super.getOwner().money -= totalFees;
-    }
      public void SoldCountry(){
          super.getOwner().money += getPrice();
          available = true;

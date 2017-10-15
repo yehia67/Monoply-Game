@@ -34,7 +34,7 @@ public class MonopolyBoardPanel extends JPanel{
     private Dice dice1;
     private Dice dice2;
     private int diceNumber;
-    Player currentPlayer;
+    public static Player currentPlayer;
     public static ArrayList<Player> players = new ArrayList<Player>();
     private Jail jail;
     public static SpecialCards cards;

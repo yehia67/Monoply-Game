@@ -23,6 +23,7 @@ public class PropertyTile extends Tile {
     
     public void setOwner(Player player) {
         owner = player;
+        owner.money -= price;
     }
     
     public Player getOwner() {

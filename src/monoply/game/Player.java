@@ -31,6 +31,7 @@ public class Player {
     private int intialPlace;
     public int houses,hotels;
     private CountriesGroup[] groups = new CountriesGroup[8];
+    private ArrayList<PropertyTile> properties = new ArrayList<PropertyTile>();
     
     private void initGroups() {
         groups[0] = new CountriesGroup(3); //cyan
@@ -42,6 +43,18 @@ public class Player {
         groups[6] = new CountriesGroup(3); //blue
         groups[7] = new CountriesGroup(2); //brown
         
+    }
+    
+    public ArrayList<PropertyTile> getProperties() {
+        return properties;
+    }
+    
+    public void addProperty(PropertyTile property) {
+        if(property instanceof Country) {
+            addCountry((Country) property);
+        } else {
+            properties.add(property);
+        }
     }
     
     public CountriesGroup[] getGroupsArray() {

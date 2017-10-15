@@ -51,7 +51,7 @@ public class PlayerPanel extends JPanel{
     }*/
     
     public void updatePanel() {
-        playerMoneyLbl.setText(playerMoneyLbl.getText() + player.money);
+        playerMoneyLbl.setText("Money : " + player.money);
         playerCountriesComboBox.removeAllItems();
         
         CountriesGroup[] groups = player.getGroupsArray();
@@ -65,6 +65,10 @@ public class PlayerPanel extends JPanel{
             for(int j = 0; j < countries.size(); j++) {
                 playerCountriesComboBox.addItem(countries.get(j).getName());
             }
+        }
+        
+        for(int i = 0; i < player.getProperties().size(); i++) {
+           playerCountriesComboBox.addItem(player.getProperties().get(i).getName()); 
         }
     }
 }

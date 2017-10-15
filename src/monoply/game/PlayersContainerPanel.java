@@ -42,18 +42,34 @@ public class PlayersContainerPanel extends JPanel {
         buyBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int playerPlace = MonopolyBoardPanel.players.get(MonopolyBoardPanel.turn).place;
-                
-                if(MonopolyBoardPanel.allTiles[playerPlace] instanceof Country) {
-                    MonopolyBoardPanel.players.get(MonopolyBoardPanel.turn)
-                            .addCountry((Country)MonopolyBoardPanel.allTiles[playerPlace]);
+                int playerPlace = MonopolyBoardPanel.currentPlayer.place;
+                if(MonopolyBoardPanel.allTiles[playerPlace] instanceof PropertyTile) {
+                    PropertyTile property = (PropertyTile)MonopolyBoardPanel.allTiles[playerPlace];
+                    if(property.getOwner() == null) {
+                        property.setOwner(MonopolyBoardPanel.currentPlayer);
+                        System.out.println(MonopolyBoardPanel.currentPlayer.money);
+                        MonopolyBoardPanel.currentPlayer.addProperty((PropertyTile)MonopolyBoardPanel.allTiles[playerPlace]);
+                        updatePanels();
+                    } else {
+                        showWarning();
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Sorry you can't buy this place",
-                            "", 3);
+                    showWarning();
                 }
             }
         });
         
         this.add(btnsPanel, BorderLayout.SOUTH);
+    }
+    
+    private void showWarning() {
+        JOptionPane.showMessageDialog(null, "Sorry you can't buy this place",
+                            "", 3);
+    }
+    
+    public void updatePanels() {
+        for(int i = 0; i < playerPanel.size(); i++) {
+            playerPanel.get(i).updatePanel();
+        }
     }
 }
