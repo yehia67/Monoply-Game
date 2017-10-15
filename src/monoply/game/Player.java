@@ -81,19 +81,10 @@ public class Player {
                     currentPlayer.place = (currentPlayer.place + 1) % allTiles.length;
                     System.out.println("place: " + currentPlayer.place);
 
-                    /*if (currentPlayer.place == 30) {
-                        MonopolyBoardPanel.GoJail.performAction(currentPlayer);
-                    } else if (currentPlayer.place == 2 || currentPlayer.place == 17 || currentPlayer.place == 33) {
-                        panel.cards.DrawCard(2, currentPlayer, panel.players);
-                    } else if (currentPlayer.place == 7 || currentPlayer.place == 22 || currentPlayer.place == 36) {
-                        panel.cards.DrawCard(1, currentPlayer, panel.players);
-
-                    }*/
                     allTiles[secondPlace].performAction(currentPlayer);
                     MainPanel b = (MainPanel) panel.getParent();
                     b.currentPanel.UpdateCurrentDetails();
                     MonopolyBoardPanel.RollButton.setEnabled(true);
-                    turn= (turn+1)%panel.players.size();
 
                     ((Timer) e.getSource()).stop();
                     if ((secondPlace) > 39 && (secondPlace != 0)) {
