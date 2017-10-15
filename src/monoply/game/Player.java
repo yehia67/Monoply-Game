@@ -95,9 +95,11 @@ public class Player {
                     MonopolyBoardPanel.RollButton.setEnabled(true);
                     turn= (turn+1)%panel.players.size();
 
-                    ((Timer) e.getSource()).stop();
                     if ((secondPlace) > 39 && (secondPlace != 0)) {
-                        currentPlayer.money += 200;
+                        allTiles[0].performAction(currentPlayer);
+                    ((Timer) e.getSource()).stop();
+                    
+                    
                     }
                 } else {
                     currentPlayer.animate();

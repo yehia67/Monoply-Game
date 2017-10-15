@@ -38,5 +38,11 @@ public abstract class PropertyTile extends Tile {
     public int getPrice() {
         return price;
     }
+   boolean isOwner(Player o) {
+        if (o == getOwner()) {
+            return true;
+        }
+        return false;
+    }
 
 }
