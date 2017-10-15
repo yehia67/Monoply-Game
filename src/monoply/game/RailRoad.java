@@ -16,7 +16,7 @@ import static monoply.game.RailRoad.placesArr;
 public class RailRoad extends PropertyTile {
   boolean availble = false;
   int price = 50;
-  static ArrayList<Country> placesArr = new ArrayList<Country>();
+  static ArrayList<RailRoad> placesArr = new ArrayList<RailRoad>();
 
     
     private String southStation = "Reading RailRoad.png", westStation ="Pennsylvania RailRoad.png", 
@@ -33,10 +33,10 @@ public class RailRoad extends PropertyTile {
         //super(mPrice, mFees, mCountryColor, mName, imgName);
     //}
   public void init(){
-  placesArr.add(new Country(200,50,null,"Reading RailRoad",southStation));
-  placesArr.add(new Country(200,50,null,"PENNSYLVANIA RAILROAD",westStation));
-  placesArr.add(new Country(200,50,null,"B&O RailRoad", northStation));
-  placesArr.add(new Country(200,50,null,"SHORT LINE", eastStation));
+  placesArr.add(new RailRoad(southStation,50,"Reading RailRoad"));
+  placesArr.add( new RailRoad(westStation ,50,"PENNSYLVANIA RAILROAD"));
+  placesArr.add(new RailRoad(northStation,50,"B&O RailRoad"));
+  placesArr.add(new RailRoad(eastStation,50,"SHORT LINE"));
   }
    
   int payment(Player owner){
