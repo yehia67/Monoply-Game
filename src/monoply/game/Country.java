@@ -88,10 +88,11 @@ public class Country extends PropertyTile {
 
     @Override
     public void performAction(Player player) {
+        if (this.getOwner()!=null){
         if (!(player==this.getOwner()))
         {
            player.payRent(this.getOwner(), this.getTotalFees());
         }
-        
+        }
     }
 }
