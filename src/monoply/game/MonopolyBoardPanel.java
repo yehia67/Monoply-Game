@@ -148,7 +148,7 @@ public class MonopolyBoardPanel extends JPanel{
                 "Oriental Avenue", southTilesNames[4]);
         allTiles[allIndex--] = new PropertyTile(southTilesNames[5], 
                 200, "Reading Railroad");
-        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[6]);
+        allTiles[allIndex--] = new Taxes(southTilesNames[6],200);
         allTiles[allIndex--] = new Country(60, 60, Color.WHITE,
                 "Baltic Avenue", southTilesNames[7]);
         allTiles[allIndex--] = new Chest(southTilesNames[8]);
@@ -240,7 +240,7 @@ public class MonopolyBoardPanel extends JPanel{
         allTiles[allIndex++] = new Chance(eastTilesNames[5]);
         allTiles[allIndex++] = new Country(350, 350, Color.BLUE,
                 "Park Place", eastTilesNames[6]);
-        allTiles[allIndex++] = new NonPropertyTile(eastTilesNames[7]);
+        allTiles[allIndex++] = new Taxes(eastTilesNames[7],100);
         allTiles[allIndex++] = new Country(400, 400, Color.BLUE,
                 "Boardwalk", eastTilesNames[8]);
         

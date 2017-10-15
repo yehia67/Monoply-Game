@@ -9,6 +9,19 @@ package monoply.game;
  *
  * @author moaz
  */
-public class Taxes {
-    
+public class Taxes extends NonPropertyTile{
+	int reduceamount;
+	public Taxes(String imgName, int redam){
+		super(imgName);
+		this.reduceamount=redam;	
+	}
+
+	
+	public void performAction(Player player){
+            if(reduceamount==100)
+                player.money-=100;
+            
+            else
+                player.money-=200;
+	}
 }
