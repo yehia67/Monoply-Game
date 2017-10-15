@@ -247,7 +247,6 @@ public class MonopolyBoardPanel extends JPanel{
                 northTilesNames.length;
         
         for(int i = 0; i<eastTilesNames.length ; i++) {
-            allTiles[allIndex] = new Tile(eastTilesNames[i]);
             eastPanel.add(allTiles[allIndex]);
             allIndex++;
         }

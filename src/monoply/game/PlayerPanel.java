@@ -71,4 +71,8 @@ public class PlayerPanel extends JPanel{
            playerCountriesComboBox.addItem(player.getProperties().get(i).getName()); 
         }
     }
+    
+    public String getSelectedItem() {
+        return (String)playerCountriesComboBox.getSelectedItem();
+    }
 }
