@@ -3,6 +3,7 @@ package monoply.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import static monoply.game.MonopolyBoardPanel.allTiles;
 
 
 public class SpecialCards {
@@ -151,7 +152,16 @@ public class SpecialCards {
         //player.x = place.coords.x;
         //player.y= place.coords.y;
         //player.place= index;
+       if (DrawnCard.getName().equalsIgnoreCase("Go to Jail")){
+        allTiles[player.place].GetLabels()[MonopolyBoardPanel.turn].setVisible(false);
+           player.place= 10;
+        allTiles[player.place].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
+            MainPanel b = (MainPanel) Player.panel.getParent();
+                    b.currentPanel.UpdateCurrentDetails();
+       }
+       else{
         player.move(index);
+       }
        // playPanel.gp.repaint();
     }
     

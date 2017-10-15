@@ -25,13 +25,14 @@ public class Player {
     Dice dice;
     public String name;
     public boolean HasJailCard;
-    private MonopolyBoardPanel panel;
+    public static MonopolyBoardPanel panel;
     private boolean inJail;
     private int jailOffset;
     private int intialPlace;
-    public int houses,hotels;
+    public int houses,hotels,railroads,utility;
     private CountriesGroup[] groups = new CountriesGroup[8];
     private ArrayList<PropertyTile> properties = new ArrayList<PropertyTile>();
+    private static boolean flag=false;
     
     private void initGroups() {
         groups[0] = new CountriesGroup(3); //cyan
@@ -64,6 +65,7 @@ public class Player {
     void move(int place) {
         intialPlace = this.place;
         int secondPlace = (place) % allTiles.length;
+        if (secondPlace==0||this.place==0) flag=true;
 
         /*allTiles[firstPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(false);
         allTiles[secondPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
@@ -80,16 +82,15 @@ public class Player {
                     allTiles[secondPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
                     currentPlayer.place = (currentPlayer.place + 1) % allTiles.length;
                     System.out.println("place: " + currentPlayer.place);
+                    flag= false;
 
                     allTiles[secondPlace].performAction(currentPlayer);
                     MainPanel b = (MainPanel) panel.getParent();
                     b.currentPanel.UpdateCurrentDetails();
                     MonopolyBoardPanel.RollButton.setEnabled(true);
-
+                    
                     ((Timer) e.getSource()).stop();
-                    if ((secondPlace) > 39 && (secondPlace != 0)) {
-                        currentPlayer.money += 200;
-                    }
+
                 } else {
                     currentPlayer.animate();
                 }
@@ -105,8 +106,14 @@ public class Player {
     {
         System.out.println("Here");
         this.place=intialPlace;
+          if (this.place==0&& !flag) {
+                        allTiles[0].performAction(this);
+                        System.out.println("Money:"+this.money);
+
+                    }
         allTiles[intialPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(false);
         intialPlace= (intialPlace+1)%allTiles.length;
+       
         allTiles[intialPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
         System.out.println("Intial Place: "+intialPlace);
     }
@@ -116,6 +123,8 @@ public class Player {
         houses = 0;
         hotels=0;
         jailOffset=0;
+        railroads=0;
+        utility=0;
         initGroups();
     }
     
