@@ -29,7 +29,7 @@ public class Player {
     private boolean inJail;
     private int jailOffset;
     private int intialPlace;
-    public int houses,hotels;
+    public int houses,hotels,railroads,utility;
     private CountriesGroup[] groups = new CountriesGroup[8];
     private ArrayList<PropertyTile> properties = new ArrayList<PropertyTile>();
     
@@ -125,6 +125,8 @@ public class Player {
         houses = 0;
         hotels=0;
         jailOffset=0;
+        railroads=0;
+        utility=0;
         initGroups();
     }
     
