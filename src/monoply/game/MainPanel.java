@@ -17,8 +17,8 @@ public class MainPanel extends JPanel {
    
     public MonopolyBoardPanel board;
    
-     public CurrentPanel currentPanel;
-    public PlayerPanel playerPanel;
+    public CurrentPanel currentPanel;
+    public PlayersContainerPanel playerPanel;
     
     public int turn;
     public MainPanel() {
@@ -28,7 +28,7 @@ public class MainPanel extends JPanel {
       
 
         this.add(board);
-         playerPanel = new PlayerPanel();
+         playerPanel = new PlayersContainerPanel(4);
          
        
         this.add(currentPanel, BorderLayout.WEST);
