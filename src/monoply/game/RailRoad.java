@@ -13,31 +13,51 @@ import static monoply.game.RailRoad.placesArr;
  *
  * @author yehia
  */
-public class RailRoad {
-  Player Owner;//ex
+public class RailRoad extends PropertyTile {
   boolean availble = false;
   int price = 50;
-  static ArrayList<Places> placesArr = new ArrayList<Places>();
+  static ArrayList<Country> placesArr = new ArrayList<Country>();
+
+    
+    private String southStation = "Reading RailRoad.png", westStation ="Pennsylvania RailRoad.png", 
+            northStation = "B&O RailRoad.png",eastStation = "Short Line.png";
+
+    public RailRoad(String imgName, int mPrice, String mName) {
+        super(imgName, mPrice, mName);
+    }
+   
+    
+   
+     
+  // public RailRoad(int mPrice, int mFees, Color mCountryColor, String mName, String imgName) {
+        //super(mPrice, mFees, mCountryColor, mName, imgName);
+    //}
   public void init(){
-  placesArr.add(new SpecialPlaces("Reading RailRoad", new Coordinates(300, 580), 0, -7));
-  placesArr.add(new SpecialPlaces("PENNSYLVANIA RAILROAD", new Coordinates(50, 300), -5, 0));
-  placesArr.add(new SpecialPlaces("B&O RailRoad", new Coordinates(300, 50),  0, -7));
-  placesArr.add(new SpecialPlaces("SHORT LINE", new Coordinates(570, 290), -5 , 0));
+  placesArr.add(new Country(200,50,null,"Reading RailRoad",southStation));
+  placesArr.add(new Country(200,50,null,"PENNSYLVANIA RAILROAD",westStation));
+  placesArr.add(new Country(200,50,null,"B&O RailRoad", northStation));
+  placesArr.add(new Country(200,50,null,"SHORT LINE", eastStation));
   }
-  void setOwner(Player pl)
-  {
-     Owner = pl;
-  }
-  
-  void payment(Player pl){
+   
+  int payment(Player owner){
+      init();
       int c = 1;
       for(int i = 0; i < placesArr.size();i++)
       {
-          if(placesArr.get(i).isOwner(pl))
+          if(placesArr.get(i).isOwner(owner))
           {
               c++;
           }
       }
-    pl.money = price*c;
+     return  price*c;
   }
+    
+    @Override
+    public void performAction(Player player) {
+        if (!(player==this.getOwner()))
+        {
+          player.money -= payment(this.getOwner());
+        }
+    }
 }
+
