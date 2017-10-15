@@ -5,13 +5,51 @@
  */
 package monoply.game;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
 /**
  *
- * @author mahmoud
+ * @author ASUS
  */
-class playerPanel {
+public class PlayerPanel extends JPanel{
+    private Player player;
+    private JLabel playerNameLbl = new JLabel("Player : ");
+    private JLabel playerMoneyLbl = new JLabel("Money : ");
+    private JComboBox playerCountriesComboBox = new JComboBox();
     
-
+    public PlayerPanel(Player player) {
+        this.player = player;
+        this.setLayout(new GridLayout(3, 1));
+        System.out.println("PlayerPanel Constructor");
+        init();
+    }
+     
+    private void init()
+    {
+        playerNameLbl.setText(playerNameLbl.getText() + player.name);
+        playerMoneyLbl.setText(playerMoneyLbl.getText() + player.money);
+        this.add(playerNameLbl);
+        this.add(playerMoneyLbl);
+        this.add(playerCountriesComboBox);
+    }
+    
+    /*private void initLabels(int numberofPlayers) {
+        this.setLayout(new GridLayout(8,1));
+        JPanel sample = new JPanel();
+        JLabel label = new JLabel("Player Name");
+        label.setForeground(Color.blue);
+        label.setBackground(Color.lightGray);
+        label.setOpaque(true);
+        this.add(label);
+    }*/
+    
     public void updatePanel() {
         playerMoneyLbl.setText("Money : " + player.money);
         playerCountriesComboBox.removeAllItems();
