@@ -247,11 +247,7 @@ public class MonopolyBoardPanel extends JPanel{
         allIndex = southTilesNames.length + westTilesNames.length + 
                 northTilesNames.length;
         
-      /*  for(int i = 0; i<eastTilesNames.length ; i++) {
-            allTiles[allIndex] = new Tile(eastTilesNames[i]);
-            eastPanel.add(allTiles[allIndex]);
-            allIndex++;
-        }*/
+
     }
     
     public void move (int diceNumber){

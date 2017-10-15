@@ -23,7 +23,8 @@ public abstract class PropertyTile extends Tile {
     
     public void setOwner(Player player) {
         owner = player;
-        owner.money -= price;
+        if(owner != null) 
+            owner.money -= price;
     }
     
     public Player getOwner() {

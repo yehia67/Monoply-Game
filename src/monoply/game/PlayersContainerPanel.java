@@ -59,6 +59,39 @@ public class PlayersContainerPanel extends JPanel {
             }
         });
         
+        sellBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int currentPlayerIndex = MonopolyBoardPanel.players.indexOf(MonopolyBoardPanel.currentPlayer);
+                PlayerPanel p = playerPanel.get(currentPlayerIndex);
+                String x = p.getSelectedItem();
+                
+                CountriesGroup[] groups = MonopolyBoardPanel.currentPlayer.getGroupsArray();
+                for(int i = 0; i < groups.length; i++) {
+                    ArrayList<Country> countries = groups[i].getCountries();
+                    for(int j = 0; j < countries.size(); j++) {
+                        if( x.equalsIgnoreCase(countries.get(j).getName())) {
+                            MonopolyBoardPanel.currentPlayer.money += countries.get(j).getPrice();
+                            countries.get(j).setOwner(null);
+                            countries.remove(countries.get(j));
+                            p.updatePanel();
+                            return;
+                        }
+                    }
+                }
+                
+                for(int i = 0; i < MonopolyBoardPanel.currentPlayer.getProperties().size(); i++) {
+                    if( x.equalsIgnoreCase(MonopolyBoardPanel.currentPlayer.getProperties().get(i).getName())) {
+                        MonopolyBoardPanel.currentPlayer.money += MonopolyBoardPanel.currentPlayer.getProperties().get(i).getPrice();
+                        MonopolyBoardPanel.currentPlayer.getProperties().get(i).setOwner(null);
+                        MonopolyBoardPanel.currentPlayer.getProperties().remove(MonopolyBoardPanel.currentPlayer.getProperties().get(i));
+                        p.updatePanel();
+                        return;
+                    }
+                }
+            }
+        });
+        
         this.add(btnsPanel, BorderLayout.SOUTH);
     }
     
