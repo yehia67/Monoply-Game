@@ -153,7 +153,7 @@ public class MonopolyBoardPanel extends JPanel{
         allTiles[allIndex--] = new Chest(southTilesNames[8]);
         allTiles[allIndex--] = new Country(60, 60, Color.WHITE,
                 "Mediterranean Avenue", southTilesNames[9]);
-        //allTiles[allIndex--] = new NonPropertyTile(southTilesNames[10]);
+        allTiles[allIndex--] = new NonPropertyTile(southTilesNames[10]);
         
         allIndex = southTilesNames.length-1;
         
@@ -258,6 +258,8 @@ public class MonopolyBoardPanel extends JPanel{
             currentPlayer = Board.players.get(Board.turn);
         }
         currentPlayer.move(currentPlayer.place+diceNumber);
+        MainPanel main = (MainPanel) this.getParent();
+        main.update();
       /*  int firstPlace = currentPlayer.place;
     
         int secondPlace = (firstPlace + diceNumber) % allTiles.length;

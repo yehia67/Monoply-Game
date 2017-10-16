@@ -41,7 +41,11 @@ public class MainPanel extends JPanel {
     }
     
    
-    
+    public void update() {
+        if(playerPanel != null) {
+            playerPanel.updatePanels();
+        }
+    }
 
    
 }
