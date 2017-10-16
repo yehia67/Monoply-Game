@@ -270,6 +270,8 @@ public class MonopolyBoardPanel extends JPanel{
             currentPlayer = Board.players.get(Board.turn);
         }
         currentPlayer.move(currentPlayer.place+diceNumber);
+        MainPanel main = (MainPanel) this.getParent();
+        main.update();
       /*  int firstPlace = currentPlayer.place;
     
         int secondPlace = (firstPlace + diceNumber) % allTiles.length;

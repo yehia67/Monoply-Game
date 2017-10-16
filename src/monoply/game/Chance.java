@@ -5,6 +5,8 @@
  */
 package monoply.game;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author eslam
@@ -18,6 +20,8 @@ public class Chance extends NonPropertyTile {
     @Override
     public void performAction(Player player) {
         MonopolyBoardPanel.cards.DrawCard(1, player, MonopolyBoardPanel.players);
+        JOptionPane.showMessageDialog(null,
+                MonopolyBoardPanel.cards.getDrawnCard().getDescription(), "", 2);
     }
     
 }
