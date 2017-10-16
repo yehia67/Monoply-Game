@@ -16,7 +16,7 @@ import java.util.Collections;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import static monoply.game.GamePanel.MessageTextField;
+//import static monoply.game.GamePanel.MessageTextField;
 
 /**
  *
@@ -269,8 +269,8 @@ public class MonopolyBoardPanel extends JPanel{
        
         while(currentPlayer.getInJail()) {
            allTiles[10].performAction(currentPlayer);
-            Board.turn = (Board.turn + 1) % this.players.size();
-            currentPlayer = MonopolyBoardPanel.players.get(Board.turn);
+            this.turn = (this.turn + 1) % this.players.size();
+            currentPlayer = MonopolyBoardPanel.players.get(this.turn);
         }
         currentPlayer.move(currentPlayer.place+diceNumber);
         MainPanel main = (MainPanel) this.getParent();

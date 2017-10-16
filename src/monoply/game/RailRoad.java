@@ -6,7 +6,7 @@
 package monoply.game;
 
 import java.util.ArrayList;
-import static monoply.game.Board.placesArr;
+//import static monoply.game.Board.placesArr;
 import static monoply.game.RailRoad.placesArr;
 
 /**

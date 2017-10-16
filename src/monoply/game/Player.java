@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
-import static monoply.game.GamePanel.MessageTextField;
+//import static monoply.game.GamePanel.MessageTextField;
 import static monoply.game.MonopolyBoardPanel.allTiles;
 import static monoply.game.MonopolyBoardPanel.turn;
 
