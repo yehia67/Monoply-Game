@@ -72,7 +72,7 @@ public class MonopolyBoardPanel extends JPanel{
         init();
         for(int i =0; i<playerNumber; i++)
         {
-           players.add(new Player("Dummy-Name"));
+           players.add(new Player(i + 1 + ""));
            players.get(i).setPanel(this);
            allTiles[0].GetLabels()[i].setVisible(true);
         
