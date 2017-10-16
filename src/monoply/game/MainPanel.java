@@ -19,9 +19,11 @@ public class MainPanel extends JPanel {
    
     public CurrentPanel currentPanel;
     public PlayersContainerPanel playerPanel;
+    public StartingPanel startPanel;
     
     public int turn;
     public MainPanel() {
+        
         this.setLayout(new BorderLayout());
        board = new MonopolyBoardPanel(4);
         currentPanel = new CurrentPanel();
