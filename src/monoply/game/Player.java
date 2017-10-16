@@ -83,8 +83,9 @@ public class Player {
                     currentPlayer.place = (currentPlayer.place + 1) % allTiles.length;
                     System.out.println("place: " + currentPlayer.place);
                     flag= false;
-
+                    if (currentPlayer.place!=10){
                     allTiles[secondPlace].performAction(currentPlayer);
+                    }
                     MainPanel b = (MainPanel) panel.getParent();
                     b.currentPanel.UpdateCurrentDetails();
                     MonopolyBoardPanel.RollButton.setEnabled(true);

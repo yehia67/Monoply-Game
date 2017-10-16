@@ -270,7 +270,7 @@ public class MonopolyBoardPanel extends JPanel{
         while(currentPlayer.getInJail()) {
            allTiles[10].performAction(currentPlayer);
             Board.turn = (Board.turn + 1) % this.players.size();
-            currentPlayer = Board.players.get(Board.turn);
+            currentPlayer = MonopolyBoardPanel.players.get(Board.turn);
         }
         currentPlayer.move(currentPlayer.place+diceNumber);
         MainPanel main = (MainPanel) this.getParent();
