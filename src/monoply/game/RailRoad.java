@@ -54,7 +54,7 @@ public class RailRoad extends PropertyTile {
     
     @Override
     public void performAction(Player player) {
-        if (!(player==this.getOwner()))
+        if (!(player==this.getOwner()) && this.getOwner() != null)
         {
           player.money -= payment(this.getOwner());
         }
