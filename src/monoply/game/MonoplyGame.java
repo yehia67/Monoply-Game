@@ -19,17 +19,20 @@ public class MonoplyGame {
     /**
      * @param args the command line arguments
      */
-   
-   
+   ;
+    
     
     public static void main(String args[]){
         ArrayList<Player> players= new ArrayList<Player>();
         //Dice dice = new Dice();
         /*mainFrame mF = new mainFrame();
         mF.setVisible(true);*/
-        MainFrame2 frame;
-        frame = new MainFrame2();
-       
+        JFrame frame = new JFrame();
+        frame.add(new MainPanel());
+        frame.setSize(500, 400);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Random rand = new Random();
       }
     
 }
