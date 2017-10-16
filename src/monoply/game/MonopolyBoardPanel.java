@@ -33,7 +33,9 @@ public class MonopolyBoardPanel extends JPanel{
     public static JButton RollButton;
     private Dice dice1;
     private Dice dice2;
+    private int dice1Num , dice2Num;
     private int diceNumber;
+    private boolean  diceFlag = false ; 
     public static Player currentPlayer;
     public static ArrayList<Player> players = new ArrayList<Player>();
     //public static Jail jail;
@@ -112,8 +114,8 @@ public class MonopolyBoardPanel extends JPanel{
         
         
        RollButton = new JButton("Roll Dice");
-         Dice dice1 = new Dice();
-        Dice dice2 = new Dice();
+          dice1 = new Dice();
+         dice2 = new Dice();
         
         centerPart.add(dice1);
         centerPart.add(dice2);
@@ -122,8 +124,8 @@ public class MonopolyBoardPanel extends JPanel{
                 
        
        
-         int dice1Num = dice1.getDice();
-        int dice2Num = dice2.getDice();
+          dice1Num = dice1.getDice();
+         dice2Num = dice2.getDice();
         diceNumber = dice1Num + dice2Num;
         RollButton.setEnabled(false);
     MonopolyBoardPanel.this.move(diceNumber);
@@ -250,8 +252,15 @@ public class MonopolyBoardPanel extends JPanel{
     }
     
     public void move (int diceNumber){
-                         turn= (turn+1)%this.players.size();
+        turn = (turn + 1) % this.players.size();
+        if (diceFlag) {
+            diceFlag = false;
+            turn = (turn - 1) % this.players.size();
 
+        }
+        if (dice1Num == dice2Num) {
+            diceFlag = true;
+        }
        currentPlayer = this.players.get(this.turn);
       
        
