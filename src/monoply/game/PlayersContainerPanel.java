@@ -24,6 +24,7 @@ public class PlayersContainerPanel extends JPanel {
     private JPanel playersPanel = new JPanel();
     private JButton buyBtn = new JButton("Buy");
     private JButton sellBtn = new JButton("Sell");
+    private JButton buildBtn = new JButton("Build");
     
     public PlayersContainerPanel(int numOfPlayers) {
         this.setLayout(new BorderLayout());
@@ -35,9 +36,15 @@ public class PlayersContainerPanel extends JPanel {
         
         this.add(playersPanel);
         
-        btnsPanel.setLayout(new GridLayout(1, 2));
-        btnsPanel.add(buyBtn);
-        btnsPanel.add(sellBtn);
+        btnsPanel.setLayout(new GridLayout(2, 1));
+        JPanel buySellPnl = new JPanel(new GridLayout(1, 2));
+        buySellPnl.add(buyBtn);
+        buySellPnl.add(sellBtn);
+        
+        JPanel buildBtnPnl = new JPanel();
+        buildBtnPnl.add(buildBtn);
+        btnsPanel.add(buySellPnl);
+        btnsPanel.add(buildBtnPnl);
         
         buyBtn.addActionListener(new ActionListener() {
             @Override
@@ -51,10 +58,10 @@ public class PlayersContainerPanel extends JPanel {
                         MonopolyBoardPanel.currentPlayer.addProperty((PropertyTile)MonopolyBoardPanel.allTiles[playerPlace]);
                         updatePanels();
                     } else {
-                        showWarning();
+                        showWarning("Sorry you can't buy this place");
                     }
                 } else {
-                    showWarning();
+                    showWarning("Sorry you can't buy this place");
                 }
             }
         });
@@ -92,11 +99,20 @@ public class PlayersContainerPanel extends JPanel {
             }
         });
         
+        buildBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                build();
+                
+            }
+        });
+        
         this.add(btnsPanel, BorderLayout.SOUTH);
     }
     
-    private void showWarning() {
-        JOptionPane.showMessageDialog(null, "Sorry you can't buy this place",
+    private void showWarning(String msg) {
+        JOptionPane.showMessageDialog(null, msg,
                             "", 3);
     }
     
@@ -105,4 +121,36 @@ public class PlayersContainerPanel extends JPanel {
             playerPanel.get(i).updatePanel();
         }
     }
+    
+    private void build() {
+        int currentPlayerIndex = MonopolyBoardPanel.players.indexOf(MonopolyBoardPanel.currentPlayer);
+        playerPanel p = playerPanel.get(currentPlayerIndex);
+        String x = p.getSelectedItem();
+        
+        for(int i = 0; i < MonopolyBoardPanel.allTiles.length; i++) {
+            if(MonopolyBoardPanel.allTiles[i] instanceof Country) {
+                Country country = (Country) MonopolyBoardPanel.allTiles[i];
+                
+                if(country.getName().equalsIgnoreCase(x)) {
+                    if(country.getCanBuildHousesFlag()) {
+                        if(MonopolyBoardPanel.currentPlayer.money > country.getPrice()) {
+                            country.getHousesImgs()[country.getHousesNumber()].setVisible(true);
+                            country.buildHouse();
+                        } else {
+                            showWarning("You don't have enough money");
+                        }
+                    } else if(country.getCanBuildHotelFlag()) {
+                        if(MonopolyBoardPanel.currentPlayer.money > country.getPrice()) {
+                            country.showHotel();
+                            country.buildHotel();
+                        } else {
+                            showWarning("You don't have enough money");
+                        }
+                    } else {
+                        showWarning("You have to get all the countries of the same color");
+                    }
+                }
+            }
+        }
+    }     
 }
