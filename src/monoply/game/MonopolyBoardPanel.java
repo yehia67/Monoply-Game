@@ -255,6 +255,9 @@ public class MonopolyBoardPanel extends JPanel{
         turn = (turn + 1) % this.players.size();
         if (diceFlag) {
             diceFlag = false;
+            if (turn==0)
+                turn= 3;
+            else 
             turn = (turn - 1) % this.players.size();
 
         }

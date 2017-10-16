@@ -93,6 +93,8 @@ public class Player {
 
                 } else {
                     currentPlayer.animate();
+                    MonopolyBoardPanel.RollButton.setEnabled(false);
+
                 }
 
             }
