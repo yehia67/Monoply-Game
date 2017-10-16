@@ -7,13 +7,18 @@ package monoply.game;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -27,7 +32,7 @@ import javax.swing.JTextField;
 
 
 public class CurrentPanel extends JPanel{
- 
+    private BufferedImage backgroundImage;
     public JLabel TileImageLabel; 
     public ImageIcon currImage;
     public String test1;
@@ -37,19 +42,29 @@ public class CurrentPanel extends JPanel{
     }
      
     public void init()
-    {
-   
-      this.setLayout(new GridLayout(8,1));
+    {    TileImageLabel = new JLabel();
+        
+        try
+        {
+    backgroundImage = ImageIO.read(new File("Monopoly Board/monopolybg3.jpg" ) );
+        }
+        catch(Exception ex)
+        {
+            System.out.println("FAIL");
+        }
+        
+               
+            Dimension size = new Dimension(backgroundImage.getWidth(),
+            backgroundImage.getHeight());
+            
+      this.setLayout(new GridLayout(7,1));
      this.setPreferredSize(new Dimension(200,200));
       
 //     Board.players.get(Board.turn)                                                                                                                                                                                                                                                                                                                                                                                                                                   
      JPanel sample = new JPanel();
-    JTextField messageTextField = new JTextField("Message goes here ");
-    JLabel message = new JLabel("Hello");
-    this.add(messageTextField);
-    this.add(message);
-    TileImageLabel = new JLabel();
-  TileImageLabel.setSize(new Dimension(50,50));
+   
+
+  TileImageLabel.setSize(new Dimension(200,200));
   System.out.println("/"+ MonopolyBoardPanel.allTiles[0].imgName+ ".png");
    try{
                currImage = new ImageIcon(ImageIO.read(new File("Monopoly Board/" 
@@ -60,7 +75,12 @@ public class CurrentPanel extends JPanel{
                }
 
            this.TileImageLabel.setIcon(currImage);
-        
+          this.TileImageLabel.setHorizontalAlignment(JLabel.CENTER);
+         //  this.TileImageLabel.setVerticalAlignment(JLabel.CENTER);
+           this.TileImageLabel.setAlignmentY(CENTER_ALIGNMENT);
+          this.add(Box.createVerticalGlue());
+         this.add(Box.createVerticalGlue());
+      
            this.add(TileImageLabel);
     }
    
@@ -107,7 +127,12 @@ public class CurrentPanel extends JPanel{
  
     }
     
+   @Override
+  protected void paintComponent(Graphics g) {
 
+    super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, null);
+}
  
     
 }

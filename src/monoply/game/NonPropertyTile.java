@@ -13,4 +13,9 @@ public abstract class NonPropertyTile extends Tile {
     public NonPropertyTile(String imgName) {
         super(imgName);
     }
+
+    @Override
+    public void performAction(Player player) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

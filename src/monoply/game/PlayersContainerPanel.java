@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  * @author mahmoud
  */
 public class PlayersContainerPanel extends JPanel {
-    private ArrayList<PlayerPanel> playerPanel = new ArrayList<PlayerPanel>();
+    private ArrayList<playerPanel> playerPanel = new ArrayList<playerPanel>();
     private JPanel btnsPanel = new JPanel();
     private JPanel playersPanel = new JPanel();
     private JButton buyBtn = new JButton("Buy");
@@ -29,7 +29,7 @@ public class PlayersContainerPanel extends JPanel {
         this.setLayout(new BorderLayout());
         playersPanel.setLayout(new GridLayout(2,2));
         for(int i = 0; i < numOfPlayers; i++) {
-            playerPanel.add(new PlayerPanel(MonopolyBoardPanel.players.get(i)));
+            playerPanel.add(new playerPanel(MonopolyBoardPanel.players.get(i)));
             playersPanel.add(playerPanel.get(i));
         }
         
@@ -63,7 +63,7 @@ public class PlayersContainerPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int currentPlayerIndex = MonopolyBoardPanel.players.indexOf(MonopolyBoardPanel.currentPlayer);
-                PlayerPanel p = playerPanel.get(currentPlayerIndex);
+                playerPanel p = playerPanel.get(currentPlayerIndex);
                 String x = p.getSelectedItem();
                 
                 CountriesGroup[] groups = MonopolyBoardPanel.currentPlayer.getGroupsArray();

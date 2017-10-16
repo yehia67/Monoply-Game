@@ -7,8 +7,12 @@ package monoply.game;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,13 +22,14 @@ import javax.swing.JPanel;
  *
  * @author ASUS
  */
-public class PlayerPanel extends JPanel{
+public class playerPanel extends JPanel{
     private Player player;
     private JLabel playerNameLbl = new JLabel("Player : ");
     private JLabel playerMoneyLbl = new JLabel("Money : ");
     private JComboBox playerCountriesComboBox = new JComboBox();
+    private BufferedImage backgroundImage;
     
-    public PlayerPanel(Player player) {
+    public playerPanel(Player player) {
         this.player = player;
         this.setLayout(new GridLayout(3, 1));
         System.out.println("PlayerPanel Constructor");
@@ -33,6 +38,15 @@ public class PlayerPanel extends JPanel{
      
     private void init()
     {
+          try
+        {
+    backgroundImage = ImageIO.read(new File("Monopoly Board/monopolybg2.jpg" ) );
+        }
+        catch(Exception ex)
+        {
+            System.out.println("FAIL");
+        }
+        
         playerNameLbl.setText(playerNameLbl.getText() + player.name);
         playerMoneyLbl.setText(playerMoneyLbl.getText() + player.money);
         this.add(playerNameLbl);
@@ -75,4 +89,12 @@ public class PlayerPanel extends JPanel{
     public String getSelectedItem() {
         return (String)playerCountriesComboBox.getSelectedItem();
     }
+    
+      @Override
+  protected void paintComponent(Graphics g) {
+
+    super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, null);
+}
+ 
 }
