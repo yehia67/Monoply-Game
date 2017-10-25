@@ -167,10 +167,7 @@ public class Player {
     public void lost (int fees)
     {
         MonopolyBoardPanel.RollButton.setEnabled(false);
-        JOptionPane.showMessageDialog(panel, "You don't have enough money", "", JOptionPane.DEFAULT_OPTION);
-        while(this.money<fees) {
-            
-        }
+        JOptionPane.showMessageDialog(panel, "You don't have enough money, Please sell some properties", "", JOptionPane.DEFAULT_OPTION);
     }
     
     public void setInJail(boolean flag) {
