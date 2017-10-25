@@ -1,1 +1,0 @@
-monoply.game.playerPanel

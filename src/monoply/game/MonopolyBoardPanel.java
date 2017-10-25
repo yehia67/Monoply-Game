@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 //import static monoply.game.GamePanel.MessageTextField;
@@ -26,6 +27,7 @@ public class MonopolyBoardPanel extends JPanel{
     private int Playernumber;
     private static Tile centerTile;
     public static int turn=-1;
+    
     private JPanel eastPanel;
     private JPanel westPanel;
     private JPanel northPanel;
@@ -38,6 +40,7 @@ public class MonopolyBoardPanel extends JPanel{
     private boolean  diceFlag = false ; 
     public static Player currentPlayer;
     public static ArrayList<Player> players = new ArrayList<Player>();
+    public static String   CurrentPlayerName;
     //public static Jail jail;
     //public static GoToJail GoJail;
     public static SpecialCards cards;
@@ -77,6 +80,8 @@ public class MonopolyBoardPanel extends JPanel{
            allTiles[0].GetLabels()[i].setVisible(true);
         
         }
+        
+        CurrentPlayerName = "Player : " + players.get(0).name + " Turn" ;
         cards=new SpecialCards();
         
       
@@ -86,7 +91,7 @@ public class MonopolyBoardPanel extends JPanel{
       
         this.setLayout(new BorderLayout());
         JPanel centerPart = new MonopolyCenterPanel("Mid-Part.png");
-        
+       
         southPanel = new JPanel();   //0 - 10
         southPanel.setLayout(new GridLayout(1, 11));
         initSouthPanel();
@@ -129,6 +134,7 @@ public class MonopolyBoardPanel extends JPanel{
         diceNumber = dice1Num + dice2Num;
         RollButton.setEnabled(false);
     MonopolyBoardPanel.this.move(diceNumber);
+     CurrentPlayerName =  "Player " + turn +" turn";
         
             }
        
@@ -291,7 +297,9 @@ public class MonopolyBoardPanel extends JPanel{
   
     }
     
- 
+   public static  String getCurrentPlayerName(){
+       return CurrentPlayerName;
+   }
     
     public static int returnTurn()
     {

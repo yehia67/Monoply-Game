@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 //import static monoply.game.GamePanel.MessageTextField;
 import static monoply.game.MonopolyBoardPanel.allTiles;
@@ -160,6 +161,15 @@ public class Player {
         }
         else {
             //Sell properties
+        }
+        
+    }
+    public void lost (int fees)
+    {
+        MonopolyBoardPanel.RollButton.setEnabled(false);
+        JOptionPane.showMessageDialog(panel, "You don't have enough money", "", JOptionPane.DEFAULT_OPTION);
+        while(this.money<fees) {
+            
         }
     }
     

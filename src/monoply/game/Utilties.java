@@ -55,6 +55,7 @@ public class Utilties extends PropertyTile {
         if (!(player==this.getOwner()) && this.getOwner() != null)
         {
           player.money -= payment(this.getOwner());
+          this.getOwner().money += payment(this.getOwner());
         }
     }
     
