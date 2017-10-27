@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -186,12 +185,12 @@ public class Player {
   
   
 }
-=======
+/*=======
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ 
 package monoply.game;
 
 import java.awt.Color;
@@ -207,7 +206,7 @@ import static monoply.game.MonopolyBoardPanel.turn;
 /**
  *
  * @author yehia
- */
+ 
 public class Player {
 
     public int money = 1500, place = 0;
@@ -260,7 +259,7 @@ public class Player {
         /*allTiles[firstPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(false);
         allTiles[secondPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
         
-        this.place=secondPlace;*/
+        this.place=secondPlace;
         Player currentPlayer = this;
 
         Timer timer = new Timer(500, new ActionListener() {
@@ -381,4 +380,4 @@ public class Player {
   
   
 }
->>>>>>> 49e35a28a028310f36d8e2956f390d039f9c723d
+>>>>>>> 49e35a28a028310f36d8e2956f390d039f9c723d*/
