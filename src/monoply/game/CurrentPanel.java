@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import static monoply.game.MonopolyBoardPanel.getCurrentPlayerName;
 
 /**
  *
@@ -35,6 +36,7 @@ public class CurrentPanel extends JPanel{
     private BufferedImage backgroundImage;
     public JLabel TileImageLabel; 
     public ImageIcon currImage;
+    public JLabel LabelName;
     public String test1;
      public CurrentPanel() {
               System.out.println("Current Constructor");
@@ -43,7 +45,8 @@ public class CurrentPanel extends JPanel{
      
     public void init()
     {    TileImageLabel = new JLabel();
-        
+            LabelName   =   new JLabel("Hello world!");
+         
         try
         {
     backgroundImage = ImageIO.read(new File("Monopoly Board/monopolybg3.jpg" ) );
@@ -80,8 +83,10 @@ public class CurrentPanel extends JPanel{
            this.TileImageLabel.setAlignmentY(CENTER_ALIGNMENT);
           this.add(Box.createVerticalGlue());
          this.add(Box.createVerticalGlue());
-      
            this.add(TileImageLabel);
+          this.add(LabelName);
+         LabelName.setSize(50, 100);
+         LabelName.setText(getCurrentPlayerName());
     }
    
     
