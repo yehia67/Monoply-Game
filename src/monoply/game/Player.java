@@ -73,7 +73,7 @@ public class Player {
         this.place=secondPlace;*/
         Player currentPlayer = this;
 
-        Timer timer = new Timer(500, new ActionListener() {
+        Timer timer = new Timer(200, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
