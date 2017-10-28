@@ -6,6 +6,7 @@
 package monoply.game;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 
@@ -21,20 +22,22 @@ public class MainPanel extends JPanel {
     public PlayersContainerPanel playerPanel;
     
     public int turn;
-    public MainPanel() {
-        this.setLayout(new BorderLayout());
+    public MainPanel(int width , int height) {
+        //this.setLayout(new BorderLayout());
+        this.setLayout(new FlowLayout());
+        this.setSize(width,height);
        board = new MonopolyBoardPanel(4);
         currentPanel = new CurrentPanel();
       
 
-        this.add(board);
+       // this.add(board);
          playerPanel = new PlayersContainerPanel(4);
          
        
-        this.add(currentPanel, BorderLayout.WEST);
-          this.add(board, BorderLayout.CENTER);
+        this.add(currentPanel);
+          this.add(board);
         
-        this.add(playerPanel, BorderLayout.EAST);
+        this.add(playerPanel);
        
        
       

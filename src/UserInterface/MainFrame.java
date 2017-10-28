@@ -63,7 +63,7 @@ public class MainFrame extends JFrame {
                 start.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent ae) {
                         sp.setVisible(false);
-                        MainFrame.mp = new MainPanel();
+                        MainFrame.mp = new MainPanel(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
                         mp.setVisible(true);
                         mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
                         mp.setLocation(0, 0);

@@ -7,6 +7,7 @@ package monoply.game;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -80,7 +81,12 @@ public class MonopolyBoardPanel extends JPanel{
            allTiles[0].GetLabels()[i].setVisible(true);
         
         }
-        
+        this.setSize(200, 200);
+        this.setMaximumSize(new Dimension(200, 200));
+                this.setPreferredSize(new Dimension(200, 200));
+                this.setMinimumSize(new Dimension(200, 200));
+
+            System.out.println("Height: "+  this.getHeight()+"\n Width:" +this.getWidth());
         CurrentPlayerName = "Player : " + players.get(0).name + " Turn" ;
         cards=new SpecialCards();
         
