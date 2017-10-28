@@ -1,9 +1,11 @@
 package monoply.game;
 
 
+import UserInterface.MainPanel;
+import UserInterface.MonopolyBoardPanel;
+import static UserInterface.MonopolyBoardPanel.allTiles;
 import java.util.ArrayList;
 import java.util.Collections;
-import static monoply.game.MonopolyBoardPanel.allTiles;
 
 
 public class SpecialCards {

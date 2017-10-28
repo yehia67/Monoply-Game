@@ -5,6 +5,7 @@
  */
 package monoply.game;
 
+import UserInterface.MainFrame;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;

@@ -5,14 +5,16 @@
  */
 package monoply.game;
 
+import UserInterface.MainPanel;
+import UserInterface.MonopolyBoardPanel;
+import static UserInterface.MonopolyBoardPanel.allTiles;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
 //import static monoply.game.GamePanel.MessageTextField;
-import static monoply.game.MonopolyBoardPanel.allTiles;
-import static monoply.game.MonopolyBoardPanel.turn;
+
 
 /**
  *
@@ -62,7 +64,7 @@ public class Player {
         return groups;
     }
 
-    void move(int place) {
+  public  void move(int place) {
         intialPlace = this.place;
         int secondPlace = (place) % allTiles.length;
         if (secondPlace==0||this.place==0) flag=true;

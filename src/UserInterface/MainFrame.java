@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package monoply.game;
+package UserInterface;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -17,8 +17,10 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import monoply.game.*;
 
 /**
+
  *
  * @author mahmoud
  */
@@ -65,7 +67,7 @@ public class MainFrame extends JFrame {
                         sp.setVisible(false);
                         MainFrame.mp = new MainPanel(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
                         mp.setVisible(true);
-                        mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                        //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
                         mp.setLocation(0, 0);
                         mf.add(mp);
 

@@ -5,6 +5,8 @@
  */
 package monoply.game;
 
+import UserInterface.MonopolyBoardPanel;
+
 /**
  *
  * @author eslam

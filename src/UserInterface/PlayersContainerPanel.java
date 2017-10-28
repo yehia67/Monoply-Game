@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package monoply.game;
+package UserInterface;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import monoply.game.*;
 
 /**
  *

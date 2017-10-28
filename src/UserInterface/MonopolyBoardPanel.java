@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package monoply.game;
+package UserInterface;
 
+import UserInterface.MainPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,6 +20,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 //import static monoply.game.GamePanel.MessageTextField;
+
+import monoply.game.*;
+
 
 /**
  *
@@ -69,7 +73,7 @@ public class MonopolyBoardPanel extends JPanel{
         "Park Place.png", "Luxury Tax.png", "BoardWalk.png"};
 
     
-    public MonopolyBoardPanel(int playerNumber) {
+    public MonopolyBoardPanel(int playerNumber, int height) {
         
         this.Playernumber=playerNumber;
              System.out.println("MonopolyBoard Constructor");
@@ -81,10 +85,10 @@ public class MonopolyBoardPanel extends JPanel{
            allTiles[0].GetLabels()[i].setVisible(true);
         
         }
-        this.setSize(200, 200);
-        this.setMaximumSize(new Dimension(200, 200));
-                this.setPreferredSize(new Dimension(200, 200));
-                this.setMinimumSize(new Dimension(200, 200));
+        this.setSize(height , height);
+        //this.setMaximumSize(new Dimension(200, 200));
+               // this.setPreferredSize(new Dimension(200, 200));
+                //this.setMinimumSize(new Dimension(200, 200));
 
             System.out.println("Height: "+  this.getHeight()+"\n Width:" +this.getWidth());
         CurrentPlayerName = "Player : " + players.get(0).name + " Turn" ;

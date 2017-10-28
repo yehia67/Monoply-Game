@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package monoply.game;
+/*package monoply.game;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -15,7 +15,7 @@ import javax.swing.*;
 /**
  *
  * @author mahmoud
- */
+ 
 public class StartPanel extends JPanel{
     JButton startButton;
     JButton exitButton;
@@ -62,4 +62,4 @@ public class StartPanel extends JPanel{
    
     }
           
-}
+}*/

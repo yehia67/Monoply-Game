@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package monoply.game;
+package UserInterface;
 
+import static UserInterface.MonopolyBoardPanel.getCurrentPlayerName;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -24,7 +25,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import static monoply.game.MonopolyBoardPanel.getCurrentPlayerName;
+//import static monoply.game.MonopolyBoardPanel.getCurrentPlayerName;
+import monoply.game.*;
+import monoply.game.RotatedIcon;
 
 /**
  *
@@ -61,7 +64,8 @@ public class CurrentPanel extends JPanel{
             backgroundImage.getHeight());
             
       this.setLayout(new GridLayout(7,1));
-     this.setPreferredSize(new Dimension(200,200));
+    //  this.setSize(200, 200);
+    // this.setPreferredSize(new Dimension(200,200));
       
 //     Board.players.get(Board.turn)                                                                                                                                                                                                                                                                                                                                                                                                                                   
      JPanel sample = new JPanel();

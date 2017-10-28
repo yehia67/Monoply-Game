@@ -5,6 +5,7 @@
  */
 package monoply.game;
 
+import UserInterface.MonopolyCenterPanel;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
