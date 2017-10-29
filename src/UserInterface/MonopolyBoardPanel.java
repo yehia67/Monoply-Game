@@ -83,6 +83,20 @@ public class MonopolyBoardPanel extends JPanel{
            players.add(new Player(i + 1 + ""));
            players.get(i).setPanel(this);
            allTiles[0].GetLabels()[i].setVisible(true);
+            switch (i) {
+                case 0:
+                    players.get(i).name = MF2.pp.getP1Name();
+                    break;
+                case 1:
+                    players.get(i).name = MF2.pp.getP2Name();
+                    break;
+                case 2:
+                    players.get(i).name = MF2.pp.getP3Name();
+                    break;
+                case 3:
+                    players.get(i).name = MF2.pp.getP4Name();
+                    break;
+            }
         
         }
         this.setSize(height , height);
@@ -143,8 +157,9 @@ public class MonopolyBoardPanel extends JPanel{
          dice2Num = dice2.getDice();
         diceNumber = dice1Num + dice2Num;
         RollButton.setEnabled(false);
+          
+
     MonopolyBoardPanel.this.move(diceNumber);
-     CurrentPlayerName =  "Player " + turn +" turn";
         
             }
        
@@ -281,7 +296,8 @@ public class MonopolyBoardPanel extends JPanel{
             diceFlag = true;
         }
        currentPlayer = this.players.get(this.turn);
-      
+       CurrentPlayerName = "Player : " + players.get(turn).name + " Turn" ;;
+
        
         while(currentPlayer.getInJail()) {
            allTiles[10].performAction(currentPlayer);

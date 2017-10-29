@@ -132,7 +132,7 @@ public class CurrentPanel extends JPanel{
            this.TileImageLabel.setIcon(ri);
        
        }
-    
+     LabelName.setText(getCurrentPlayerName());
  
     }
     

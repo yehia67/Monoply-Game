@@ -5,6 +5,7 @@
  */
 package monoply.game;
 
+import UserInterface.MF2;
 import UserInterface.MainFrame;
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,7 +29,9 @@ public class MonoplyGame {
         //Dice dice = new Dice();
         /*mainFrame mF = new mainFrame();
         mF.setVisible(true);*/
-        MainFrame frame = new MainFrame();
+       // MainFrame frame = new MainFrame();
+                MF2 frame2 = new MF2();
+
       }
     
 }

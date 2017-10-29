@@ -24,18 +24,18 @@ public class MainPanel extends JPanel {
     public PlayersContainerPanel playerPanel;
     
     public int turn;
-    public MainPanel(int width , int height) {
+    public MainPanel(int width , int height, int nplayers) {
         //this.setLayout(new BorderLayout());
         this.setLayout(null);
         this.setSize(width,height);
         System.out.println("Width main panel: "+ width+ "\n Height main panel: "+ height);
-       board = new MonopolyBoardPanel(4, height);
+       board = new MonopolyBoardPanel(nplayers, height);
         currentPanel = new CurrentPanel();
         currentPanel.setLocation(0, 0);
         currentPanel.setSize((width-height)/3,height);
 
        // this.add(board);
-         playerPanel = new PlayersContainerPanel(4);
+         playerPanel = new PlayersContainerPanel(nplayers);
          
          board.setLocation(currentPanel.getWidth(), 0);
        playerPanel.setLocation(currentPanel.getWidth()+board.getWidth(), 0);
@@ -55,6 +55,7 @@ public class MainPanel extends JPanel {
         if(playerPanel != null) {
             playerPanel.updatePanels();
         }
+        
     }
 
    

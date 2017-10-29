@@ -5,6 +5,7 @@
  */
 package UserInterface;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Rectangle;
@@ -45,27 +46,38 @@ public class MainFrame extends JFrame {
 
             private JButton start;
             private JButton exit;
+            private playPanel pp;
 
             public startPanel() {
-                this.setSize(400, 500);
+                this.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
                 this.setLayout(null);
                 
                 start = new JButton("Start");
                 start.setSize(300, 75);
-                start.setLocation(50, 100);
+                start.setLocation((this.getWidth()-start.getWidth())/2, 250);
                 this.add(start);
                 exit = new JButton("Exit");
                 exit.setSize(300, 75);
-                exit.setLocation(50, 400);
+                exit.setLocation((this.getWidth()-exit.getWidth())/2, 550);
                 this.add(exit);
                 this.setVisible(true);
                 
+                pp = new playPanel();
+                
+                JPanel panel = new JPanel();
+                //panel.setLayout(null);
+                panel.setBackground(Color.red);
+                panel.setSize(600, 600);
+                panel.setLocation(start.getWidth()+start.getX()+10, 0);
+               // pp.setLocation(0, 0);
+               // panel.add(pp);
+                this.add(panel);
                 startPanel sp = this;
                 
                 start.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent ae) {
                         sp.setVisible(false);
-                        MainFrame.mp = new MainPanel(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                        MainFrame.mp = new MainPanel(mf.getContentPane().getWidth(),mf.getContentPane().getHeight(),pp.getSpinnerValue());
                         mp.setVisible(true);
                         //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
                         mp.setLocation(0, 0);
@@ -83,32 +95,15 @@ public class MainFrame extends JFrame {
             }
 
         }
-        
+  
         startPanel sp = new startPanel();
-        sp.setLocation((this.getWidth()-sp.getWidth())/2, (this.getHeight()-sp.getHeight())/2);
-        this.add(sp);
-        
-      /*  this.addComponentListener(new ComponentAdapter() {
-    @Override
-public void componentResized(ComponentEvent arg0) {
-    
-int W = 3;
-int H = 2; 
-Rectangle b = arg0.getComponent().getBounds();
-if (prevwidth==b.width){
-arg0.getComponent().setBounds(b.x, b.y, b.width, b.width*H/W);
-prevheight= b.width*H/W;
-System.out.println("resized");
-}
-
-else if (prevheight==b.height){
-arg0.getComponent().setBounds(b.x, b.y, b.height*W/H, b.height);
-prevwidth=b.height*W/H;
-}
-}
-        });*/
-        
-    }
+      // sp.setLocation((this.getWidth()-sp.getWidth())/2, (this.getHeight()-sp.getHeight())/2);
+       sp.setLocation(0, 0);
+      //playPanel pp = new playPanel();
+    // pp.setVisible(true);
+    // sp.add(pp);
+    this.add(sp);
+  }
 
 }
 
