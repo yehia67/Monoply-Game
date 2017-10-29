@@ -85,15 +85,27 @@ public class MonopolyBoardPanel extends JPanel{
            allTiles[0].GetLabels()[i].setVisible(true);
             switch (i) {
                 case 0:
+                    if (MF2.pp.getP1Name().trim().equalsIgnoreCase(""))
+                        players.get(i).name="Player 1";
+                    else
                     players.get(i).name = MF2.pp.getP1Name();
                     break;
                 case 1:
+                    if (MF2.pp.getP2Name().trim().equalsIgnoreCase(""))
+                        players.get(i).name="Player 2";
+                    else
                     players.get(i).name = MF2.pp.getP2Name();
                     break;
                 case 2:
+                    if (MF2.pp.getP3Name().trim().equalsIgnoreCase(""))
+                        players.get(i).name="Player 3";
+                    else
                     players.get(i).name = MF2.pp.getP3Name();
                     break;
                 case 3:
+                    if (MF2.pp.getP4Name().trim().equalsIgnoreCase(""))
+                        players.get(i).name="Player 4";
+                    else
                     players.get(i).name = MF2.pp.getP4Name();
                     break;
             }
