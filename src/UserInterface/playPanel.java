@@ -22,7 +22,7 @@ public class playPanel extends javax.swing.JPanel {
         player4TextField.setVisible(false);
         label4.setVisible(false);
         label3.setVisible(false);*/
-
+      
         System.out.println("Intialized");
        
        
@@ -73,7 +73,8 @@ public String getP4Name()
         setMaximumSize(new java.awt.Dimension(450, 450));
         setMinimumSize(new java.awt.Dimension(200, 200));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(400, 300));
+        setOpaque(false);
+        setPreferredSize(new java.awt.Dimension(400, 250));
         setRequestFocusEnabled(false);
         setVerifyInputWhenFocusTarget(false);
 
@@ -85,6 +86,7 @@ public String getP4Name()
             }
         });
 
+        label1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label1.setText("Player 1: ");
 
         player1TextField.setText("Player 1");
@@ -118,8 +120,10 @@ public String getP4Name()
             }
         });
 
+        label3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label3.setText("Player 3:");
 
+        label4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label4.setText("Player 4:");
 
         player4TextField.setText("Player 4");
@@ -134,8 +138,10 @@ public String getP4Name()
             }
         });
 
+        label2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label2.setText("Player 2: ");
 
+        label7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label7.setText("Choose No. of players:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -143,7 +149,7 @@ public String getP4Name()
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -157,7 +163,7 @@ public String getP4Name()
                             .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(player3TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                             .addComponent(player4TextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(34, Short.MAX_VALUE))
+                        .addContainerGap(50, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -188,7 +194,7 @@ public String getP4Name()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(player2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(player4TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jSpinner1.getAccessibleContext().setAccessibleName("spinner");

@@ -8,9 +8,14 @@ package UserInterface;
 import static UserInterface.MainFrame.mp;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -43,7 +48,7 @@ public class MF2 extends javax.swing.JFrame {
 
             private JButton start;
             private JButton exit;
-            
+            Image background ;
 
             public startPanel() {
                 this.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
@@ -58,10 +63,16 @@ public class MF2 extends javax.swing.JFrame {
                 exit.setLocation((this.getWidth()-exit.getWidth())/2, 550);
                 this.add(exit);
                 this.setVisible(true);
-                
+                try {
+                    background = ImageIO.read(new File("Monopoly Board/Background.jpg")).getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_FAST);
+                } catch (Exception ex) {
+                    System.out.println("FAIL");
+                }
+
                 pp = new playPanel();
                 
                 JPanel panel = new JPanel();
+                panel.setOpaque(false);
                 //panel.setLayout(null);
                // panel.setBackground(Color.red);
                 panel.setSize(600, 450);
@@ -91,6 +102,12 @@ public class MF2 extends javax.swing.JFrame {
                 });
 
             }
+@Override
+  protected void paintComponent(Graphics g) {
+
+    super.paintComponent(g);
+        g.drawImage(background, 0, 0, null);
+}
 
         }
   
