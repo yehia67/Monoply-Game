@@ -64,7 +64,7 @@ public class MF2 extends javax.swing.JFrame {
                 this.add(exit);
                 this.setVisible(true);
                 try {
-                    background = ImageIO.read(new File("Monopoly Board/Background.jpg")).getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_FAST);
+                    background = ImageIO.read(new File("Monopoly Board/Background.jpg")).getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
                 } catch (Exception ex) {
                     System.out.println("FAIL");
                 }
