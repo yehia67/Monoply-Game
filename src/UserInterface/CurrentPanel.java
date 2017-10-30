@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -41,13 +44,15 @@ public class CurrentPanel extends JPanel{
     public ImageIcon currImage;
     public JLabel LabelName;
     public String test1;
+    private JButton saveBtn = new JButton("Save");
      public CurrentPanel() {
               System.out.println("Current Constructor");
         init();
     }
      
     public void init()
-    {    TileImageLabel = new JLabel();
+    {    
+        TileImageLabel = new JLabel();
             LabelName   =   new JLabel("Hello world!");
          
         try
@@ -91,6 +96,19 @@ public class CurrentPanel extends JPanel{
           this.add(LabelName);
          LabelName.setSize(50, 100);
          LabelName.setText(getCurrentPlayerName());
+         saveBtn.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent ev) {
+                saveGame();
+             }
+         });
+         
+         this.add(saveBtn);
+    }
+    
+    public void saveGame() {
+        MainPanel p = (MainPanel) this.getParent();
+        p.board.save();
     }
    
     

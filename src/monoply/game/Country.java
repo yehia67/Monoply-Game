@@ -1,6 +1,11 @@
 package monoply.game;
 
 import java.awt.Color;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Country extends PropertyTile {
 
@@ -96,4 +101,26 @@ public class Country extends PropertyTile {
         }
         }
     
+    @Override
+    public void save(FileOutputStream fos, ObjectOutputStream oos) 
+            throws IOException {
+        super.save(fos, oos);
+        oos.writeInt(totalFees);
+        oos.writeObject(countryColor);
+        oos.writeBoolean(available);
+        oos.writeBoolean(canBuildHotelFlag);
+        oos.writeBoolean(canBuildHousesFlag);
+    }
+    
+    
+    @Override
+    public void load(FileInputStream fis, ObjectInputStream ois) 
+            throws IOException, ClassNotFoundException {
+        super.load(fis, ois);
+        totalFees = ois.readInt();
+        countryColor = (Color)ois.readObject();
+        available = ois.readBoolean();
+        canBuildHotelFlag = ois.readBoolean();
+        canBuildHousesFlag = ois.readBoolean();
+    }
 }

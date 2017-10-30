@@ -5,7 +5,14 @@
  */
 package monoply.game;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import UserInterface.MonopolyBoardPanel;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 
 /**
  *
@@ -45,5 +52,26 @@ public class CountriesGroup {
     }
     public int getSize() {
         return countries.size();
+    }
+    
+    public void save(FileOutputStream fos, ObjectOutputStream oos) 
+            throws IOException {
+        oos.writeInt(countries.size());
+        for(int i = 0; i < countries.size(); i++) {
+            for(int j = 0; j < 40; j++) {
+                if(countries.get(i) == MonopolyBoardPanel.allTiles[j]) {
+                    oos.writeInt(j);
+                }
+            }
+        }
+    }
+    
+    public void load(Player p, 
+            FileInputStream fis, ObjectInputStream ois) throws IOException {
+        int sz = ois.readInt();
+        for(int i = 0; i < sz; i++) {
+            int index = ois.readInt();
+            this.addCountry((Country)MonopolyBoardPanel.allTiles[index]);
+        }
     }
 }

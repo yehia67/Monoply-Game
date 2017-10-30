@@ -50,6 +50,28 @@ public class MainPanel extends JPanel {
       
     }
     
+    public MainPanel(MonopolyBoardPanel board, int w, int h) {
+        this.board = board;
+        this.setLayout(null);
+        this.setSize(w,h);
+        currentPanel = new CurrentPanel();
+        currentPanel.setLocation(0, 0);
+        currentPanel.setSize((w-h)/3,h);
+        playerPanel = new PlayersContainerPanel(this.board.getPlayersNumber());
+        board.setLocation(currentPanel.getWidth(), 0);
+        playerPanel.setLocation(currentPanel.getWidth()+board.getWidth(), 0);
+        playerPanel.setSize(w-board.getWidth()-currentPanel.getWidth(), h);
+        this.add(currentPanel);
+        
+        this.add(board);
+        
+        this.add(playerPanel);
+        
+        board.updateBoard();
+        update();
+        currentPanel.UpdateCurrentDetails();
+    }
+    
    
     public void update() {
         if(playerPanel != null) {
@@ -57,6 +79,8 @@ public class MainPanel extends JPanel {
         }
         
     }
-
-   
+    
+    public MonopolyBoardPanel getMonopolyBoardPanel() {
+        return board;
+    }
 }

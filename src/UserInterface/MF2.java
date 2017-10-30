@@ -15,9 +15,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -48,6 +52,7 @@ public class MF2 extends javax.swing.JFrame {
 
             private JButton start;
             private JButton exit;
+            private JButton loadBtn;
             Image background ;
 
             public startPanel() {
@@ -62,6 +67,10 @@ public class MF2 extends javax.swing.JFrame {
                 exit.setSize(300, 75);
                 exit.setLocation((this.getWidth()-exit.getWidth())/2, 550);
                 this.add(exit);
+                loadBtn = new JButton("Load");
+                loadBtn.setSize(300, 75);
+                loadBtn.setLocation((this.getWidth()-loadBtn.getWidth())/2, 350);
+                this.add(loadBtn);
                 this.setVisible(true);
                 try {
                     background = ImageIO.read(new File("Monopoly Board/Background.jpg")).getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
@@ -84,17 +93,64 @@ public class MF2 extends javax.swing.JFrame {
                 
                 start.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent ae) {
-                        sp.setVisible(false);
-                        System.out.println("Spinner "+pp.getSpinnerValue());
-                        MF2.mp = new MainPanel(mf.getContentPane().getWidth(),mf.getContentPane().getHeight(),pp.getSpinnerValue());
-                        mp.setVisible(true);
-                        //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
-                        mp.setLocation(0, 0);
-                        mf.add(mp);
+                        /*try {
+                            FileInputStream fis = new FileInputStream("game.data");
+                            ObjectInputStream ois = new ObjectInputStream(fis);
+                            System.out.println("hereeeeeeeeeeee");
+                            MonopolyBoardPanel board = loadGame(fis, ois);
+                            sp.setVisible(false);
+                            MF2.mp = new MainPanel(board, mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                            mp.setVisible(true);
+                            //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                            mp.setLocation(0, 0);
+                            mf.add(mp);
+                        } catch(IOException ex) {
+                            JOptionPane.showMessageDialog(MF2.this, "No saved game found", "", 2);
+                            sp.setVisible(false);
+                            System.out.println("Spinner "+pp.getSpinnerValue());
+                            MF2.mp = new MainPanel(mf.getContentPane().getWidth(),mf.getContentPane().getHeight(),pp.getSpinnerValue());
+                            mp.setVisible(true);
+                            //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                            mp.setLocation(0, 0);
+                            mf.add(mp);
+                        } catch(ClassNotFoundException ex) {
+                            JOptionPane.showMessageDialog(MF2.this, ex.getMessage(),
+                                    "", 2);
+                        }*/
 
-
+                        
+                            sp.setVisible(false);
+                            System.out.println("Spinner "+pp.getSpinnerValue());
+                            MF2.mp = new MainPanel(mf.getContentPane().getWidth(),mf.getContentPane().getHeight(),pp.getSpinnerValue());
+                            mp.setVisible(true);
+                            //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                            mp.setLocation(0, 0);
+                            mf.add(mp);
                     }
                 });
+                
+                loadBtn.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent ae) {
+                        try {
+                            FileInputStream fis = new FileInputStream("game.data");
+                            ObjectInputStream ois = new ObjectInputStream(fis);
+                            System.out.println("hereeeeeeeeeeee");
+                            MonopolyBoardPanel board = loadGame(fis, ois);
+                            sp.setVisible(false);
+                            MF2.mp = new MainPanel(board, mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                            mp.setVisible(true);
+                            //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                            mp.setLocation(0, 0);
+                            mf.add(mp);
+                        } catch(IOException ex) {
+                            JOptionPane.showMessageDialog(MF2.this, "No saved game found", "", 2);
+                        } catch(ClassNotFoundException ex) {
+                            JOptionPane.showMessageDialog(MF2.this, ex.getMessage(),
+                                    "", 2);
+                        }
+                    }
+                });
+                
                 exit.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent ae) {
                         System.exit(0);
@@ -126,6 +182,14 @@ public class MF2 extends javax.swing.JFrame {
         screenSize.width= screenSize.width-100*screenSize.width/screenSize.height;
         screenSize.height= screenSize.height-100*screenSize.height/screenSize.width;
         return screenSize;
+    }
+    
+    public MonopolyBoardPanel loadGame(FileInputStream fis, ObjectInputStream ois) 
+            throws IOException, ClassNotFoundException{
+        int playersNum = ois.readInt();
+        MonopolyBoardPanel board = new MonopolyBoardPanel(playersNum, MF2.this.getContentPane().getHeight());
+        board.loadGame(fis, ois);
+        return board;   
     }
 
     /**

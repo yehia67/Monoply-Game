@@ -12,11 +12,18 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 //import static monoply.game.GamePanel.MessageTextField;
@@ -28,7 +35,7 @@ import monoply.game.*;
  *
  * @author mahmoud
  */
-public class MonopolyBoardPanel extends JPanel{
+public class MonopolyBoardPanel extends JPanel implements Serializable {
     private int Playernumber;
     private static Tile centerTile;
     public static int turn=-1;
@@ -308,7 +315,7 @@ public class MonopolyBoardPanel extends JPanel{
             diceFlag = true;
         }
        currentPlayer = this.players.get(this.turn);
-       CurrentPlayerName = "Player : " + players.get(turn).name + " Turn" ;;
+       CurrentPlayerName = "Player : " + players.get(turn).name + " Turn" ;
 
        
         while(currentPlayer.getInJail()) {
@@ -353,6 +360,74 @@ public class MonopolyBoardPanel extends JPanel{
     {
         return MonopolyBoardPanel.allTiles;
     }
+     
+     public int getPlayersNumber() {
+         return Playernumber;
+     }
     
+    public void save() {
+        try {
+            FileOutputStream fos = new FileOutputStream("game.data", false);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeInt(Playernumber);
+            oos.writeInt(turn);
+            //oos.writeUTF(CurrentPlayerName);
+            oos.writeBoolean(diceFlag);
+            oos.writeInt(MonopolyBoardPanel.players.indexOf(currentPlayer));
+            //oos.writeObject(dice1);
+            //oos.writeObject(dice2);
+            
+            for(int i = 0; i < players.size(); i++) {
+                players.get(i).save(fos, oos);
+            }
+            
+            for(int i = 0; i < 40; i++) {
+                if(allTiles[i] instanceof PropertyTile) {
+                    PropertyTile tile = (PropertyTile)allTiles[i];
+                    tile.save(fos, oos);
+                }
+            }
+            
+            oos.close();
+            fos.close();
+            System.out.println("saved");
+        } catch(IOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "", 2);
+        }
+    }
     
+    public void loadGame(FileInputStream fis, ObjectInputStream ois) 
+            throws IOException, ClassNotFoundException {
+        
+        turn = ois.readInt();
+        diceFlag = ois.readBoolean();
+        currentPlayer = players.get(ois.readInt());
+        //dice1 = (Dice)ois.readObject();
+        //dice2 = (Dice)ois.readObject();
+        System.out.println("Players : " + players.size());
+        for(int i = 0; i < players.size(); i++) {
+            players.get(i).load(fis, ois);
+        }
+        
+        for(int i = 0; i < 40; i++) {
+            if(allTiles[i] instanceof PropertyTile) {
+                PropertyTile tile = (PropertyTile) allTiles[i];
+                tile.load(fis, ois);
+            }
+        }
+        
+        
+        CurrentPlayerName = "Player : " + players.get(turn).name + " Turn" ;
+        System.out.println("Loaded");
+    }
+    
+    public void updateBoard() {
+        for(int i = 0; i < players.size(); i++) {
+            allTiles[0].GetLabels()[i].setVisible(false);
+        }
+        
+        for(int i = 0; i < players.size(); i++) {
+            allTiles[players.get(i).place].GetLabels()[i].setVisible(true);
+        }
+    }
 }

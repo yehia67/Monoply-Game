@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -19,7 +20,7 @@ import javax.swing.Timer;
  *
  * @author yehia
  */
-public class Dice extends JLabel{
+public class Dice extends JLabel implements Serializable {
     private Random rand = new Random();
     
     private String []s={"Dice1.gif","Dice2.gif","Dice3.gif","Dice4.gif","Dice5.gif","Dice6.gif"};

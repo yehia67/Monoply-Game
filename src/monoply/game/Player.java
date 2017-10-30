@@ -11,6 +11,12 @@ import static UserInterface.MonopolyBoardPanel.allTiles;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.Timer;
 //import static monoply.game.GamePanel.MessageTextField;
@@ -20,7 +26,7 @@ import javax.swing.Timer;
  *
  * @author yehia
  */
-public class Player {
+public class Player implements Serializable {
 
     public int money = 1500, place = 0;
    
@@ -185,7 +191,59 @@ public class Player {
         this.panel = panel;
     }
   
-  
+    public void save(FileOutputStream fos, ObjectOutputStream oos) 
+            throws IOException{
+        oos.writeInt(place);
+        oos.writeInt(money);
+        oos.writeUTF(name);
+        oos.writeBoolean(HasJailCard);
+        oos.writeBoolean(inJail);
+        oos.writeBoolean(flag);
+        oos.writeInt(houses);
+        oos.writeInt(hotels);
+        oos.writeInt(railroads);
+        oos.writeInt(utility);
+        
+        oos.writeInt(intialPlace);
+        //Saving countries indices
+        for(int i = 0; i < groups.length; i++) {
+            groups[i].save(fos, oos);
+        }
+        
+        //Saving properties indices
+        oos.writeInt(properties.size());
+        for(int i = 0; i < properties.size(); i++) {
+            for(int j = 0; j < 40; j++) {
+                if(properties.get(i) == MonopolyBoardPanel.allTiles[j]) {
+                    oos.writeInt(j);
+                }
+            }
+        }
+    }
+    
+    public void load(FileInputStream fis, ObjectInputStream ois) throws IOException {
+        place = ois.readInt();
+        money = ois.readInt();
+        name = ois.readUTF();
+        HasJailCard = ois.readBoolean();
+        inJail = ois.readBoolean();
+        flag = ois.readBoolean();
+        houses = ois.readInt();
+        hotels = ois.readInt();
+        railroads = ois.readInt();
+        utility = ois.readInt();
+        intialPlace = ois.readInt();
+        
+        for(int i = 0; i < groups.length; i++) {
+            groups[i].load(this, fis, ois);
+        }
+        
+        int propSz = ois.readInt();
+        for(int i = 0; i < propSz; i++) {
+            int index = ois.readInt();
+            this.addProperty((PropertyTile)MonopolyBoardPanel.allTiles[index]);
+        }
+    }
 }
 /*=======
 /*

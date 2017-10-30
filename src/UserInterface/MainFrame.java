@@ -14,6 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -46,6 +49,7 @@ public class MainFrame extends JFrame {
 
             private JButton start;
             private JButton exit;
+            private JButton loadBtn = new JButton("Load");
             private playPanel pp;
 
             public startPanel() {
@@ -60,7 +64,32 @@ public class MainFrame extends JFrame {
                 exit.setSize(300, 75);
                 exit.setLocation((this.getWidth()-exit.getWidth())/2, 550);
                 this.add(exit);
+                loadBtn.setSize(200, 50);
+                loadBtn.setLocation((this.getWidth() - loadBtn.getWidth()) / 2, 0);
+                this.add(loadBtn);
                 this.setVisible(true);
+                startPanel sp = this;
+                
+                loadBtn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        try {
+                            FileInputStream fis = new FileInputStream("game.data");
+                            ObjectInputStream ois = new ObjectInputStream(fis);
+                            MonopolyBoardPanel board = loadGame(fis, ois);
+                            sp.setVisible(false);
+                            MainFrame.mp = new MainPanel(board, mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                            mp.setVisible(true);
+                            //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                            mp.setLocation(0, 0);
+                            mf.add(mp);
+                        } catch(IOException ex) {
+                            
+                        } catch(ClassNotFoundException ex) {
+                            System.out.println("Mafesh fayda");
+                        }
+                    }
+                });
                 
                 pp = new playPanel();
                 
@@ -72,16 +101,33 @@ public class MainFrame extends JFrame {
                // pp.setLocation(0, 0);
                // panel.add(pp);
                 this.add(panel);
-                startPanel sp = this;
                 
                 start.addActionListener(new ActionListener() {
+                    @Override
                     public void actionPerformed(ActionEvent ae) {
-                        sp.setVisible(false);
+                        System.out.println("hereeeeeeeeeeeeeeeee1");
+                        try {
+                            FileInputStream fis = new FileInputStream("game.data");
+                            ObjectInputStream ois = new ObjectInputStream(fis);
+                            System.out.println("hereeeeeeeeeeee");
+                            MonopolyBoardPanel board = loadGame(fis, ois);
+                            sp.setVisible(false);
+                            MainFrame.mp = new MainPanel(board, mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                            mp.setVisible(true);
+                            //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                            mp.setLocation(0, 0);
+                            mf.add(mp);
+                        } catch(IOException ex) {
+                            
+                        } catch(ClassNotFoundException ex) {
+                            System.out.println("Mafesh fayda");
+                        }
+                        /*sp.setVisible(false);
                         MainFrame.mp = new MainPanel(mf.getContentPane().getWidth(),mf.getContentPane().getHeight(),pp.getSpinnerValue());
                         mp.setVisible(true);
                         //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
                         mp.setLocation(0, 0);
-                        mf.add(mp);
+                        mf.add(mp);*/
 
 
                     }
@@ -104,6 +150,14 @@ public class MainFrame extends JFrame {
     // sp.add(pp);
     this.add(sp);
   }
+    
+    public MonopolyBoardPanel loadGame(FileInputStream fis, ObjectInputStream ois) 
+            throws IOException, ClassNotFoundException{
+        int playersNum = ois.readInt();
+        MonopolyBoardPanel board = new MonopolyBoardPanel(playersNum, this.getHeight());
+        board.loadGame(fis, ois);
+        return board;   
+    }
 
 }
 
