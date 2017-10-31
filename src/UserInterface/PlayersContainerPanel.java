@@ -153,5 +153,9 @@ public class PlayersContainerPanel extends JPanel {
                 }
             }
         }
-    }     
+    }
+    
+    public JButton getBuyBtn() {
+        return buyBtn;
+    }
 }

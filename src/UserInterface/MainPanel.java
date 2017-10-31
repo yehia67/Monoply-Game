@@ -83,4 +83,8 @@ public class MainPanel extends JPanel {
     public MonopolyBoardPanel getMonopolyBoardPanel() {
         return board;
     }
+    
+    public PlayersContainerPanel getPlayersContainer() {
+        return playerPanel;
+    }
 }

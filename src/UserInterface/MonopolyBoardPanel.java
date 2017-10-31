@@ -323,8 +323,10 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
             this.turn = (this.turn + 1) % this.players.size();
             currentPlayer = MonopolyBoardPanel.players.get(this.turn);
         }
-        currentPlayer.move(currentPlayer.place+diceNumber);
+        
         MainPanel main = (MainPanel) this.getParent();
+        main.getPlayersContainer().getBuyBtn().setEnabled(false);
+        currentPlayer.move(currentPlayer.place+diceNumber);
         main.update();
       /*  int firstPlace = currentPlayer.place;
     

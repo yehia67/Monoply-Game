@@ -5,8 +5,9 @@
         <group>
             <file>file:/home/mahmoud/Projects/Monoply-Game/src/UserInterface/MonopolyBoardPanel.java</file>
             <file>file:/home/mahmoud/Projects/Monoply-Game/src/monoply/game/MonoplyGame.java</file>
-            <file>file:/home/mahmoud/Projects/Monoply-Game/src/monoply/game/Country.java</file>
             <file>file:/home/mahmoud/Projects/Monoply-Game/src/UserInterface/MainPanel.java</file>
+            <file>file:/home/mahmoud/Projects/Monoply-Game/src/UserInterface/playerPanel.java</file>
+            <file>file:/home/mahmoud/Projects/Monoply-Game/src/UserInterface/CurrentPanel.java</file>
             <file>file:/home/mahmoud/Projects/Monoply-Game/src/monoply/game/Player.java</file>
             <file>file:/home/mahmoud/Projects/Monoply-Game/src/UserInterface/MF2.java</file>
         </group>

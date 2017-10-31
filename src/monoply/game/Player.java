@@ -97,6 +97,7 @@ public class Player implements Serializable {
                     MainPanel b = (MainPanel) panel.getParent();
                     b.currentPanel.UpdateCurrentDetails();
                     MonopolyBoardPanel.RollButton.setEnabled(true);
+                    b.getPlayersContainer().getBuyBtn().setEnabled(true);
                     
                     ((Timer) e.getSource()).stop();
 
