@@ -57,7 +57,7 @@ public class CurrentPanel extends JPanel{
         TileImageLabel = new JLabel();
             LabelName   =   new JLabel("Hello world!");
             savinglabel =  new JLabel("Saving...");
-            tosavelabel = new JLabel("<html>To save game press \"CTRL+S\" or press <br>  ALT to view and hide menu bar<html>");
+            tosavelabel = new JLabel("<html>To save game press \"CTRL+S\" or press <br>  \"ALT\" to view and hide menu bar<html>");
             savinglabel.setVisible(false);
          
         try

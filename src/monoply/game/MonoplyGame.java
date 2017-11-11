@@ -22,7 +22,7 @@ public class MonoplyGame {
      * @param args the command line arguments
      */
    ;
-    
+    public static MF2 frame2;
     
     public static void main(String args[]){
         ArrayList<Player> players= new ArrayList<Player>();
@@ -30,7 +30,7 @@ public class MonoplyGame {
         /*mainFrame mF = new mainFrame();
         mF.setVisible(true);*/
        // MainFrame frame = new MainFrame();
-                MF2 frame2 = new MF2();
+                 frame2 = new MF2();
 
       }
     

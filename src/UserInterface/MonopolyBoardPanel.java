@@ -149,7 +149,19 @@ component.getActionMap().put("actionMapKey", new AbstractAction() {
                p.save();
             }
         }
-                    
+          
+        );
+component.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ALT,
+                           0,true),
+                    "alt");
+component.getActionMap().put("alt", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+          
+            MonoplyGame.frame2.setBarVisibality(!MF2.bar.isVisible());
+            }
+        }
+          
         );
 Timer timer = new Timer(20000, new ActionListener() {
 

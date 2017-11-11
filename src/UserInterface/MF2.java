@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -40,22 +41,22 @@ import javax.swing.JPanel;
 public class MF2 extends javax.swing.JFrame  {
     public static MainPanel mp;
     public static playPanel pp;
-    private  JMenuBar bar;
+    public static  JMenuBar bar;
     private  JMenu  File;
     public static JMenuItem save;
     MF2 mf = this;
     startPanel sp ;
-    private class MyDispatcher implements KeyEventDispatcher {
+    /*private class MyDispatcher implements KeyEventDispatcher {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
             if (e.getID() == KeyEvent.KEY_PRESSED) {
-                if (e.getKeyCode()== KeyEvent.VK_ALT){
+                if (e.getKeyCode()== KeyEvent.VK_ALT ){
                 mf.setBarVisibality(!bar.isVisible());
                 }
             } 
-            return true;
+            return false;
         }
-    }
+    }*/
     public static JPanel currentpanel;
             class startPanel extends JPanel {
 
@@ -172,7 +173,7 @@ public class MF2 extends javax.swing.JFrame  {
         this.setLayout(null);
         bar = new JMenuBar();
         File = new JMenu("File");
-        save= new JMenuItem("Save");
+        save= new JMenuItem("Save game");
         bar.add(File);
         File.add(save);
         bar.setVisible(false);
@@ -181,11 +182,11 @@ public class MF2 extends javax.swing.JFrame  {
         bar.setFocusable(false);
         this.add(bar);
 
-  
+
         sp = new startPanel();
         sp.setLocation(0, 0);
-        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-        manager.addKeyEventDispatcher(new MyDispatcher());
+        //KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+       // manager.addKeyEventDispatcher(new MyDispatcher());
         //this.addKeyListener(this);
         currentpanel= sp;
         this.add(sp);
