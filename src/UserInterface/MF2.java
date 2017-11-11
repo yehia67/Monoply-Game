@@ -59,7 +59,7 @@ public class MF2 extends javax.swing.JFrame {
                 this.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
                 this.setLayout(null);
                 
-                start = new JButton("Start");
+                start = new JButton("New game");
                 start.setSize(300, 75);
                 start.setLocation((this.getWidth()-start.getWidth())/2, 250);
                 this.add(start);
@@ -69,7 +69,7 @@ public class MF2 extends javax.swing.JFrame {
                 this.add(exit);
                 loadBtn = new JButton("Load");
                 loadBtn.setSize(300, 75);
-                loadBtn.setLocation((this.getWidth()-loadBtn.getWidth())/2, 350);
+                loadBtn.setLocation((this.getWidth()-loadBtn.getWidth())/2, start.getY()+(exit.getY()-start.getY()+start.getHeight()-loadBtn.getHeight())/2);
                 this.add(loadBtn);
                 this.setVisible(true);
                 try {
