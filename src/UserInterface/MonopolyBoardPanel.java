@@ -22,6 +22,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -182,20 +184,19 @@ Timer timer = new Timer(20000, new ActionListener() {
        
         southPanel = new JPanel();   //0 - 10
         southPanel.setLayout(new GridLayout(1, 11));
-        initSouthPanel();
         
         westPanel = new JPanel();
         westPanel.setLayout(new GridLayout(9, 1));
-        initWestPanel();
+       
         
         
         northPanel = new JPanel();
         northPanel.setLayout(new GridLayout(1, 11));
-        initNorthPanel();
+       
      
         eastPanel = new JPanel();
         eastPanel.setLayout(new GridLayout(9, 1));
-        initEastPanel();
+       
         
         
         
@@ -204,8 +205,41 @@ Timer timer = new Timer(20000, new ActionListener() {
         this.add(westPanel, BorderLayout.WEST);
         this.add(northPanel, BorderLayout.NORTH);
         this.add(southPanel, BorderLayout.SOUTH);
+        Thread t1 = new Thread(new Runnable() {
+         public void run() {
+                     initSouthPanel();
+
+         }
+    });  
+    t1.start();
+    Thread t2 = new Thread(new Runnable() {
+         public void run() {
+             initWestPanel();
+         }
+    });  
+    t2.start();
+    Thread t3 = new Thread(new Runnable() {
+         public void run() {
+              initNorthPanel();
+         }
+    });  
+    t3.start();
+    Thread t4 = new Thread(new Runnable() {
+         public void run() {
+ initEastPanel();         }
+    });  
+    t4.start();
         
-        
+        try {
+            t1.join();
+            t2.join();
+            t3.join();
+            t4.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MonopolyBoardPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
+    
        RollButton = new JButton("Roll Dice");
           dice1 = new Dice();
          dice2 = new Dice();
