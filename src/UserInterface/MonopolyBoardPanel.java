@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,10 +22,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 //import static monoply.game.GamePanel.MessageTextField;
 
@@ -57,7 +62,7 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
     //public static GoToJail GoJail;
     public static SpecialCards cards;
     public static Tile[] allTiles = new Tile[40];
-    
+    private boolean saving = false;
     private String[] southTilesNames = {"Jail.png", "Connecticut Avenue.png",
         "Vermont Avenue.png", "Chance Down.png", "Oriental Avenue.png", 
         "Reading RailRoad.png", "Income Tax.png", "Baltic Avenue.png",
@@ -126,8 +131,36 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
             System.out.println("Height: "+  this.getHeight()+"\n Width:" +this.getWidth());
         CurrentPlayerName = "Player : " + players.get(0).name + " Turn" ;
         cards=new SpecialCards();
+        MonopolyBoardPanel p = this;
+         MF2.save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                p.save();
+            }
+        });
+         
+         JComponent component =  this;
+component.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+                            java.awt.event.InputEvent.CTRL_DOWN_MASK),
+                    "actionMapKey");
+component.getActionMap().put("actionMapKey", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               p.save();
+            }
+        }
+                    
+        );
+Timer timer = new Timer(20000, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+              CurrentPanel.tosavelabel.setVisible(false);
+            }
+        });
+ timer.start();
         
-      
     }
     
     private void init() {
@@ -368,6 +401,11 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
      }
     
     public void save() {
+        if (!saving){
+         System.out.println("entered saving");
+
+            saving = true;
+            CurrentPanel.savinglabel.setVisible(true);
         try {
             FileOutputStream fos = new FileOutputStream("game.data", false);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -392,9 +430,22 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
             
             oos.close();
             fos.close();
+            
+               Timer timer = new Timer(2000, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saving = false;
+              CurrentPanel.savinglabel.setVisible(false);
+            }
+        });
+ timer.start();
+           
+
             System.out.println("saved");
         } catch(IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "", 2);
+        }
         }
     }
     

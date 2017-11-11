@@ -43,6 +43,8 @@ public class CurrentPanel extends JPanel{
     public JLabel TileImageLabel; 
     public ImageIcon currImage;
     public JLabel LabelName;
+    public static JLabel savinglabel;
+    public static JLabel tosavelabel;
     public String test1;
     private JButton saveBtn = new JButton("Save");
      public CurrentPanel() {
@@ -54,6 +56,9 @@ public class CurrentPanel extends JPanel{
     {    
         TileImageLabel = new JLabel();
             LabelName   =   new JLabel("Hello world!");
+            savinglabel =  new JLabel("Saving...");
+            tosavelabel = new JLabel("<html>To save game press \"CTRL+S\" or press <br>  ALT to view and hide menu bar<html>");
+            savinglabel.setVisible(false);
          
         try
         {
@@ -96,20 +101,22 @@ public class CurrentPanel extends JPanel{
           this.add(LabelName);
          LabelName.setSize(50, 100);
          LabelName.setText(getCurrentPlayerName());
-         saveBtn.addActionListener(new ActionListener() {
+         this.add(tosavelabel);
+         this.add(savinglabel);
+      /*   saveBtn.addActionListener(new ActionListener() {
              @Override
              public void actionPerformed(ActionEvent ev) {
                 saveGame();
              }
          });
          
-         this.add(saveBtn);
+         this.add(saveBtn);*/
     }
     
-    public void saveGame() {
+   /* public void saveGame() {
         MainPanel p = (MainPanel) this.getParent();
         p.board.save();
-    }
+    }*/
    
     
     

@@ -6,6 +6,7 @@
 package UserInterface;
 
 import java.awt.Color;
+import javax.swing.JSpinner;
 
 /**
  *
@@ -22,8 +23,10 @@ public class playPanel extends javax.swing.JPanel {
         player4TextField.setVisible(false);
         label4.setVisible(false);
         label3.setVisible(false);*/
-      
-        System.out.println("Intialized");
+      JSpinner.DefaultEditor editor = ( JSpinner.DefaultEditor ) jSpinner1.getEditor();
+   editor.getTextField().setEnabled( true );
+   editor.getTextField().setEditable( false );
+       System.out.println("Intialized");
        
        
 

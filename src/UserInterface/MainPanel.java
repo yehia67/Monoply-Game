@@ -8,6 +8,8 @@ package UserInterface;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import monoply.game.*;
 
@@ -40,12 +42,14 @@ public class MainPanel extends JPanel {
          board.setLocation(currentPanel.getWidth(), 0);
        playerPanel.setLocation(currentPanel.getWidth()+board.getWidth(), 0);
        playerPanel.setSize(width-board.getWidth()-currentPanel.getWidth(), height);
+       MF2.currentpanel= this;
         this.add(currentPanel);
         
           this.add(board);
         
         this.add(playerPanel);
-       
+       //this.setFocusable(false);
+    
        
       
     }
