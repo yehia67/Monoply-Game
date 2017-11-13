@@ -161,6 +161,7 @@ public class CurrentPanel extends JPanel{
                     for(int j = 0; j < countries.size(); j++) {
                         if( x.equalsIgnoreCase(countries.get(j).getName())) {
                             MonopolyBoardPanel.currentPlayer.money += countries.get(j).getPrice();
+                            countries.get(j).setTax(countries.get(j).getTotalFees());
                             countries.get(j).setOwner(null);
                             countries.remove(countries.get(j));
                             mp.update();

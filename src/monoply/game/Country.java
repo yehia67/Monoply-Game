@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 public class Country extends PropertyTile {
 
     private int totalFees;
+    private int tax ;
     private Color countryColor;
     
     private int housesNumber = 0;
@@ -23,6 +24,7 @@ public class Country extends PropertyTile {
             String imgName) {
         super(imgName, mPrice, mName);
         totalFees = mFees;
+        tax = mFees/4;
         countryColor = mCountryColor;
     }
     
@@ -34,10 +36,12 @@ public class Country extends PropertyTile {
     public void buildHouse() {
         if(canBuildHousesFlag) {
             housesNumber++;
+            tax+=15;
             super.getOwner().houses++;
             if(housesNumber >= 2) {
                 canBuildHousesFlag = false;
                 canBuildHotelFlag = true;
+                tax+=30;
             }
         }
     }
@@ -48,6 +52,14 @@ public class Country extends PropertyTile {
             super.getOwner().hotels++;
             canBuildHotelFlag = false;
         }
+    }
+
+    public int getTax() {
+        return tax;
+    }
+
+    public void setTax(int tax) {
+        this.tax = tax;
     }
     
     public int getHotelsNumber() {
@@ -103,7 +115,7 @@ public class Country extends PropertyTile {
         if (!(player==this.getOwner()) && this.getOwner() != null)
         {
             System.out.println("here");
-            player.payRent(this.getOwner(), this.getTotalFees());
+            player.payRent(this.getOwner(), this.getTax());
         }
         }
     
