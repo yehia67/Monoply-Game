@@ -52,6 +52,7 @@ public class Player implements Serializable {
         groups[6] = new CountriesGroup(3); //blue
         groups[7] = new CountriesGroup(2); //brown
         
+    
     }
     
     public ArrayList<PropertyTile> getProperties() {
@@ -97,7 +98,7 @@ public class Player implements Serializable {
                     MainPanel b = (MainPanel) panel.getParent();
                     b.currentPanel.UpdateCurrentDetails();
                     MonopolyBoardPanel.RollButton.setEnabled(true);
-                    b.getPlayersContainer().getBuyBtn().setEnabled(true);
+                    b.currentPanel.getBuyBtn().setEnabled(true);
                     
                     ((Timer) e.getSource()).stop();
 

@@ -125,6 +125,12 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
             }
         
         }
+        
+            players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[6]);
+            Country count = (Country) MonopolyBoardPanel.allTiles[6];
+            players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[8]);
+            players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[9]);
+
         this.setSize(height , height);
         //this.setMaximumSize(new Dimension(200, 200));
                // this.setPreferredSize(new Dimension(200, 200));
@@ -404,7 +410,7 @@ Timer timer = new Timer(20000, new ActionListener() {
         }
         
         MainPanel main = (MainPanel) this.getParent();
-        main.getPlayersContainer().getBuyBtn().setEnabled(false);
+        main.currentPanel.buyBtn.setEnabled(false);
         currentPlayer.move(currentPlayer.place+diceNumber);
         main.update();
       /*  int firstPlace = currentPlayer.place;

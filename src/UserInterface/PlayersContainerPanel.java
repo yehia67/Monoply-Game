@@ -20,11 +20,10 @@ import monoply.game.*;
  * @author mahmoud
  */
 public class PlayersContainerPanel extends JPanel {
-    private ArrayList<playerPanel> playerPanel = new ArrayList<playerPanel>();
+    public ArrayList<playerPanel> playerPanel = new ArrayList<playerPanel>();
     private JPanel btnsPanel = new JPanel();
     private JPanel playersPanel = new JPanel();
-    private JButton buyBtn = new JButton("Buy");
-    private JButton sellBtn = new JButton("Sell");
+  
     private JButton buildBtn = new JButton("Build");
     
     public PlayersContainerPanel(int numOfPlayers) {
@@ -37,68 +36,14 @@ public class PlayersContainerPanel extends JPanel {
         
         this.add(playersPanel);
         
-        btnsPanel.setLayout(new GridLayout(2, 1));
-        JPanel buySellPnl = new JPanel(new GridLayout(1, 2));
-        buySellPnl.add(buyBtn);
-        buySellPnl.add(sellBtn);
-        
+        btnsPanel.setLayout(new GridLayout(1, 1));
+       
         JPanel buildBtnPnl = new JPanel();
         buildBtnPnl.add(buildBtn);
-        btnsPanel.add(buySellPnl);
+        //btnsPanel.add(buySellPnl);
         btnsPanel.add(buildBtnPnl);
         
-        buyBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int playerPlace = MonopolyBoardPanel.currentPlayer.place;
-                if(MonopolyBoardPanel.allTiles[playerPlace] instanceof PropertyTile) {
-                    PropertyTile property = (PropertyTile)MonopolyBoardPanel.allTiles[playerPlace];
-                    if(property.getOwner() == null) {
-                        property.setOwner(MonopolyBoardPanel.currentPlayer);
-                        System.out.println(MonopolyBoardPanel.currentPlayer.money);
-                        MonopolyBoardPanel.currentPlayer.addProperty((PropertyTile)MonopolyBoardPanel.allTiles[playerPlace]);
-                        updatePanels();
-                    } else {
-                        showWarning("Sorry you can't buy this place");
-                    }
-                } else {
-                    showWarning("Sorry you can't buy this place");
-                }
-            }
-        });
         
-        sellBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int currentPlayerIndex = MonopolyBoardPanel.players.indexOf(MonopolyBoardPanel.currentPlayer);
-                playerPanel p = playerPanel.get(currentPlayerIndex);
-                String x = p.getSelectedItem();
-                
-                CountriesGroup[] groups = MonopolyBoardPanel.currentPlayer.getGroupsArray();
-                for(int i = 0; i < groups.length; i++) {
-                    ArrayList<Country> countries = groups[i].getCountries();
-                    for(int j = 0; j < countries.size(); j++) {
-                        if( x.equalsIgnoreCase(countries.get(j).getName())) {
-                            MonopolyBoardPanel.currentPlayer.money += countries.get(j).getPrice();
-                            countries.get(j).setOwner(null);
-                            countries.remove(countries.get(j));
-                            p.updatePanel();
-                            return;
-                        }
-                    }
-                }
-                
-                for(int i = 0; i < MonopolyBoardPanel.currentPlayer.getProperties().size(); i++) {
-                    if( x.equalsIgnoreCase(MonopolyBoardPanel.currentPlayer.getProperties().get(i).getName())) {
-                        MonopolyBoardPanel.currentPlayer.money += MonopolyBoardPanel.currentPlayer.getProperties().get(i).getPrice();
-                        MonopolyBoardPanel.currentPlayer.getProperties().get(i).setOwner(null);
-                        MonopolyBoardPanel.currentPlayer.getProperties().remove(MonopolyBoardPanel.currentPlayer.getProperties().get(i));
-                        p.updatePanel();
-                        return;
-                    }
-                }
-            }
-        });
         
         buildBtn.addActionListener(new ActionListener() {
             @Override
@@ -155,7 +100,5 @@ public class PlayersContainerPanel extends JPanel {
         }
     }
     
-    public JButton getBuyBtn() {
-        return buyBtn;
-    }
+    
 }
