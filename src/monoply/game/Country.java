@@ -13,6 +13,7 @@ public class Country extends PropertyTile {
     private Color countryColor;
     
     private int housesNumber = 0;
+    private int hotelsNumber = 0;
     
     private boolean available = true;
     private boolean canBuildHousesFlag = false;
@@ -43,9 +44,14 @@ public class Country extends PropertyTile {
     
     public void buildHotel() {
         if(canBuildHotelFlag) {
+            hotelsNumber++;
             super.getOwner().hotels++;
             canBuildHotelFlag = false;
         }
+    }
+    
+    public int getHotelsNumber() {
+        return hotelsNumber;
     }
 
     boolean isOwner(Player o) {

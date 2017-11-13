@@ -128,8 +128,13 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
         
             players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[6]);
             Country count = (Country) MonopolyBoardPanel.allTiles[6];
+            count.setOwner(players.get(0));
             players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[8]);
+            count = (Country) MonopolyBoardPanel.allTiles[8];
+            count.setOwner(players.get(0));
             players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[9]);
+            count = (Country) MonopolyBoardPanel.allTiles[9];
+           count.setOwner(players.get(0));
 
         this.setSize(height , height);
         //this.setMaximumSize(new Dimension(200, 200));

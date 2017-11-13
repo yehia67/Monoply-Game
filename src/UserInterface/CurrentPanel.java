@@ -150,7 +150,9 @@ public class CurrentPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 int currentPlayerIndex = MonopolyBoardPanel.players.indexOf(MonopolyBoardPanel.currentPlayer);
-                playerPanel p = playerContainerRef.playerPanel.get(currentPlayerIndex);
+                //playerPanel p = playerContainerRef.playerPanel.get(currentPlayerIndex);
+                MainPanel mp = (MainPanel) CurrentPanel.this.getParent();
+                playerPanel p = mp.getPlayersContainer().playerPanel.get(currentPlayerIndex);
                 String x = p.getSelectedItem();
                 
                 CountriesGroup[] groups = MonopolyBoardPanel.currentPlayer.getGroupsArray();
@@ -161,7 +163,7 @@ public class CurrentPanel extends JPanel{
                             MonopolyBoardPanel.currentPlayer.money += countries.get(j).getPrice();
                             countries.get(j).setOwner(null);
                             countries.remove(countries.get(j));
-                            p.updatePanel();
+                            mp.update();
                             return;
                         }
                     }

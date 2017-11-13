@@ -93,7 +93,11 @@ public class PlayersContainerPanel extends JPanel {
                             showWarning("You don't have enough money");
                         }
                     } else {
-                        showWarning("You have to get all the countries of the same color");
+                        if(country.getHotelsNumber() > 0) {
+                            showWarning("You can't build on the same country anymore!");
+                        } else {
+                            showWarning("You have to get all the countries of the same color");
+                        }
                     }
                 }
             }
