@@ -6,10 +6,15 @@
 package UserInterface;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,13 +30,16 @@ public class PlayersContainerPanel extends JPanel {
     private JPanel playersPanel = new JPanel();
   
     private JButton buildBtn = new JButton("Build");
-    
+    private Image backgroundImage;
+
     public PlayersContainerPanel(int numOfPlayers) {
         this.setLayout(new BorderLayout());
-        playersPanel.setLayout(new GridLayout(2,2));
+        playersPanel.setLayout(new GridLayout(4,2));
+        playersPanel.setOpaque(false);
         for(int i = 0; i < numOfPlayers; i++) {
             playerPanel.add(new playerPanel(MonopolyBoardPanel.players.get(i)));
             playersPanel.add(playerPanel.get(i));
+            playerPanel.get(i).setOpaque(false);
         }
         
         this.add(playersPanel);
@@ -53,6 +61,17 @@ public class PlayersContainerPanel extends JPanel {
                 
             }
         });
+          try
+        {
+    backgroundImage = ImageIO.read(new File("Monopoly Board/monopolybg2.jpg" ) )/*.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);*/;
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex);
+            System.out.println("FAIL");
+        }
+          buildBtnPnl.setOpaque(false);
+          btnsPanel.setOpaque(false);
         
         this.add(btnsPanel, BorderLayout.SOUTH);
     }
@@ -103,6 +122,11 @@ public class PlayersContainerPanel extends JPanel {
             }
         }
     }
-    
+     @Override
+  protected void paintComponent(Graphics g) {
+
+    super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, null);
+}
     
 }

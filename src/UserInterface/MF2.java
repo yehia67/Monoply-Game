@@ -44,6 +44,7 @@ public class MF2 extends javax.swing.JFrame  {
     public static  JMenuBar bar;
     private  JMenu  File;
     public static JMenuItem save;
+    public  JMenuItem exit;
     MF2 mf = this;
     startPanel sp ;
     /*private class MyDispatcher implements KeyEventDispatcher {
@@ -174,14 +175,26 @@ public class MF2 extends javax.swing.JFrame  {
         bar = new JMenuBar();
         File = new JMenu("File");
         save= new JMenuItem("Save game");
+        exit= new JMenuItem("Exit game");
         bar.add(File);
         File.add(save);
+        File.add(exit);
         bar.setVisible(false);
         bar.setLocation(0, 0);
         bar.setSize(this.getWidth(),20);
         bar.setFocusable(false);
         this.add(bar);
-
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(mf, "Are you Sure want to exit", "Exit game!",JOptionPane.YES_NO_OPTION );
+                if (option==JOptionPane.YES_OPTION ){
+                mp.setVisible(false);
+                setBarVisibality(false);
+                sp.setVisible(true);
+                }
+            }
+        });
 
         sp = new startPanel();
         sp.setLocation(0, 0);

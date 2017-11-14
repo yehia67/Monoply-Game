@@ -40,14 +40,14 @@ public class playerPanel extends JPanel{
      
     private void init()
     {
-          try
+     /*     try
         {
     backgroundImage = ImageIO.read(new File("Monopoly Board/monopolybg2.jpg" ) );
         }
         catch(Exception ex)
         {
             System.out.println("FAIL");
-        }
+        }*/
         
         playerNameLbl.setText(playerNameLbl.getText() + player.name);
         playerMoneyLbl.setText(playerMoneyLbl.getText() + player.money);
@@ -92,11 +92,11 @@ public class playerPanel extends JPanel{
         return (String)playerCountriesComboBox.getSelectedItem();
     }
     
-      @Override
+     /* @Override
   protected void paintComponent(Graphics g) {
 
     super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, null);
-}
+}*/
  
 }
