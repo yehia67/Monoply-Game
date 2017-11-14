@@ -243,7 +243,7 @@ switch (value) {
         }
       
     }//GEN-LAST:event_jSpinner1StateChanged
-    public static int GetNoOfPlayers(){
+    public static int GetNofPlayers(){
     return  NoOfPlayers;
 }
     public int getSpinnerValue()

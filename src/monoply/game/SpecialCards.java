@@ -31,29 +31,28 @@ public class SpecialCards {
         chance.add(new Card ("Broadwalk","Take a walk to the Broadwalk",1));//finished
         chance.add(new Card ("Utility","Advance token to nearst utility",1));//finished
         chance.add(new Card ("Go","Advance to \"GO\" \n Reminder: If you pass go collect $200",1));//finished
-        chance.add(new Card ("Bank pays you dividend of $50"," collect $50",1));//finished
-        chance.add(new Card ("Pay poor tax of $15"," pay $15",1));//finished
-        chance.add(new Card ("Take a trip to Reading Railroad","If you pass Go, collect $200",1));//finished
-        chance.add(new Card ("You have been elected Chairman of the Board","Pay each player $50",1));//finished
-        chance.add(new Card ("You have won a crossword competition","Collect $100",1));//finished
+        chance.add(new Card ("Bank pays you dividend of $50"," Bank pays you dividend of $50",1));//finished
+        chance.add(new Card ("Pay poor tax of $15","Pay poor tax of $15",1));//finished
+        chance.add(new Card ("Take a trip to Reading Railroad","Take a trip to Reading Railroad If you pass Go, collect $200",1));//finished
+        chance.add(new Card ("You have been elected Chairman of the Board","You have been elected Chairman of the Board Pay each player $50",1));//finished
+        chance.add(new Card ("You have won a crossword competition","You have won a crossword competition Collect $100",1));//finished
         
         //chest
         chest.add(new Card ("Go to Jail","Go directly to jail",2));// finished
         chest.add(new Card ("Increase Money","From Sale of stock you get $45",2));//finished
         chest.add(new Card ("Grand Opera Openning","collect $50 from every player",2));// finished
         chest.add(new Card ("GO","Advance to \"GO\"",2));//finished
-        chest.add(new Card ("Bank error in your favor","Collect $200 ",2));//finished
-        chest.add(new Card ("Doctor's fees ","Pay $50",2));//finished
+        chest.add(new Card ("Bank error in your favor","Bank error in your favor Collect $200 ",2));//finished
+        chest.add(new Card ("Doctor's fees ","Doctor's fees Pay $50",2));//finished
         chest.add(new Card ("Sales","From sale of stock you get $50",2));//finished
-        chest.add(new Card ("Holiday  Fund matures","Receive  $100",2));//finished
-        chest.add(new Card ("Income tax refund","Collect $20",2));//finished
-        chest.add(new Card ("It is your birthday","Collect $10 from each player",2));//finished
-        chest.add(new Card ("Life insurance matures","Collect $100",2));//finished
+        chest.add(new Card ("Holiday  Fund matures","Holiday  Fund matures Receive  $100",2));//finished
+        chest.add(new Card ("Income tax refund","Income tax refund Collect $20",2));//finished
+        chest.add(new Card ("It is your birthday","It is your birthday Collect $10 from each player",2));//finished
+        chest.add(new Card ("Life insurance matures","Life insurance matures Collect $100",2));//finished
         chest.add(new Card ("Pay hospital fees of $100","Pay $100",2));//finished
-        chest.add(new Card ("Pay hospital fees of $100","Pay $100",2));//finished
-        chest.add(new Card ("Receive $25 consultancy fee","Receive for services $25",2));//finished
-        chest.add(new Card ("You have won second prize in a beauty contest","Collect $10",2));//finished
-        chest.add(new Card ("You inherit $100","Collect $100",2));//finished
+        chest.add(new Card ("Receive $25 consultancy fee","Receive $25 consultancy fees for services $25",2));//finished
+        chest.add(new Card ("You have won second prize in a beauty contest","You have won second prize in a beauty contest Collect $10",2));//finished
+        chest.add(new Card ("You inherit $100","You inherit $100",2));//finished
         FreeCard=new Card ("Freed","Get out of jail free",2);//finished
         chest.add(FreeCard);
     
