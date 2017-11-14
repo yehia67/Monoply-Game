@@ -131,6 +131,7 @@ public class CurrentPanel extends JPanel{
         buyBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try{
                 int playerPlace = MonopolyBoardPanel.currentPlayer.place;
                 if(MonopolyBoardPanel.allTiles[playerPlace] instanceof PropertyTile) {
                     PropertyTile property = (PropertyTile)MonopolyBoardPanel.allTiles[playerPlace];
@@ -149,6 +150,11 @@ public class CurrentPanel extends JPanel{
                 } else {
                     showWarning("Sorry you can't buy this place");
                 }
+               
+            }
+                 catch (NullPointerException ex){
+                        
+                        }
             }
         });
         
