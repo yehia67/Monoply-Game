@@ -55,6 +55,10 @@ public class CurrentPanel extends JPanel{
     JPanel buySellPnl = new JPanel(new GridLayout(1, 2));
     public JButton buyBtn = new JButton("Buy");
     private JButton sellBtn = new JButton("Sell");
+    private JButton mortgageBtn = new JButton("Mortgage");
+    private JButton unmortgageBtn = new JButton("Unmortgage");
+    private JPanel mortgageImgPanel;
+    private JLabel mortgageImgJLabel;
      public CurrentPanel() {
         
             
@@ -103,9 +107,11 @@ public class CurrentPanel extends JPanel{
                }
 
            this.TileImageLabel.setIcon(currImage);
-             buySellPnl.setLayout(new GridLayout(1, 2));
+             buySellPnl.setLayout(new GridLayout(2, 2));
               buySellPnl.add(buyBtn);
           buySellPnl.add(sellBtn);
+          buySellPnl.add(mortgageBtn);
+          buySellPnl.add(unmortgageBtn);
         
           this.TileImageLabel.setHorizontalAlignment(JLabel.CENTER);
          //  this.TileImageLabel.setVerticalAlignment(JLabel.CENTER);
@@ -145,6 +151,113 @@ public class CurrentPanel extends JPanel{
                 }
             }
         });
+        
+        mortgageBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                    int currentPlayerIndex = MonopolyBoardPanel.players.indexOf(MonopolyBoardPanel.currentPlayer);
+                    MainPanel mp = (MainPanel) CurrentPanel.this.getParent();
+                    playerPanel p = mp.getPlayersContainer().playerPanel.get(currentPlayerIndex);
+                    String x = p.getSelectedItem();
+
+                    CountriesGroup[] groups = MonopolyBoardPanel.currentPlayer.getGroupsArray();
+                    ArrayList<PropertyTile> props = MonopolyBoardPanel.currentPlayer.getProperties();
+                    for(int i = 0; i < groups.length; i++) {
+                        ArrayList<Country> countries = groups[i].getCountries();
+                        for(int j = 0; j < countries.size(); j++) {
+                            if( x.equalsIgnoreCase(countries.get(j).getName())){
+                                if (countries.get(j).getCountry().mortgaged /*|| countries.get(j).getCountry().available*/){
+                                    showWarning("This Place is already Mortgaged");
+                                }
+                                
+                                else{
+                                    MonopolyBoardPanel.currentPlayer.money += countries.get(j).getPrice()/2;
+                                    countries.get(j).getCountry().mortgaged= true;
+                                    //p.updatePanel();
+
+                                    /*mortgageImgPanel = new JPanel();
+                                    mortgageImgPanel.setOpaque(false);
+                                    MonopolyBoardPanel.allTiles[MonopolyBoardPanel.currentPlayer.place].add(mortgageImgPanel);
+
+                                    mortgageImgJLabel = new JLabel();
+                                    mortgageImgJLabel.setHorizontalAlignment(JLabel.CENTER);
+                                    mortgageImgPanel.add(mortgageImgJLabel);
+
+                                    ImageIcon mortgageicon = new ImageIcon(new ImageIcon(getClass().getResource("/mortgage.jpg")).
+                                    getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT));
+
+                                    mortgageImgJLabel.setIcon(mortgageicon);
+                                    mortgageImgJLabel.setVisible(false);*/
+                                }
+                                mp.update();
+                                return;
+                            }    
+                        }
+                    }
+                    for(int i = 0; i < props.size(); i++){
+                        if( x.equalsIgnoreCase(props.get(i).getName())){
+                            if (props.get(i).mortgaged /*|| countries.get(j).getCountry().available*/){
+                                    showWarning("This Place is already Mortgaged");
+                                }
+                                
+                                else{
+                                    MonopolyBoardPanel.currentPlayer.money += props.get(i).getPrice()/2;
+                                    props.get(i).mortgaged= true;
+                                }
+                        }
+                    }
+            
+                    mp.update();
+                System.out.println(MonopolyBoardPanel.currentPlayer.money);
+                        
+            }
+        });
+        
+        
+        unmortgageBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                int currentPlayerIndex = MonopolyBoardPanel.players.indexOf(MonopolyBoardPanel.currentPlayer);
+                    MainPanel mp = (MainPanel) CurrentPanel.this.getParent();
+                    playerPanel p = mp.getPlayersContainer().playerPanel.get(currentPlayerIndex);
+                    String x = p.getSelectedItem();
+
+                    CountriesGroup[] groups = MonopolyBoardPanel.currentPlayer.getGroupsArray();
+                    ArrayList<PropertyTile> props = MonopolyBoardPanel.currentPlayer.getProperties();
+                    for(int i = 0; i < groups.length; i++) {
+                        ArrayList<Country> countries = groups[i].getCountries();
+                        for(int j = 0; j < countries.size(); j++) {
+                            if( x.equalsIgnoreCase(countries.get(j).getName())){
+                                if (!countries.get(j).getCountry().mortgaged){
+                                   showWarning("This Place is already Yours");
+                                }
+                                
+                                else{
+                                    MonopolyBoardPanel.currentPlayer.money -= countries.get(j).getPrice()/2;
+                                    countries.get(j).getCountry().mortgaged= false;
+                                    //updatePanels();
+
+                                    //MonopolyBoardPanel.allTiles[MonopolyBoardPanel.currentPlayer.place].remove(mortgageImgPanel);
+                                }
+                                mp.update();
+                                return;
+                            }
+                        }
+                    }
+                    for(int i = 0; i < props.size(); i++){
+                        if( x.equalsIgnoreCase(props.get(i).getName())){
+                            if (!props.get(i).mortgaged /*|| countries.get(j).getCountry().available*/){
+                                    showWarning("This Place is already Yours");
+                                }
+                                
+                                else{
+                                    MonopolyBoardPanel.currentPlayer.money -= props.get(i).getPrice()/2;
+                                    props.get(i).mortgaged= false;
+                                }
+                        }
+                    }
+                    
+                    mp.update();
+                    System.out.println(MonopolyBoardPanel.currentPlayer.money);
+            }});
         
         sellBtn.addActionListener(new ActionListener() {
             @Override
