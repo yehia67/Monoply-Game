@@ -31,12 +31,29 @@ public class SpecialCards {
         chance.add(new Card ("Broadwalk","Take a walk to the Broadwalk",1));//finished
         chance.add(new Card ("Utility","Advance token to nearst utility",1));//finished
         chance.add(new Card ("Go","Advance to \"GO\" \n Reminder: If you pass go collect $200",1));//finished
+        chance.add(new Card ("Bank pays you dividend of $50"," collect $50",1));//finished
+        chance.add(new Card ("Pay poor tax of $15"," pay $15",1));//finished
+        chance.add(new Card ("Take a trip to Reading Railroad","If you pass Go, collect $200",1));//finished
+        chance.add(new Card ("You have been elected Chairman of the Board","Pay each player $50",1));//finished
+        chance.add(new Card ("You have won a crossword competition","Collect $100",1));//finished
+        
         //chest
         chest.add(new Card ("Go to Jail","Go directly to jail",2));// finished
         chest.add(new Card ("Increase Money","From Sale of stock you get $45",2));//finished
         chest.add(new Card ("Grand Opera Openning","collect $50 from every player",2));// finished
         chest.add(new Card ("GO","Advance to \"GO\"",2));//finished
         chest.add(new Card ("Bank error in your favor","Collect $200 ",2));//finished
+        chest.add(new Card ("Doctor's fees ","Pay $50",2));//finished
+        chest.add(new Card ("Sales","From sale of stock you get $50",2));//finished
+        chest.add(new Card ("Holiday  Fund matures","Receive  $100",2));//finished
+        chest.add(new Card ("Income tax refund","Collect $20",2));//finished
+        chest.add(new Card ("It is your birthday","Collect $10 from each player",2));//finished
+        chest.add(new Card ("Life insurance matures","Collect $100",2));//finished
+        chest.add(new Card ("Pay hospital fees of $100","Pay $100",2));//finished
+        chest.add(new Card ("Pay hospital fees of $100","Pay $100",2));//finished
+        chest.add(new Card ("Receive $25 consultancy fee","Receive for services $25",2));//finished
+        chest.add(new Card ("You have won second prize in a beauty contest","Collect $10",2));//finished
+        chest.add(new Card ("You inherit $100","Collect $100",2));//finished
         FreeCard=new Card ("Freed","Get out of jail free",2);//finished
         chest.add(FreeCard);
     
@@ -65,6 +82,24 @@ public class SpecialCards {
                 case "Go":
                     this.move(player,0);
                     break;
+                case "Bank pays you dividend of $50":
+                    player.money += 50;
+                    break; 
+                
+                case "Pay poor tax of $15":
+                    player.money -= 15;
+                    break;
+                case "Take a trip to Reading Railroad":
+                     this.move2(player,2);
+                    break; 
+                
+                case "You have been elected Chairman of the Board":
+                     this.reduceMoney(player,players,50);
+                    break;
+                
+                case "You have won a crossword competition ":
+                    player.money += 100;
+                    break;    
                
             }
         }
@@ -83,8 +118,8 @@ public class SpecialCards {
                     
                 //loops over arraylist and reduce money of each player  
                 case "Grand Opera Openning":
-                   this.reduceMoney(player, players);
-                   player.money += GetNofPlayers()*50;
+                   this.reduceMoney(player,players,50);
+                   
                     break;
                     
                     
@@ -95,8 +130,51 @@ public class SpecialCards {
                 case "Bank error in your favor" :
                     player.money+=200;
                     break; 
-
-            }
+                
+                case "Doctor's fees" :
+                    player.money -=50;
+                    break;  
+                
+                case "Sales" :
+                    player.money +=50;
+                    break;
+                
+                case "Holiday  Fund matures" :
+                    player.money +=100;
+                    break;  
+                case "Income tax refund" :
+                    player.money +=20;
+                    break;     
+                
+                case "It is your birthday":
+                   this.reduceMoney(player, players,10);
+                   
+                    break;    
+                
+                case "Life insurance matures" :
+                    player.money +=100;
+                    break;    
+                
+                case "Pay hospital fees of $100" :
+                    player.money -=100;
+                    break; 
+                
+                case "Pay school fees  of $150" :
+                    player.money -=150;
+                    break;
+                
+                case "Receive $25 consultancy fee" :
+                    player.money +=25;
+                    break; 
+                
+                case "You have won second prize in a beauty contest" :
+                    player.money +=10;
+                    break;
+                
+                case "You inherit $100" :
+                    player.money +=100;
+                    break;    
+          }
         }
     }
     public void DrawCard (int type, Player Player,ArrayList<Player> players)
@@ -126,13 +204,27 @@ public class SpecialCards {
         this.performAction(Player,players);
     }
    
-    private void reduceMoney(Player player,ArrayList<Player> players){
+    private void reduceMoney(Player player,ArrayList<Player> players,int money){
          for(int i=0;i<players.size();i++){
                         if(players.get(i)==player){}
                         else{
-                            if (players.get(i).money-50>=0){
-                            players.get(i).money-=50;
-                            player.money+=50;
+                            if (players.get(i).money-money>=0){
+                            players.get(i).money-=money;
+                            player.money+=money;
+                            }
+                            else {
+                                //lost ////////////////////////////////////////////    
+                                    }
+                                    }
+                    }
+    }
+    private void increaseMoney(Player player,ArrayList<Player> players,int money){
+         for(int i=0;i<players.size();i++){
+                        if(players.get(i)==player){}
+                        else{
+                            if (players.get(i).money-money>=0){
+                            players.get(i).money +=money;
+                            player.money-=money;
                             }
                             else {
                                 //lost ////////////////////////////////////////////    
