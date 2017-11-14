@@ -214,9 +214,10 @@ public String getP4Name()
     private void player4TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player4TextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_player4TextFieldActionPerformed
-
+public static int NoOfPlayers;
     private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
 int value = (Integer) jSpinner1.getValue(); 
+ NoOfPlayers = value;
 switch (value) {
             case 2:
                 player3TextField.setVisible(false);
@@ -240,9 +241,11 @@ switch (value) {
  
                 break;
         }
-       
+      
     }//GEN-LAST:event_jSpinner1StateChanged
-    
+    public static int GetNoOfPlayers(){
+    return  NoOfPlayers;
+}
     public int getSpinnerValue()
     {
         return (Integer) jSpinner1.getValue();

@@ -4,6 +4,7 @@ package monoply.game;
 import UserInterface.MainPanel;
 import UserInterface.MonopolyBoardPanel;
 import static UserInterface.MonopolyBoardPanel.allTiles;
+import static UserInterface.playPanel.GetNofPlayers;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -33,8 +34,9 @@ public class SpecialCards {
         //chest
         chest.add(new Card ("Go to Jail","Go directly to jail",2));// finished
         chest.add(new Card ("Increase Money","From Sale of stock you get $45",2));//finished
-        chest.add(new Card ("Grand Opera Openning","collect $50 from every player",2));//half finished
+        chest.add(new Card ("Grand Opera Openning","collect $50 from every player",2));// finished
         chest.add(new Card ("GO","Advance to \"GO\"",2));//finished
+        chest.add(new Card ("Bank error in your favor","Collect $200 ",2));//finished
         FreeCard=new Card ("Freed","Get out of jail free",2);//finished
         chest.add(FreeCard);
     
@@ -82,12 +84,17 @@ public class SpecialCards {
                 //loops over arraylist and reduce money of each player  
                 case "Grand Opera Openning":
                    this.reduceMoney(player, players);
+                   player.money += GetNofPlayers()*50;
                     break;
                     
                     
                 case "GO":
                     this.move(player,0);
                     break;
+                    
+                case "Bank error in your favor" :
+                    player.money+=200;
+                    break; 
 
             }
         }
