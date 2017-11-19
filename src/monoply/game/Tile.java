@@ -13,6 +13,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -27,7 +28,8 @@ import javax.swing.JPanel;
  public abstract class  Tile extends JPanel implements Serializable {
     private BufferedImage backgroundImage;
     public String imgName;
-    private JLabel[] playerImgs = new JLabel[4];
+     private ArrayList<JLabel> playerImgs = new ArrayList<JLabel>();
+  
     private JLabel[] housesImgs = new JLabel[2];
     private JPanel playerImgsPanel;
     private JPanel houseImgsPanel; 
@@ -60,9 +62,9 @@ import javax.swing.JPanel;
             
              for(int i =0; i<4; i++)
              {
-                 playerImgs[i] = new JLabel();
-                 playerImgsPanel.add(playerImgs[i]);
-                 playerImgs[i].setHorizontalAlignment(JLabel.CENTER);
+                 playerImgs.add(i, new JLabel());
+                 playerImgsPanel.add(playerImgs.get(i));
+                 playerImgs.get(i).setHorizontalAlignment(JLabel.CENTER);
                 // playerImgs[i].setSize(playerImgsPanel.getWidth(), playerImgsPanel.getHeight()/4);
              }
              
@@ -84,14 +86,14 @@ import javax.swing.JPanel;
        
            
      
-            playerImgs[0].setIcon(monopolydog);
-            playerImgs[0].setVisible(false);
-            playerImgs[1].setIcon(monopolycar);
-            playerImgs[1].setVisible(false);
-            playerImgs[2].setIcon(monopolyhat);
-            playerImgs[2].setVisible(false);
-            playerImgs[3].setIcon(monopolyboot);
-            playerImgs[3].setVisible(false);
+            playerImgs.get(0).setIcon(monopolydog);
+            playerImgs.get(0).setVisible(false);
+            playerImgs.get(1).setIcon(monopolycar);
+            playerImgs.get(1).setVisible(false);
+            playerImgs.get(2).setIcon(monopolyhat);
+            playerImgs.get(2).setVisible(false);
+            playerImgs.get(3).setIcon(monopolyboot);
+            playerImgs.get(3).setVisible(false);
             
             housesImgs[0].setIcon(houseImg);
             housesImgs[0].setVisible(false);
@@ -134,7 +136,7 @@ import javax.swing.JPanel;
         return this.backgroundImage;
     }
     
-    public JLabel[] GetLabels()
+    public ArrayList<JLabel> GetLabels()
     {
         return this.playerImgs;
     }
@@ -142,6 +144,7 @@ import javax.swing.JPanel;
     public JLabel[] getHousesImgs() {
         return housesImgs;
     }
+    
     
     public void showHotel() {
         housesImgs[0].setIcon(hotelImg);

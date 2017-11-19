@@ -25,7 +25,7 @@ import monoply.game.*;
  * @author mahmoud
  */
 public class PlayersContainerPanel extends JPanel {
-    public ArrayList<playerPanel> playerPanel = new ArrayList<playerPanel>();
+    public static ArrayList<playerPanel> playerPanel = new ArrayList<playerPanel>();
     private JPanel btnsPanel = new JPanel();
     private JPanel playersPanel = new JPanel();
   

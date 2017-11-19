@@ -5,9 +5,11 @@
  */
 package monoply.game;
 
+import UserInterface.MF2;
 import UserInterface.MainPanel;
 import UserInterface.MonopolyBoardPanel;
 import static UserInterface.MonopolyBoardPanel.allTiles;
+import UserInterface.PlayersContainerPanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +20,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 //import static monoply.game.GamePanel.MessageTextField;
 
@@ -29,9 +32,10 @@ import javax.swing.Timer;
 public class Player implements Serializable {
 
     public int money = 1500, place = 0;
-   
+    
     Dice dice;
     public String name;
+    public boolean isDead;
     public boolean HasJailCard;
     public static MonopolyBoardPanel panel;
     private boolean inJail;
@@ -41,6 +45,9 @@ public class Player implements Serializable {
     private CountriesGroup[] groups = new CountriesGroup[8];
     private ArrayList<PropertyTile> properties = new ArrayList<PropertyTile>();
     private static boolean flag=false;
+    boolean MortageNotEnoughMoney;
+    int dueMoney ;
+    Player playerToPayTo;
     
     private void initGroups() {
         groups[0] = new CountriesGroup(3); //cyan
@@ -88,18 +95,18 @@ public class Player implements Serializable {
             public void actionPerformed(ActionEvent e) {
                 if (intialPlace == secondPlace) {
                     System.out.println("Stopped");
-                    allTiles[secondPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
+                    allTiles[secondPlace].GetLabels().get(MonopolyBoardPanel.turn).setVisible(true);
                     currentPlayer.place = (currentPlayer.place + 1) % allTiles.length;
                     System.out.println("place: " + currentPlayer.place);
                     flag= false;
                     if (currentPlayer.place!=10){
-                    allTiles[secondPlace].performAction(currentPlayer);
+                    
                     }
                     MainPanel b = (MainPanel) panel.getParent();
                     b.currentPanel.UpdateCurrentDetails();
                     MonopolyBoardPanel.RollButton.setEnabled(true);
                     b.currentPanel.getBuyBtn().setEnabled(true);
-                    
+                    allTiles[secondPlace].performAction(currentPlayer);
                     ((Timer) e.getSource()).stop();
 
                 } else {
@@ -124,10 +131,10 @@ public class Player implements Serializable {
                         System.out.println("Money:"+this.money);
 
                     }
-        allTiles[intialPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(false);
+        allTiles[intialPlace].GetLabels().get(MonopolyBoardPanel.turn).setVisible(false);
         intialPlace= (intialPlace+1)%allTiles.length;
        
-        allTiles[intialPlace].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
+        allTiles[intialPlace].GetLabels().get(MonopolyBoardPanel.turn).setVisible(true);
         System.out.println("Intial Place: "+intialPlace);
     }
     public Player(String n) {
@@ -163,15 +170,110 @@ public class Player implements Serializable {
         }
     }
     public void payRent (Player owner, int fees)
-    {
+            
+    {  System.out.println("Pay rent called");
+        this.playerToPayTo =owner;
         if (this.money- fees >= 0){
             owner.money+= fees;
             this.money-= fees;
+             MonopolyBoardPanel.RollButton.setEnabled(true);
         }
         else {
+            System.out.println("ana da5lt hena ya shabab mt2l2oosh");
+            MonopolyBoardPanel.RollButton.setEnabled(false);
+            JOptionPane.showMessageDialog(panel, "You need to mortage some properties to pay tax", "Not enough money!", 1);
+            notEnoughMoney(fees);
             //Sell properties
         }
+        
+        MF2.mp.update();
+        
     }
+
+    public Player getPlayerToPayTo() {
+        return playerToPayTo;
+    }
+    
+    
+    public void notEnoughMoney(int fees)
+    {
+        int j = 0;
+        boolean breaked = false;
+        for(; j < groups.length; j++) {
+            ArrayList<Country> countries = groups[j].getCountries();
+            if ( breaked )break;
+            for(int k = 0; k < countries.size(); k++) {
+                if (!countries.get(k).mortgaged){
+                    breaked = true;
+                    break;
+                }
+            }
+            
+            
+        }
+        int i = 0;
+        for ( i = 0; i<properties.size();i++)
+            
+         {
+            if (!properties.get(i).mortgaged)
+                break;
+            
+        
+        }
+        
+        if(i == properties.size()&& !breaked)
+        {
+            lose(playerToPayTo);
+        }
+                
+        else {
+            MortageNotEnoughMoney =true;
+            dueMoney= fees;
+        }
+    }
+    
+    public void lose(Player p2p2)
+    {
+        for(int i =0; i< groups.length; i++) {
+            ArrayList<Country> countries = groups[i].getCountries();
+            for(int j  = 0; j < countries.size(); j++) {
+                countries.get(j).setOwner(p2p2);
+                
+            }
+        }
+            for (int  i = 0; i<properties.size();i++)
+            {
+                properties.get(i).setOwner(p2p2);
+            }
+            System.out.println("Lost1");
+         
+              System.out.println("Lost 2");
+         
+          //MonopolyBoardPanel.removePlayerGui(MonopolyBoardPanel.turn);
+           PlayersContainerPanel.playerPanel.get(MonopolyBoardPanel.turn).removePlayer();
+          // MonopolyBoardPanel.players.remove(this);
+          MonopolyBoardPanel.players.get(MonopolyBoardPanel.turn).isDead=true;
+          JOptionPane.showMessageDialog(null, this.name + " went bankrupt");
+           MonopolyBoardPanel.allTiles[place].GetLabels().get(MonopolyBoardPanel.turn).setVisible(false);
+         
+       //   if (MonopolyBoardPanel.turn==MonopolyBoardPanel.players.size()){ MonopolyBoardPanel.turn--; }
+         // if (MonopolyBoardPanel.turn)
+           System.out.println("Lost 3");
+            MonopolyBoardPanel.RollButton.setEnabled(true);
+           System.out.println("Lost 4");
+
+            
+     }
+    
+    
+    public boolean isMortageNotEnoughMoney() {
+        return MortageNotEnoughMoney;
+    }
+
+    public int getDueMoney() {
+        return dueMoney;
+    }
+    
     
     public void setInJail(boolean flag) {
         inJail = flag;
@@ -201,6 +303,7 @@ public class Player implements Serializable {
         oos.writeBoolean(HasJailCard);
         oos.writeBoolean(inJail);
         oos.writeBoolean(flag);
+        oos.writeBoolean(isDead);
         oos.writeInt(houses);
         oos.writeInt(hotels);
         oos.writeInt(railroads);
@@ -230,6 +333,7 @@ public class Player implements Serializable {
         HasJailCard = ois.readBoolean();
         inJail = ois.readBoolean();
         flag = ois.readBoolean();
+        isDead = ois.readBoolean();
         houses = ois.readInt();
         hotels = ois.readInt();
         railroads = ois.readInt();

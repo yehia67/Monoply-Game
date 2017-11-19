@@ -4,7 +4,7 @@ package monoply.game;
 import UserInterface.MainPanel;
 import UserInterface.MonopolyBoardPanel;
 import static UserInterface.MonopolyBoardPanel.allTiles;
-import static UserInterface.playPanel.GetNofPlayers;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -253,9 +253,9 @@ public class SpecialCards {
         //player.y= place.coords.y;
         //player.place= index;
        if (DrawnCard.getName().equalsIgnoreCase("Go to Jail")){
-        allTiles[player.place].GetLabels()[MonopolyBoardPanel.turn].setVisible(false);
+        allTiles[player.place].GetLabels().get(MonopolyBoardPanel.turn).setVisible(false);
            player.place= 10;
-        allTiles[player.place].GetLabels()[MonopolyBoardPanel.turn].setVisible(true);
+        allTiles[player.place].GetLabels().get(MonopolyBoardPanel.turn).setVisible(true);
             MainPanel b = (MainPanel) Player.panel.getParent();
                     b.currentPanel.UpdateCurrentDetails();
        }

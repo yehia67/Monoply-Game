@@ -92,6 +92,13 @@ public class playerPanel extends JPanel{
         return (String)playerCountriesComboBox.getSelectedItem();
     }
     
+    public void removePlayer()
+    {
+   playerNameLbl.setEnabled(false);
+   playerMoneyLbl.setEnabled(false);
+  playerCountriesComboBox.setEnabled(false);
+    }
+    
      /* @Override
   protected void paintComponent(Graphics g) {
 

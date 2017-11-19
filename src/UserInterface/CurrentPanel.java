@@ -8,6 +8,7 @@ package UserInterface;
 import static UserInterface.MonopolyBoardPanel.getCurrentPlayerName;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
@@ -160,6 +161,10 @@ public class CurrentPanel extends JPanel{
         
         mortgageBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                            System.out.println("Turn: "+MonopolyBoardPanel.turn );
+                            System.out.println("Name: "+MonopolyBoardPanel.getCurrentPlayerName() );
+                            
+
                     int currentPlayerIndex = MonopolyBoardPanel.players.indexOf(MonopolyBoardPanel.currentPlayer);
                     MainPanel mp = (MainPanel) CurrentPanel.this.getParent();
                     playerPanel p = mp.getPlayersContainer().playerPanel.get(currentPlayerIndex);
@@ -178,6 +183,7 @@ public class CurrentPanel extends JPanel{
                                 else{
                                     MonopolyBoardPanel.currentPlayer.money += countries.get(j).getPrice()/2;
                                     countries.get(j).getCountry().mortgaged= true;
+                                    System.out.println("Player after mortage money"+MonopolyBoardPanel.currentPlayer.money);
                                     //p.updatePanel();
 
                                     /*mortgageImgPanel = new JPanel();
@@ -195,7 +201,17 @@ public class CurrentPanel extends JPanel{
                                     mortgageImgJLabel.setVisible(false);*/
                                 }
                                 mp.update();
+                               if (MonopolyBoardPanel.currentPlayer.isMortageNotEnoughMoney())
+                               {
+                                if(MonopolyBoardPanel.currentPlayer.money < MonopolyBoardPanel.currentPlayer.getDueMoney()) {
+                                    MonopolyBoardPanel.currentPlayer.notEnoughMoney(MonopolyBoardPanel.currentPlayer.getDueMoney());
+                                    
+                                } else {
+                                    MonopolyBoardPanel.currentPlayer.payRent(MonopolyBoardPanel.currentPlayer.getPlayerToPayTo(),MonopolyBoardPanel.currentPlayer.getDueMoney());
+                                }
+                               }
                                 return;
+                                
                             }    
                         }
                     }
@@ -213,6 +229,15 @@ public class CurrentPanel extends JPanel{
                     }
             
                     mp.update();
+                    if (MonopolyBoardPanel.currentPlayer.isMortageNotEnoughMoney())
+                    {
+                     if(MonopolyBoardPanel.currentPlayer.money < MonopolyBoardPanel.currentPlayer.getDueMoney()) {
+                         MonopolyBoardPanel.currentPlayer.notEnoughMoney(MonopolyBoardPanel.currentPlayer.getDueMoney());
+
+                     } else {
+                         MonopolyBoardPanel.currentPlayer.payRent(MonopolyBoardPanel.currentPlayer.getPlayerToPayTo(),MonopolyBoardPanel.currentPlayer.getDueMoney());
+                     }
+                    }
                 System.out.println(MonopolyBoardPanel.currentPlayer.money);
                         
             }
@@ -323,7 +348,7 @@ public class CurrentPanel extends JPanel{
     
     public void UpdateCurrentDetails()
     {
-        int location = MonopolyBoardPanel.players.get(MonopolyBoardPanel.returnTurn()).place;
+        int location = MonopolyBoardPanel.players.get(MonopolyBoardPanel.turn).place;
      try{
                currImage = new ImageIcon(ImageIO.read(new File("Monopoly Board/" 
                     + MonopolyBoardPanel.allTiles[location].imgName)));

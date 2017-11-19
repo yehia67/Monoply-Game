@@ -28,6 +28,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -46,7 +47,7 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
     private int Playernumber;
     private static Tile centerTile;
     public static int turn=-1;
-    
+   
     private JPanel eastPanel;
     private JPanel westPanel;
     private JPanel northPanel;
@@ -96,7 +97,7 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
         {
            players.add(new Player(i + 1 + ""));
            players.get(i).setPanel(this);
-           allTiles[0].GetLabels()[i].setVisible(true);
+           allTiles[0].GetLabels().get(i).setVisible(true);
             switch (i) {
                 case 0:
                     if (MF2.pp.getP1Name().trim().equalsIgnoreCase(""))
@@ -126,7 +127,7 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
         
         }
         
-            players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[6]);
+            /*players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[6]);
             Country count = (Country) MonopolyBoardPanel.allTiles[6];
             count.setOwner(players.get(0));
             players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[8]);
@@ -135,6 +136,10 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
             players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[9]);
             count = (Country) MonopolyBoardPanel.allTiles[9];
            count.setOwner(players.get(0));
+            players.get(2).addCountry((Country)MonopolyBoardPanel.allTiles[11]);
+            count = (Country) MonopolyBoardPanel.allTiles[11];
+           count.setOwner(players.get(2));*/
+           
 
         this.setSize(height , height);
         //this.setMaximumSize(new Dimension(200, 200));
@@ -143,6 +148,7 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
 
             System.out.println("Height: "+  this.getHeight()+"\n Width:" +this.getWidth());
         CurrentPlayerName = "Player : " + players.get(0).name + " Turn" ;
+        
         cards=new SpecialCards();
         MonopolyBoardPanel p = this;
          MF2.save.addActionListener(new ActionListener() {
@@ -393,12 +399,26 @@ Timer timer = new Timer(20000, new ActionListener() {
     
     public void move (int diceNumber){
         turn = (turn + 1) % this.players.size();
+        while(this.players.get(MonopolyBoardPanel.turn).isDead)
+        {
+             turn = (turn + 1) % this.players.size();
+        }
+         System.out.println("Trun"+ turn);
         if (diceFlag) {
             diceFlag = false;
             if (turn==0)
+            {
                 turn=this.players.size()-1;
+                while(this.players.get(MonopolyBoardPanel.turn).isDead)
+        {
+             turn = (turn - 1) % this.players.size();
+        }
+            }
             else 
-            turn = (turn - 1) % this.players.size();
+           while(this.players.get(MonopolyBoardPanel.turn).isDead)
+        {
+             turn = (turn - 1) % this.players.size();
+        }
 
         }
         if (dice1Num == dice2Num) {
@@ -410,7 +430,10 @@ Timer timer = new Timer(20000, new ActionListener() {
        
         while(currentPlayer.getInJail()) {
            allTiles[10].performAction(currentPlayer);
-            this.turn = (this.turn + 1) % this.players.size();
+      while(this.players.get(MonopolyBoardPanel.turn).isDead)
+        {
+             turn = (turn + 1) % this.players.size();
+        }
             currentPlayer = MonopolyBoardPanel.players.get(this.turn);
         }
         
@@ -530,14 +553,42 @@ Timer timer = new Timer(20000, new ActionListener() {
         CurrentPlayerName = "Player : " + players.get(turn).name + " Turn" ;
         System.out.println("Loaded");
     }
-    
+    public static void removePlayerGui(int x)
+    {
+        for(int i =0; i<allTiles.length; i++)
+        {
+            allTiles[i].GetLabels().remove(x);
+        }
+    }
     public void updateBoard() {
         for(int i = 0; i < players.size(); i++) {
-            allTiles[0].GetLabels()[i].setVisible(false);
+            allTiles[0].GetLabels().get(i).setVisible(false);
         }
         
         for(int i = 0; i < players.size(); i++) {
-            allTiles[players.get(i).place].GetLabels()[i].setVisible(true);
+            if(!players.get(i).isDead)
+                allTiles[players.get(i).place].GetLabels().get(i).setVisible(true);
+        }
+        
+        for(int i = 0; i < 40; i++) {
+            if(allTiles[i] instanceof Country) {
+                Country country = (Country) allTiles[i];
+                if(country.getCanBuildHousesFlag()) {
+                    for(int j = 0; j < country.getHousesNumber(); j++) {
+                        country.getHousesImgs()[j].setVisible(true);
+                    }
+                } else if(country.getCanBuildHotelFlag()) {
+                    if(country.getHotelsNumber() == 0) {
+                        System.out.println("houses : " + country.getHousesNumber());
+                        for(int j = 0; j < country.getHousesNumber(); j++) {
+                            country.getHousesImgs()[j].setVisible(true);
+                        }
+                    }
+                }  else if(country.getHotelsNumber() > 0) {
+                        System.out.println("hotels :" + country.getHotelsNumber());
+                        country.showHotel();
+                    }
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ public class Country extends PropertyTile {
             String imgName) {
         super(imgName, mPrice, mName);
         totalFees = mFees;
-        tax = mFees/4;
+        tax =mFees/4;
         countryColor = mCountryColor;
     }
     
@@ -36,7 +36,7 @@ public class Country extends PropertyTile {
     public void buildHouse() {
         if(canBuildHousesFlag) {
             housesNumber++;
-            tax+=15;
+            tax+=2000;
             super.getOwner().houses++;
             if(housesNumber >= 2) {
                 canBuildHousesFlag = false;
@@ -128,6 +128,9 @@ public class Country extends PropertyTile {
             throws IOException {
         super.save(fos, oos);
         oos.writeInt(totalFees);
+        oos.writeInt(tax);
+        oos.writeInt(housesNumber);
+        oos.writeInt(hotelsNumber);
         oos.writeObject(countryColor);
         oos.writeBoolean(available);
         oos.writeBoolean(canBuildHotelFlag);
@@ -140,9 +143,13 @@ public class Country extends PropertyTile {
             throws IOException, ClassNotFoundException {
         super.load(fis, ois);
         totalFees = ois.readInt();
+        tax = ois.readInt();
+        housesNumber = ois.readInt();
+        hotelsNumber = ois.readInt();
         countryColor = (Color)ois.readObject();
         available = ois.readBoolean();
         canBuildHotelFlag = ois.readBoolean();
         canBuildHousesFlag = ois.readBoolean();
+        
     }
 }
