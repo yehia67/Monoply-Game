@@ -10,13 +10,12 @@ package monoply.game;
  * @author moaz
  */
 public class GO extends NonPropertyTile {
-    
-    public GO(String imgName){
+
+    public GO(String imgName) {
         super(imgName);
     }
-    
-    public void performAction(Player player)
-    {
-        player.money+=200;
+
+    public void performAction(Player player) {
+        player.money += 200;
     }
 }

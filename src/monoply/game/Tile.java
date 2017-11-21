@@ -23,69 +23,61 @@ import javax.swing.JPanel;
  *
  * @author mahmoud
  */
+public abstract class Tile extends JPanel implements Serializable {
 
-
- public abstract class  Tile extends JPanel implements Serializable {
     private BufferedImage backgroundImage;
     public String imgName;
-     private ArrayList<JLabel> playerImgs = new ArrayList<JLabel>();
-  
+    private ArrayList<JLabel> playerImgs = new ArrayList<JLabel>();
+
     private JLabel[] housesImgs = new JLabel[2];
     private JPanel playerImgsPanel;
-    private JPanel houseImgsPanel; 
+    private JPanel houseImgsPanel;
     private ImageIcon hotelImg;
-    
+
     public Tile(String imgName) {
         try {
-           this.imgName=imgName;
-            backgroundImage = ImageIO.read(new File("Monopoly Board/" 
+            this.imgName = imgName;
+            backgroundImage = ImageIO.read(new File("Monopoly Board/"
                     + imgName));
             Dimension size = new Dimension(backgroundImage.getWidth(),
-            backgroundImage.getHeight());
+                    backgroundImage.getHeight());
             setPreferredSize(size);
             setMinimumSize(size);
             setMaximumSize(size);
             setSize(size);
-            this.setLayout(new GridLayout(1,2));
-            
+            this.setLayout(new GridLayout(1, 2));
+
             playerImgsPanel = new JPanel();
             playerImgsPanel.setOpaque(false);
             houseImgsPanel = new JPanel();
             houseImgsPanel.setOpaque(false);
-             this.add(playerImgsPanel);
-             this.add(houseImgsPanel);
-             
-            
-    
+            this.add(playerImgsPanel);
+            this.add(houseImgsPanel);
+
             playerImgsPanel.setLayout(new GridLayout(4, 1));
             houseImgsPanel.setLayout(new GridLayout(2, 1));
-            
-             for(int i =0; i<4; i++)
-             {
-                 playerImgs.add(i, new JLabel());
-                 playerImgsPanel.add(playerImgs.get(i));
-                 playerImgs.get(i).setHorizontalAlignment(JLabel.CENTER);
+
+            for (int i = 0; i < 4; i++) {
+                playerImgs.add(i, new JLabel());
+                playerImgsPanel.add(playerImgs.get(i));
+                playerImgs.get(i).setHorizontalAlignment(JLabel.CENTER);
                 // playerImgs[i].setSize(playerImgsPanel.getWidth(), playerImgsPanel.getHeight()/4);
-             }
-             
-             for(int i = 0; i < 2; i++) {
-                 housesImgs[i] = new JLabel();
-                 houseImgsPanel.add(housesImgs[i]);
-                 housesImgs[i].setHorizontalAlignment(JLabel.CENTER);
-             }
-       
-            
-          ImageIcon monopolydog = new ImageIcon(new ImageIcon(getClass().getResource("/monopolydog.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-          ImageIcon monopolycar = new ImageIcon(new ImageIcon(getClass().getResource("/monopolycar.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-           ImageIcon monopolyhat = new ImageIcon(new ImageIcon(getClass().getResource("/monopolyhat.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+            }
+
+            for (int i = 0; i < 2; i++) {
+                housesImgs[i] = new JLabel();
+                houseImgsPanel.add(housesImgs[i]);
+                housesImgs[i].setHorizontalAlignment(JLabel.CENTER);
+            }
+
+            ImageIcon monopolydog = new ImageIcon(new ImageIcon(getClass().getResource("/monopolydog.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+            ImageIcon monopolycar = new ImageIcon(new ImageIcon(getClass().getResource("/monopolycar.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+            ImageIcon monopolyhat = new ImageIcon(new ImageIcon(getClass().getResource("/monopolyhat.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
             ImageIcon monopolyboot = new ImageIcon(new ImageIcon(getClass().getResource("/monopolyboot.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-            
+
             ImageIcon houseImg = new ImageIcon(new ImageIcon(getClass().getResource("/monopolyhouse.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
             hotelImg = new ImageIcon(new ImageIcon(getClass().getResource("/monopolyhotel.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-          
-       
-           
-     
+
             playerImgs.get(0).setIcon(monopolydog);
             playerImgs.get(0).setVisible(false);
             playerImgs.get(1).setIcon(monopolycar);
@@ -94,7 +86,7 @@ import javax.swing.JPanel;
             playerImgs.get(2).setVisible(false);
             playerImgs.get(3).setIcon(monopolyboot);
             playerImgs.get(3).setVisible(false);
-            
+
             housesImgs[0].setIcon(houseImg);
             housesImgs[0].setVisible(false);
             housesImgs[1].setIcon(houseImg);
@@ -104,48 +96,41 @@ import javax.swing.JPanel;
             housesImgs[3].setIcon(houseImg);
             housesImgs[3].setVisible(false);*/
             //playerImgs[0].setText("HELLO");
-           /* playerImgs[1].setIcon(monopolycar);
+            /* playerImgs[1].setIcon(monopolycar);
             playerImgs[2].setIcon(monopolyhat);
             playerImgs[3].setIcon(monopolyboot);
             
-       */
-                 
-      
-        } catch(Exception e) {
-          
+             */
+
+        } catch (Exception e) {
+
             System.out.println(e.getMessage());
         }
-        
-   
-      
-     
-      //
+
+        //
     }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
-     g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), 
-              null);
-        
+
+        g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(),
+                null);
+
     }
-    
-    public BufferedImage GetImage()
-    {
+
+    public BufferedImage GetImage() {
         return this.backgroundImage;
     }
-    
-    public ArrayList<JLabel> GetLabels()
-    {
+
+    public ArrayList<JLabel> GetLabels() {
         return this.playerImgs;
     }
-    
+
     public JLabel[] getHousesImgs() {
         return housesImgs;
     }
-    
-    
+
     public void showHotel() {
         housesImgs[0].setIcon(hotelImg);
         housesImgs[0].setVisible(true);
@@ -153,8 +138,7 @@ import javax.swing.JPanel;
         /*housesImgs[2].setVisible(false);
         housesImgs[3].setVisible(false);*/
     }
-     public abstract void performAction(Player player);
-         
-     
-    
+
+    public abstract void performAction(Player player);
+
 }

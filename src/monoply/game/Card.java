@@ -14,7 +14,7 @@ public class Card {
     private String name;
     private String Description;
     private int type;
-    
+
     public Card(String name, String Description, int type) {
         this.name = name;
         this.Description = Description;

@@ -24,5 +24,5 @@ public class Chance extends NonPropertyTile {
         JOptionPane.showMessageDialog(null,
                 MonopolyBoardPanel.cards.getDrawnCard().getDescription(), "", 2);
     }
-    
+
 }

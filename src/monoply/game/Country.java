@@ -10,44 +10,45 @@ import java.io.ObjectOutputStream;
 public class Country extends PropertyTile {
 
     private int totalFees;
-    private int tax ;
+    private int tax;
     private Color countryColor;
-    
+
     private int housesNumber = 0;
     private int hotelsNumber = 0;
-    
+
     private boolean available = true;
     private boolean canBuildHousesFlag = false;
     private boolean canBuildHotelFlag = false;
-         
+
     public Country(int mPrice, int mFees, Color mCountryColor, String mName,
             String imgName) {
         super(imgName, mPrice, mName);
         totalFees = mFees;
-        tax =mFees/4;
+        tax = mFees / 4;
         countryColor = mCountryColor;
     }
-    
-     public void SoldCountry(){
-         super.getOwner().money += getPrice();
-         available = true;
-         super.setOwner(null);
-     }
+
+    public void SoldCountry() {
+        super.getOwner().money += getPrice();
+        available = true;
+        super.setOwner(null);
+    }
+
     public void buildHouse() {
-        if(canBuildHousesFlag) {
+        if (canBuildHousesFlag) {
             housesNumber++;
-            tax+=2000;
+            tax += 2000;
             super.getOwner().houses++;
-            if(housesNumber >= 2) {
+            if (housesNumber >= 2) {
                 canBuildHousesFlag = false;
                 canBuildHotelFlag = true;
-                tax+=30;
+                tax += 30;
             }
         }
     }
-    
+
     public void buildHotel() {
-        if(canBuildHotelFlag) {
+        if (canBuildHotelFlag) {
             hotelsNumber++;
             super.getOwner().hotels++;
             canBuildHotelFlag = false;
@@ -61,7 +62,7 @@ public class Country extends PropertyTile {
     public void setTax(int tax) {
         this.tax = tax;
     }
-    
+
     public int getHotelsNumber() {
         return hotelsNumber;
     }
@@ -88,43 +89,42 @@ public class Country extends PropertyTile {
     public Color getColor() {
         return countryColor;
     }
-    
+
     public boolean getCanBuildHousesFlag() {
         return canBuildHousesFlag;
     }
-    
+
     public void setCanBuildHousesFlag(boolean flag) {
         canBuildHousesFlag = flag;
     }
-    
+
     public boolean getCanBuildHotelFlag() {
         return canBuildHotelFlag;
     }
-    
+
     public void setCanBuildHotelFlag(boolean flag) {
         canBuildHotelFlag = flag;
     }
-    
+
     public int getHousesNumber() {
         return housesNumber;
     }
-    
-    public Country getCountry(){
+
+    public Country getCountry() {
         return this;
     }
 
     @Override
     public void performAction(Player player) {
 
-        if (!(player==this.getOwner()) && this.getOwner() != null && !this.mortgaged )
-        {
+        if (!(player == this.getOwner()) && this.getOwner() != null && !this.mortgaged) {
             System.out.println("here");
             player.payRent(this.getOwner(), this.getTax());
         }
-        }
-    
+    }
+
     @Override
-    public void save(FileOutputStream fos, ObjectOutputStream oos) 
+    public void save(FileOutputStream fos, ObjectOutputStream oos)
             throws IOException {
         super.save(fos, oos);
         oos.writeInt(totalFees);
@@ -136,20 +136,19 @@ public class Country extends PropertyTile {
         oos.writeBoolean(canBuildHotelFlag);
         oos.writeBoolean(canBuildHousesFlag);
     }
-    
-    
+
     @Override
-    public void load(FileInputStream fis, ObjectInputStream ois) 
+    public void load(FileInputStream fis, ObjectInputStream ois)
             throws IOException, ClassNotFoundException {
         super.load(fis, ois);
         totalFees = ois.readInt();
         tax = ois.readInt();
         housesNumber = ois.readInt();
         hotelsNumber = ois.readInt();
-        countryColor = (Color)ois.readObject();
+        countryColor = (Color) ois.readObject();
         available = ois.readBoolean();
         canBuildHotelFlag = ois.readBoolean();
         canBuildHousesFlag = ois.readBoolean();
-        
+
     }
 }

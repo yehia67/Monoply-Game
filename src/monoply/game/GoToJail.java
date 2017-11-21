@@ -11,16 +11,16 @@ import UserInterface.MonopolyBoardPanel;
  *
  * @author eslam
  */
-public class GoToJail extends NonPropertyTile  {
+public class GoToJail extends NonPropertyTile {
 
     public GoToJail(String imgName) {
         super(imgName);
     }
+
     @Override
-    public void performAction(Player player)
-    {
+    public void performAction(Player player) {
         player.move(10);
-        Jail jail = (Jail)MonopolyBoardPanel.allTiles[10];
-       jail.setInjail(player);
+        Jail jail = (Jail) MonopolyBoardPanel.allTiles[10];
+        jail.setInjail(player);
     }
 }

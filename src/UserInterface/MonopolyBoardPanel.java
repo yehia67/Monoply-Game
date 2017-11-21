@@ -38,16 +38,16 @@ import javax.swing.Timer;
 
 import monoply.game.*;
 
-
 /**
  *
  * @author mahmoud
  */
 public class MonopolyBoardPanel extends JPanel implements Serializable {
+
     private int Playernumber;
     private static Tile centerTile;
-    public static int turn=-1;
-   
+    public static int turn = -1;
+
     private JPanel eastPanel;
     private JPanel westPanel;
     private JPanel northPanel;
@@ -55,79 +55,81 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
     public static JButton RollButton;
     private Dice dice1;
     private Dice dice2;
-    private int dice1Num , dice2Num;
+    private int dice1Num, dice2Num;
     private int diceNumber;
-    private boolean  diceFlag = false ; 
+    private boolean diceFlag = false;
     public static Player currentPlayer;
     public static ArrayList<Player> players = new ArrayList<Player>();
-    public static String   CurrentPlayerName;
+    public static String CurrentPlayerName;
     //public static Jail jail;
     //public static GoToJail GoJail;
     public static SpecialCards cards;
     public static Tile[] allTiles = new Tile[40];
     private boolean saving = false;
     private String[] southTilesNames = {"Jail.png", "Connecticut Avenue.png",
-        "Vermont Avenue.png", "Chance Down.png", "Oriental Avenue.png", 
+        "Vermont Avenue.png", "Chance Down.png", "Oriental Avenue.png",
         "Reading RailRoad.png", "Income Tax.png", "Baltic Avenue.png",
         "Community Chest Down.png", "Mediteranean Avenue.png", "GO.png"};
-    
-    private String[] northTilesNames = {"Free Parking.png", 
+
+    private String[] northTilesNames = {"Free Parking.png",
         "Kentucky Avenue.png", "Chance Top.png", "Indiana Avenue.png",
         "Illinois Avenue.png", "B&O RailRoad.png", "Atlantic Avenue.png",
         "Ventor Avenue.png", "Water Selection.png", "Marvin Gardens.png",
         "Go To Jail.png"};
-    
-    private String[] westTilesNames = {"New York Avenue.png", 
-        "Tennesse Avenue.png", "Community Chest Left.png", "St.png", 
+
+    private String[] westTilesNames = {"New York Avenue.png",
+        "Tennesse Avenue.png", "Community Chest Left.png", "St.png",
         "Pennsylvania RailRoad.png", "Virginia Avenue.png", "States Avenue.png",
         "Electric Company.png", "St Charles Place.png"};
-    
-    private String[] eastTilesNames = {"Pacific Avenue.png", 
-        "North Carolina Avenue.png", "Community Chest Right.png", 
-        "Pennsylvania Avenue.png", "Short Line.png", "Chance Right.png", 
+
+    private String[] eastTilesNames = {"Pacific Avenue.png",
+        "North Carolina Avenue.png", "Community Chest Right.png",
+        "Pennsylvania Avenue.png", "Short Line.png", "Chance Right.png",
         "Park Place.png", "Luxury Tax.png", "BoardWalk.png"};
 
-    
     public MonopolyBoardPanel(int playerNumber, int height) {
-        
-        this.Playernumber=playerNumber;
-             System.out.println("MonopolyBoard Constructor");
+
+        this.Playernumber = playerNumber;
+        System.out.println("MonopolyBoard Constructor");
         init();
-        for(int i =0; i<playerNumber; i++)
-        {
-           players.add(new Player(i + 1 + ""));
-           players.get(i).setPanel(this);
-           allTiles[0].GetLabels().get(i).setVisible(true);
+        for (int i = 0; i < playerNumber; i++) {
+            players.add(new Player(i + 1 + ""));
+            players.get(i).setPanel(this);
+            allTiles[0].GetLabels().get(i).setVisible(true);
             switch (i) {
                 case 0:
-                    if (MF2.pp.getP1Name().trim().equalsIgnoreCase(""))
-                        players.get(i).name="Player 1";
-                    else
-                    players.get(i).name = MF2.pp.getP1Name();
+                    if (MF2.pp.getP1Name().trim().equalsIgnoreCase("")) {
+                        players.get(i).name = "Player 1";
+                    } else {
+                        players.get(i).name = MF2.pp.getP1Name();
+                    }
                     break;
                 case 1:
-                    if (MF2.pp.getP2Name().trim().equalsIgnoreCase(""))
-                        players.get(i).name="Player 2";
-                    else
-                    players.get(i).name = MF2.pp.getP2Name();
+                    if (MF2.pp.getP2Name().trim().equalsIgnoreCase("")) {
+                        players.get(i).name = "Player 2";
+                    } else {
+                        players.get(i).name = MF2.pp.getP2Name();
+                    }
                     break;
                 case 2:
-                    if (MF2.pp.getP3Name().trim().equalsIgnoreCase(""))
-                        players.get(i).name="Player 3";
-                    else
-                    players.get(i).name = MF2.pp.getP3Name();
+                    if (MF2.pp.getP3Name().trim().equalsIgnoreCase("")) {
+                        players.get(i).name = "Player 3";
+                    } else {
+                        players.get(i).name = MF2.pp.getP3Name();
+                    }
                     break;
                 case 3:
-                    if (MF2.pp.getP4Name().trim().equalsIgnoreCase(""))
-                        players.get(i).name="Player 4";
-                    else
-                    players.get(i).name = MF2.pp.getP4Name();
+                    if (MF2.pp.getP4Name().trim().equalsIgnoreCase("")) {
+                        players.get(i).name = "Player 4";
+                    } else {
+                        players.get(i).name = MF2.pp.getP4Name();
+                    }
                     break;
             }
-        
+
         }
-        
-            /*players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[6]);
+
+        /*players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[6]);
             Country count = (Country) MonopolyBoardPanel.allTiles[6];
             count.setOwner(players.get(0));
             players.get(0).addCountry((Country)MonopolyBoardPanel.allTiles[8]);
@@ -139,114 +141,105 @@ public class MonopolyBoardPanel extends JPanel implements Serializable {
             players.get(2).addCountry((Country)MonopolyBoardPanel.allTiles[11]);
             count = (Country) MonopolyBoardPanel.allTiles[11];
            count.setOwner(players.get(2));*/
-           
-
-        this.setSize(height , height);
+        this.setSize(height, height);
         //this.setMaximumSize(new Dimension(200, 200));
-               // this.setPreferredSize(new Dimension(200, 200));
-                //this.setMinimumSize(new Dimension(200, 200));
+        // this.setPreferredSize(new Dimension(200, 200));
+        //this.setMinimumSize(new Dimension(200, 200));
 
-            System.out.println("Height: "+  this.getHeight()+"\n Width:" +this.getWidth());
-        CurrentPlayerName = "Player : " + players.get(0).name + " Turn" ;
-        
-        cards=new SpecialCards();
+        System.out.println("Height: " + this.getHeight() + "\n Width:" + this.getWidth());
+        CurrentPlayerName = "Player : " + players.get(0).name + " Turn";
+
+        cards = new SpecialCards();
         MonopolyBoardPanel p = this;
-         MF2.save.addActionListener(new ActionListener() {
+        MF2.save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 p.save();
             }
         });
-         
-         JComponent component =  this;
-component.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-                            java.awt.event.InputEvent.CTRL_DOWN_MASK),
-                    "actionMapKey");
-component.getActionMap().put("actionMapKey", new AbstractAction() {
+
+        JComponent component = this;
+        component.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+                java.awt.event.InputEvent.CTRL_DOWN_MASK),
+                "actionMapKey");
+        component.getActionMap().put("actionMapKey", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               p.save();
+                p.save();
             }
         }
-          
         );
-component.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ALT,
-                           0,true),
-                    "alt");
-component.getActionMap().put("alt", new AbstractAction() {
+        component.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ALT,
+                0, true),
+                "alt");
+        component.getActionMap().put("alt", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-          
-            MonoplyGame.frame2.setBarVisibality(!MF2.bar.isVisible());
+
+                MonoplyGame.frame2.setBarVisibality(!MF2.bar.isVisible());
             }
         }
-          
         );
-Timer timer = new Timer(20000, new ActionListener() {
+        Timer timer = new Timer(20000, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-              CurrentPanel.tosavelabel.setVisible(false);
+
+                CurrentPanel.tosavelabel.setVisible(false);
             }
         });
- timer.start();
-        
+        timer.start();
+
     }
-    
+
     private void init() {
-      
+
         this.setLayout(new BorderLayout());
         JPanel centerPart = new MonopolyCenterPanel("Mid-Part.png");
-       
+
         southPanel = new JPanel();   //0 - 10
         southPanel.setLayout(new GridLayout(1, 11));
-        
+
         westPanel = new JPanel();
         westPanel.setLayout(new GridLayout(9, 1));
-       
-        
-        
+
         northPanel = new JPanel();
         northPanel.setLayout(new GridLayout(1, 11));
-       
-     
+
         eastPanel = new JPanel();
         eastPanel.setLayout(new GridLayout(9, 1));
-       
-        
-        
-        
+
         this.add(centerPart, BorderLayout.CENTER);
         this.add(eastPanel, BorderLayout.EAST);
         this.add(westPanel, BorderLayout.WEST);
         this.add(northPanel, BorderLayout.NORTH);
         this.add(southPanel, BorderLayout.SOUTH);
         Thread t1 = new Thread(new Runnable() {
-         public void run() {
-                     initSouthPanel();
+            public void run() {
+                initSouthPanel();
 
-         }
-    });  
-    t1.start();
-    Thread t2 = new Thread(new Runnable() {
-         public void run() {
-             initWestPanel();
-         }
-    });  
-    t2.start();
-    Thread t3 = new Thread(new Runnable() {
-         public void run() {
-              initNorthPanel();
-         }
-    });  
-    t3.start();
-    Thread t4 = new Thread(new Runnable() {
-         public void run() {
- initEastPanel();         }
-    });  
-    t4.start();
-        
+            }
+        });
+        t1.start();
+        Thread t2 = new Thread(new Runnable() {
+            public void run() {
+                initWestPanel();
+            }
+        });
+        t2.start();
+        Thread t3 = new Thread(new Runnable() {
+            public void run() {
+                initNorthPanel();
+            }
+        });
+        t3.start();
+        Thread t4 = new Thread(new Runnable() {
+            public void run() {
+                initEastPanel();
+            }
+        });
+        t4.start();
+
         try {
             t1.join();
             t2.join();
@@ -255,47 +248,43 @@ Timer timer = new Timer(20000, new ActionListener() {
         } catch (InterruptedException ex) {
             Logger.getLogger(MonopolyBoardPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-  
-    
-       RollButton = new JButton("Roll Dice");
-          dice1 = new Dice();
-         dice2 = new Dice();
-        
+
+        RollButton = new JButton("Roll Dice");
+        dice1 = new Dice();
+        dice2 = new Dice();
+
         centerPart.add(dice1);
         centerPart.add(dice2);
-        RollButton.addActionListener(new ActionListener(){
-       public void actionPerformed(ActionEvent e){
-                
-       
-       
-          dice1Num = dice1.getDice();
-         dice2Num = dice2.getDice();
-        diceNumber = dice1Num + dice2Num;
-        RollButton.setEnabled(false);
-          
+        RollButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
-    MonopolyBoardPanel.this.move(diceNumber);
-        
+                dice1Num = dice1.getDice();
+                dice2Num = dice2.getDice();
+                diceNumber = dice1Num + dice2Num;
+                RollButton.setEnabled(false);
+
+                MonopolyBoardPanel.this.move(diceNumber);
+
             }
-       
+
         }
-               );   
-                centerPart.add(RollButton);
-             
+        );
+        centerPart.add(RollButton);
+
     }
-    
+
     private void initSouthPanel() {
-        int allIndex=southTilesNames.length-1;
+        int allIndex = southTilesNames.length - 1;
         allTiles[allIndex--] = new Jail(southTilesNames[0]);
         allTiles[allIndex--] = new Country(120, 120, Color.CYAN,
                 "Connecticut Avenue", southTilesNames[1]);
-        allTiles[allIndex--] = new Country(100, 100, Color.CYAN, 
+        allTiles[allIndex--] = new Country(100, 100, Color.CYAN,
                 "Vermont Avenue", southTilesNames[2]);
         allTiles[allIndex--] = new Chance(southTilesNames[3]);
         allTiles[allIndex--] = new Country(100, 100, Color.CYAN,
                 "Oriental Avenue", southTilesNames[4]);
-       allTiles[allIndex--] =  new RailRoad(southTilesNames[5],50,"Reading RailRoad");
-        allTiles[allIndex--] = new Taxes(southTilesNames[6],200);
+        allTiles[allIndex--] = new RailRoad(southTilesNames[5], 50, "Reading RailRoad");
+        allTiles[allIndex--] = new Taxes(southTilesNames[6], 200);
         allTiles[allIndex--] = new Country(60, 60, Color.WHITE,
                 "Baltic Avenue", southTilesNames[7]);
         allTiles[allIndex--] = new Chest(southTilesNames[8]);
@@ -303,18 +292,18 @@ Timer timer = new Timer(20000, new ActionListener() {
                 "Mediterranean Avenue", southTilesNames[9]);
 
         allTiles[allIndex--] = new GO(southTilesNames[10]);
-        
-        allIndex = southTilesNames.length-1;
-        
-        for(int i = 0; i<southTilesNames.length ; i++) {
+
+        allIndex = southTilesNames.length - 1;
+
+        for (int i = 0; i < southTilesNames.length; i++) {
             southPanel.add(allTiles[allIndex]);
             allIndex--;
         }
     }
-    
+
     private void initWestPanel() {
         int allIndex = southTilesNames.length + westTilesNames.length - 1;
-        
+
         allTiles[allIndex--] = new Country(200, 200, Color.ORANGE,
                 "New York Avenue", westTilesNames[0]);
         allTiles[allIndex--] = new Country(180, 180, Color.ORANGE,
@@ -322,27 +311,27 @@ Timer timer = new Timer(20000, new ActionListener() {
         allTiles[allIndex--] = new Chest(westTilesNames[2]);
         allTiles[allIndex--] = new Country(180, 180, Color.ORANGE,
                 "St. James Place", westTilesNames[3]);
-         allTiles[allIndex--] =  new RailRoad(westTilesNames[4],50,"PENNSYLVANIA RAILROAD");
+        allTiles[allIndex--] = new RailRoad(westTilesNames[4], 50, "PENNSYLVANIA RAILROAD");
         allTiles[allIndex--] = new Country(160, 160, Color.PINK,
                 "Virginia Avenue", westTilesNames[5]);
         allTiles[allIndex--] = new Country(140, 140, Color.PINK,
                 "States Avenue", westTilesNames[6]);
-        allTiles[allIndex--] = new Utilties ("Electric Company.png" ,150,"Electric Company");
+        allTiles[allIndex--] = new Utilties("Electric Company.png", 150, "Electric Company");
 
         allTiles[allIndex--] = new Country(140, 140, Color.PINK,
                 "St. Charles Place", westTilesNames[8]);
-        
+
         allIndex = southTilesNames.length + westTilesNames.length - 1;
-        
-        for(int i = 0; i<westTilesNames.length ; i++) {
+
+        for (int i = 0; i < westTilesNames.length; i++) {
             westPanel.add(allTiles[allIndex]);
             allIndex--;
         }
     }
-    
+
     private void initNorthPanel() {
-        int allIndex=southTilesNames.length + westTilesNames.length;
-        
+        int allIndex = southTilesNames.length + westTilesNames.length;
+
         allTiles[allIndex++] = new Jail(northTilesNames[0]);
         allTiles[allIndex++] = new Country(220, 220, Color.RED,
                 "Kentucky Avenue", northTilesNames[1]);
@@ -351,28 +340,28 @@ Timer timer = new Timer(20000, new ActionListener() {
                 "Indiana Avenue", northTilesNames[3]);
         allTiles[allIndex++] = new Country(240, 240, Color.RED,
                 "Illinois Avenue", northTilesNames[4]);
-        allTiles[allIndex++] =   new RailRoad(  northTilesNames[5],50,"B&O RailRoad");
+        allTiles[allIndex++] = new RailRoad(northTilesNames[5], 50, "B&O RailRoad");
         allTiles[allIndex++] = new Country(260, 260, Color.YELLOW,
                 "Atlantic Avenue", northTilesNames[6]);
         allTiles[allIndex++] = new Country(260, 260, Color.YELLOW,
                 "Ventnor Avenue", northTilesNames[7]);
-        allTiles[allIndex++] =new Utilties ("Water Selection.png",150,"Water Works");
+        allTiles[allIndex++] = new Utilties("Water Selection.png", 150, "Water Works");
         allTiles[allIndex++] = new Country(280, 280, Color.YELLOW,
                 "Marvin Gardens", northTilesNames[9]);
         allTiles[allIndex++] = new GoToJail(northTilesNames[10]);
-        
-        allIndex=southTilesNames.length + westTilesNames.length;
-        
-        for(int i = 0; i<northTilesNames.length ; i++) {
+
+        allIndex = southTilesNames.length + westTilesNames.length;
+
+        for (int i = 0; i < northTilesNames.length; i++) {
             northPanel.add(allTiles[allIndex]);
             allIndex++;
         }
     }
-    
+
     private void initEastPanel() {
-        int allIndex = southTilesNames.length + westTilesNames.length + 
-                northTilesNames.length;
-        
+        int allIndex = southTilesNames.length + westTilesNames.length
+                + northTilesNames.length;
+
         allTiles[allIndex++] = new Country(300, 300, Color.GREEN,
                 "Pacific Avenue", eastTilesNames[0]);
         allTiles[allIndex++] = new Country(300, 300, Color.GREEN,
@@ -380,68 +369,62 @@ Timer timer = new Timer(20000, new ActionListener() {
         allTiles[allIndex++] = new Chest(eastTilesNames[2]);
         allTiles[allIndex++] = new Country(320, 320, Color.GREEN,
                 "Pensylvania Avenue", eastTilesNames[3]);
-        allTiles[allIndex++] = new RailRoad(eastTilesNames[4],50,"SHORT LINE");
+        allTiles[allIndex++] = new RailRoad(eastTilesNames[4], 50, "SHORT LINE");
         allTiles[allIndex++] = new Chance(eastTilesNames[5]);
         allTiles[allIndex++] = new Country(350, 350, Color.BLUE,
                 "Park Place", eastTilesNames[6]);
-        allTiles[allIndex++] = new Taxes(eastTilesNames[7],100);
+        allTiles[allIndex++] = new Taxes(eastTilesNames[7], 100);
         allTiles[allIndex++] = new Country(400, 400, Color.BLUE,
                 "Boardwalk", eastTilesNames[8]);
-        
-        allIndex = southTilesNames.length + westTilesNames.length + 
-                northTilesNames.length;
-        
-        for(int i = 0; i< eastTilesNames.length ; i++) {
+
+        allIndex = southTilesNames.length + westTilesNames.length
+                + northTilesNames.length;
+
+        for (int i = 0; i < eastTilesNames.length; i++) {
             eastPanel.add(allTiles[allIndex]);
             allIndex++;
         }
     }
-    
-    public void move (int diceNumber){
+
+    public void move(int diceNumber) {
         turn = (turn + 1) % this.players.size();
-        while(this.players.get(MonopolyBoardPanel.turn).isDead)
-        {
-             turn = (turn + 1) % this.players.size();
+        while (this.players.get(MonopolyBoardPanel.turn).isDead) {
+            turn = (turn + 1) % this.players.size();
         }
-         System.out.println("Trun"+ turn);
+        System.out.println("Trun" + turn);
         if (diceFlag) {
             diceFlag = false;
-            if (turn==0)
-            {
-                turn=this.players.size()-1;
-                while(this.players.get(MonopolyBoardPanel.turn).isDead)
-        {
-             turn = (turn - 1) % this.players.size();
-        }
+            if (turn == 0) {
+                turn = this.players.size() - 1;
+                while (this.players.get(MonopolyBoardPanel.turn).isDead) {
+                    turn = (turn - 1) % this.players.size();
+                }
+            } else {
+                while (this.players.get(MonopolyBoardPanel.turn).isDead) {
+                    turn = (turn - 1) % this.players.size();
+                }
             }
-            else 
-           while(this.players.get(MonopolyBoardPanel.turn).isDead)
-        {
-             turn = (turn - 1) % this.players.size();
-        }
 
         }
         if (dice1Num == dice2Num) {
             diceFlag = true;
         }
-       currentPlayer = this.players.get(this.turn);
-       CurrentPlayerName = "Player : " + players.get(turn).name + " Turn" ;
+        currentPlayer = this.players.get(this.turn);
+        CurrentPlayerName = "Player : " + players.get(turn).name + " Turn";
 
-       
-        while(currentPlayer.getInJail()) {
-           allTiles[10].performAction(currentPlayer);
-      while(this.players.get(MonopolyBoardPanel.turn).isDead)
-        {
-             turn = (turn + 1) % this.players.size();
-        }
+        while (currentPlayer.getInJail()) {
+            allTiles[10].performAction(currentPlayer);
+            while (this.players.get(MonopolyBoardPanel.turn).isDead) {
+                turn = (turn + 1) % this.players.size();
+            }
             currentPlayer = MonopolyBoardPanel.players.get(this.turn);
         }
-        
+
         MainPanel main = (MainPanel) this.getParent();
         main.currentPanel.buyBtn.setEnabled(false);
-        currentPlayer.move(currentPlayer.place+diceNumber);
+        currentPlayer.move(currentPlayer.place + diceNumber);
         main.update();
-      /*  int firstPlace = currentPlayer.place;
+        /*  int firstPlace = currentPlayer.place;
     
         int secondPlace = (firstPlace + diceNumber) % allTiles.length;
         
@@ -453,141 +436,136 @@ Timer timer = new Timer(20000, new ActionListener() {
        
      MainPanel  b = (MainPanel)this.getParent();
         b.currentPanel.UpdateCurrentDetails();*/
-        
-  
+
     }
-    
-   public static  String getCurrentPlayerName(){
-       return CurrentPlayerName;
-   }
-    
-    public static int returnTurn()
-    {
+
+    public static String getCurrentPlayerName() {
+        return CurrentPlayerName;
+    }
+
+    public static int returnTurn() {
         return MonopolyBoardPanel.turn;
     }
-    
-    public static void setTurn(int turn)
-    {
-       MonopolyBoardPanel.turn = turn;
+
+    public static void setTurn(int turn) {
+        MonopolyBoardPanel.turn = turn;
     }
-    
-     public static Tile[] getTileArr()
-    {
+
+    public static Tile[] getTileArr() {
         return MonopolyBoardPanel.allTiles;
     }
-     
-     public int getPlayersNumber() {
-         return Playernumber;
-     }
-    
+
+    public int getPlayersNumber() {
+        return Playernumber;
+    }
+
     public void save() {
-        if (!saving){
-         System.out.println("entered saving");
+        if (!saving) {
+            System.out.println("entered saving");
 
             saving = true;
             CurrentPanel.savinglabel.setVisible(true);
-        try {
-            FileOutputStream fos = new FileOutputStream("game.data", false);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeInt(Playernumber);
-            oos.writeInt(turn);
-            //oos.writeUTF(CurrentPlayerName);
-            oos.writeBoolean(diceFlag);
-            oos.writeInt(MonopolyBoardPanel.players.indexOf(currentPlayer));
-            //oos.writeObject(dice1);
-            //oos.writeObject(dice2);
-            
-            for(int i = 0; i < players.size(); i++) {
-                players.get(i).save(fos, oos);
-            }
-            
-            for(int i = 0; i < 40; i++) {
-                if(allTiles[i] instanceof PropertyTile) {
-                    PropertyTile tile = (PropertyTile)allTiles[i];
-                    tile.save(fos, oos);
+            try {
+                FileOutputStream fos = new FileOutputStream("game.data", false);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeInt(Playernumber);
+                oos.writeInt(turn);
+                //oos.writeUTF(CurrentPlayerName);
+                oos.writeBoolean(diceFlag);
+                oos.writeInt(MonopolyBoardPanel.players.indexOf(currentPlayer));
+                //oos.writeObject(dice1);
+                //oos.writeObject(dice2);
+
+                for (int i = 0; i < players.size(); i++) {
+                    players.get(i).save(fos, oos);
                 }
-            }
-            
-            oos.close();
-            fos.close();
-            
-               Timer timer = new Timer(2000, new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saving = false;
-              CurrentPanel.savinglabel.setVisible(false);
-            }
-        });
- timer.start();
-           
+                for (int i = 0; i < 40; i++) {
+                    if (allTiles[i] instanceof PropertyTile) {
+                        PropertyTile tile = (PropertyTile) allTiles[i];
+                        tile.save(fos, oos);
+                    }
+                }
 
-            System.out.println("saved");
-        } catch(IOException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "", 2);
-        }
+                oos.close();
+                fos.close();
+
+                Timer timer = new Timer(2000, new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        saving = false;
+                        CurrentPanel.savinglabel.setVisible(false);
+                    }
+                });
+                timer.start();
+
+                System.out.println("saved");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "", 2);
+            }
         }
     }
-    
-    public void loadGame(FileInputStream fis, ObjectInputStream ois) 
+
+    public void loadGame(FileInputStream fis, ObjectInputStream ois)
             throws IOException, ClassNotFoundException {
-        
+
         turn = ois.readInt();
         diceFlag = ois.readBoolean();
         currentPlayer = players.get(ois.readInt());
         //dice1 = (Dice)ois.readObject();
         //dice2 = (Dice)ois.readObject();
         System.out.println("Players : " + players.size());
-        for(int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < players.size(); i++) {
             players.get(i).load(fis, ois);
         }
-        
-        for(int i = 0; i < 40; i++) {
-            if(allTiles[i] instanceof PropertyTile) {
+
+        for (int i = 0; i < 40; i++) {
+            if (allTiles[i] instanceof PropertyTile) {
                 PropertyTile tile = (PropertyTile) allTiles[i];
                 tile.load(fis, ois);
             }
         }
-        
-        
-        CurrentPlayerName = "Player : " + players.get(turn).name + " Turn" ;
+
+        CurrentPlayerName = "Player : " + players.get(turn).name + " Turn";
         System.out.println("Loaded");
     }
-    public static void removePlayerGui(int x)
-    {
-        for(int i =0; i<allTiles.length; i++)
-        {
+
+    public static void removePlayerGui(int x) {
+        for (int i = 0; i < allTiles.length; i++) {
             allTiles[i].GetLabels().remove(x);
         }
     }
+
     public void updateBoard() {
-        for(int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < players.size(); i++) {
             allTiles[0].GetLabels().get(i).setVisible(false);
         }
-        
-        for(int i = 0; i < players.size(); i++) {
-            if(!players.get(i).isDead)
+
+        for (int i = 0; i < players.size(); i++) {
+            if (!players.get(i).isDead) {
                 allTiles[players.get(i).place].GetLabels().get(i).setVisible(true);
+            }
         }
-        
-        for(int i = 0; i < 40; i++) {
-            if(allTiles[i] instanceof Country) {
+
+        for (int i = 0; i < 40; i++) {
+            if (allTiles[i] instanceof Country) {
                 Country country = (Country) allTiles[i];
-                if(country.getCanBuildHousesFlag()) {
-                    for(int j = 0; j < country.getHousesNumber(); j++) {
+                if (country.getCanBuildHousesFlag()) {
+                    for (int j = 0; j < country.getHousesNumber(); j++) {
                         country.getHousesImgs()[j].setVisible(true);
                     }
-                } else if(country.getCanBuildHotelFlag()) {
-                    if(country.getHotelsNumber() == 0) {
+                } else if (country.getCanBuildHotelFlag()) {
+                    if (country.getHotelsNumber() == 0) {
                         System.out.println("houses : " + country.getHousesNumber());
-                        for(int j = 0; j < country.getHousesNumber(); j++) {
+                        for (int j = 0; j < country.getHousesNumber(); j++) {
                             country.getHousesImgs()[j].setVisible(true);
                         }
                     }
-                }  else if(country.getHotelsNumber() > 0) {
-                        System.out.println("hotels :" + country.getHotelsNumber());
-                        country.showHotel();
-                    }
+                } else if (country.getHotelsNumber() > 0) {
+                    System.out.println("hotels :" + country.getHotelsNumber());
+                    country.showHotel();
+                }
             }
         }
     }

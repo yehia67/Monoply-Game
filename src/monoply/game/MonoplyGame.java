@@ -21,17 +21,17 @@ public class MonoplyGame {
     /**
      * @param args the command line arguments
      */
-   ;
+    ;
     public static MF2 frame2;
-    
-    public static void main(String args[]){
-        ArrayList<Player> players= new ArrayList<Player>();
+
+    public static void main(String args[]) {
+        ArrayList<Player> players = new ArrayList<Player>();
         //Dice dice = new Dice();
         /*mainFrame mF = new mainFrame();
         mF.setVisible(true);*/
-       // MainFrame frame = new MainFrame();
-                 frame2 = new MF2();
+        // MainFrame frame = new MainFrame();
+        frame2 = new MF2();
 
-      }
-    
+    }
+
 }

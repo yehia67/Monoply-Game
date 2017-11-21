@@ -19,34 +19,32 @@ public class playPanel extends javax.swing.JPanel {
      */
     public playPanel() {
         initComponents();
-       /*player3TextField.setVisible(false);
+        /*player3TextField.setVisible(false);
         player4TextField.setVisible(false);
         label4.setVisible(false);
         label3.setVisible(false);*/
-      JSpinner.DefaultEditor editor = ( JSpinner.DefaultEditor ) jSpinner1.getEditor();
-   editor.getTextField().setEnabled( true );
-   editor.getTextField().setEditable( false );
-       System.out.println("Intialized");
-       
-       
+        JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) jSpinner1.getEditor();
+        editor.getTextField().setEnabled(true);
+        editor.getTextField().setEditable(false);
+        System.out.println("Intialized");
 
     }
-public String getP1Name()
-{
-    return player1TextField.getText();
-}
-public String getP2Name()
-{
-    return player2TextField.getText();
-}
-public String getP3Name()
-{
-    return player3TextField.getText();
-}
-public String getP4Name()
-{
-    return player4TextField.getText();
-}
+
+    public String getP1Name() {
+        return player1TextField.getText();
+    }
+
+    public String getP2Name() {
+        return player2TextField.getText();
+    }
+
+    public String getP3Name() {
+        return player3TextField.getText();
+    }
+
+    public String getP4Name() {
+        return player4TextField.getText();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -214,17 +212,17 @@ public String getP4Name()
     private void player4TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player4TextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_player4TextFieldActionPerformed
-public static int NoOfPlayers;
+    public static int NoOfPlayers;
     private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
-int value = (Integer) jSpinner1.getValue(); 
- NoOfPlayers = value;
-switch (value) {
+        int value = (Integer) jSpinner1.getValue();
+        NoOfPlayers = value;
+        switch (value) {
             case 2:
                 player3TextField.setVisible(false);
                 player4TextField.setVisible(false);
                 label3.setVisible(false);
                 label4.setVisible(false);
-         
+
                 break;
             case 3:
                 player3TextField.setVisible(true);
@@ -238,35 +236,35 @@ switch (value) {
                 player4TextField.setVisible(true);
                 label3.setVisible(true);
                 label4.setVisible(true);
- 
+
                 break;
         }
-      
+
     }//GEN-LAST:event_jSpinner1StateChanged
-    public static int GetNofPlayers(){
-    return  NoOfPlayers;
-}
-    public int getSpinnerValue()
-    {
+    public static int GetNofPlayers() {
+        return NoOfPlayers;
+    }
+
+    public int getSpinnerValue() {
         return (Integer) jSpinner1.getValue();
     }
     private void player1TextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player1TextFieldMouseClicked
-player1TextField.setText("");        // TODO add your handling code here:
+        player1TextField.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_player1TextFieldMouseClicked
 
     private void player3TextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player3TextFieldMouseClicked
-       player3TextField.setText("");        // TODO add your handling code here:
+        player3TextField.setText("");        // TODO add your handling code here:
 
         // TODO add your handling code here:
     }//GEN-LAST:event_player3TextFieldMouseClicked
 
     private void player2TextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player2TextFieldMouseClicked
-player2TextField.setText("");        // TODO add your handling code here:
+        player2TextField.setText("");        // TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_player2TextFieldMouseClicked
 
     private void player4TextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player4TextFieldMouseClicked
-player4TextField.setText("");        // TODO add your handling code here:
+        player4TextField.setText("");        // TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_player4TextFieldMouseClicked
 

@@ -24,5 +24,5 @@ public class Chest extends NonPropertyTile {
         JOptionPane.showMessageDialog(null,
                 MonopolyBoardPanel.cards.getDrawnCard().getDescription(), "", 2);
     }
-    
+
 }

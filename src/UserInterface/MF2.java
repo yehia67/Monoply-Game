@@ -38,15 +38,16 @@ import javax.swing.JPanel;
  *
  * @author eslam
  */
-public class MF2 extends javax.swing.JFrame  {
+public class MF2 extends javax.swing.JFrame {
+
     public static MainPanel mp;
     public static playPanel pp;
-    public static  JMenuBar bar;
-    private  JMenu  File;
+    public static JMenuBar bar;
+    private JMenu File;
     public static JMenuItem save;
-    public  JMenuItem exit;
+    public JMenuItem exit;
     MF2 mf = this;
-    startPanel sp ;
+    startPanel sp;
     /*private class MyDispatcher implements KeyEventDispatcher {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
@@ -59,114 +60,114 @@ public class MF2 extends javax.swing.JFrame  {
         }
     }*/
     public static JPanel currentpanel;
-            class startPanel extends JPanel {
 
-            private JButton start;
-            private JButton exit;
-            private JButton loadBtn;
-            Image background;
+    class startPanel extends JPanel {
 
-            public startPanel() {
-                this.setSize(mf.getContentPane().getWidth(), mf.getContentPane().getHeight());
-                this.setLayout(null);
+        private JButton start;
+        private JButton exit;
+        private JButton loadBtn;
+        Image background;
 
-                start = new JButton("New game");
-                start.setSize(300, 75);
-                start.setLocation((this.getWidth() - start.getWidth()) / 2, 250);
-                this.add(start);
-                exit = new JButton("Exit");
-                exit.setSize(300, 75);
-                exit.setLocation((this.getWidth() - exit.getWidth()) / 2, 550);
-                this.add(exit);
-                loadBtn = new JButton("Load");
-                loadBtn.setSize(300, 75);
-                loadBtn.setLocation((this.getWidth() - loadBtn.getWidth()) / 2, start.getY() + (exit.getY() - start.getY() + start.getHeight() - loadBtn.getHeight()) / 2);
-                this.add(loadBtn);
-                this.setVisible(true);
-                try {
-                    background = ImageIO.read(new File("Monopoly Board/Background.jpg")).getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
-                } catch (Exception ex) {
-                    System.out.println("FAIL");
+        public startPanel() {
+            this.setSize(mf.getContentPane().getWidth(), mf.getContentPane().getHeight());
+            this.setLayout(null);
+
+            start = new JButton("New game");
+            start.setSize(300, 75);
+            start.setLocation((this.getWidth() - start.getWidth()) / 2, 250);
+            this.add(start);
+            exit = new JButton("Exit");
+            exit.setSize(300, 75);
+            exit.setLocation((this.getWidth() - exit.getWidth()) / 2, 550);
+            this.add(exit);
+            loadBtn = new JButton("Load");
+            loadBtn.setSize(300, 75);
+            loadBtn.setLocation((this.getWidth() - loadBtn.getWidth()) / 2, start.getY() + (exit.getY() - start.getY() + start.getHeight() - loadBtn.getHeight()) / 2);
+            this.add(loadBtn);
+            this.setVisible(true);
+            try {
+                background = ImageIO.read(new File("Monopoly Board/Background.jpg")).getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
+            } catch (Exception ex) {
+                System.out.println("FAIL");
+            }
+
+            pp = new playPanel();
+
+            JPanel panel = new JPanel();
+            panel.setOpaque(false);
+            //panel.setLayout(null);
+            // panel.setBackground(Color.red);
+            panel.setSize(600, 450);
+            panel.setLocation(start.getWidth() + start.getX() + 10, this.getHeight() * 1 / 4);
+            // pp.setLocation(0, 0);
+            panel.add(pp);
+            this.add(panel);
+            startPanel sp = this;
+
+            start.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+
+                    mf.setBarVisibality(false);
+                    sp.setVisible(false);
+                    System.out.println("Spinner " + pp.getSpinnerValue());
+                    MF2.mp = new MainPanel(mf.getContentPane().getWidth(), mf.getContentPane().getHeight(), pp.getSpinnerValue());
+                    mp.setVisible(true);
+                    //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
+                    mp.setLocation(0, 0);
+                    mf.add(mp);
+
                 }
+            });
 
-                pp = new playPanel();
-
-                JPanel panel = new JPanel();
-                panel.setOpaque(false);
-                //panel.setLayout(null);
-                // panel.setBackground(Color.red);
-                panel.setSize(600, 450);
-                panel.setLocation(start.getWidth() + start.getX() + 10, this.getHeight() * 1 / 4);
-                // pp.setLocation(0, 0);
-                panel.add(pp);
-                this.add(panel);
-                startPanel sp = this;
-
-                start.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent ae) {
-                        
-                        mf.setBarVisibality(false);
+            loadBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    try {
+                        FileInputStream fis = new FileInputStream("game.data");
+                        ObjectInputStream ois = new ObjectInputStream(fis);
+                        System.out.println("hereeeeeeeeeeee");
+                        MonopolyBoardPanel board = loadGame(fis, ois);
                         sp.setVisible(false);
-                        System.out.println("Spinner " + pp.getSpinnerValue());
-                        MF2.mp = new MainPanel(mf.getContentPane().getWidth(), mf.getContentPane().getHeight(), pp.getSpinnerValue());
+                        MF2.mp = new MainPanel(board, mf.getContentPane().getWidth(), mf.getContentPane().getHeight());
                         mp.setVisible(true);
                         //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
                         mp.setLocation(0, 0);
                         mf.add(mp);
-                        
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(MF2.this, "No saved game found", "", 2);
+                    } catch (ClassNotFoundException ex) {
+                        JOptionPane.showMessageDialog(MF2.this, ex.getMessage(),
+                                "", 2);
                     }
-                });
+                }
+            });
 
-                loadBtn.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent ae) {
-                        try {
-                            FileInputStream fis = new FileInputStream("game.data");
-                            ObjectInputStream ois = new ObjectInputStream(fis);
-                            System.out.println("hereeeeeeeeeeee");
-                            MonopolyBoardPanel board = loadGame(fis, ois);
-                            sp.setVisible(false);
-                            MF2.mp = new MainPanel(board, mf.getContentPane().getWidth(), mf.getContentPane().getHeight());
-                            mp.setVisible(true);
-                            //mp.setSize(mf.getContentPane().getWidth(),mf.getContentPane().getHeight());
-                            mp.setLocation(0, 0);
-                            mf.add(mp);
-                        } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(MF2.this, "No saved game found", "", 2);
-                        } catch (ClassNotFoundException ex) {
-                            JOptionPane.showMessageDialog(MF2.this, ex.getMessage(),
-                                    "", 2);
-                        }
-                    }
-                });
-
-                exit.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent ae) {
-                        System.exit(0);
-                    }
-                });
-
-            }
-
-            @Override
-            protected void paintComponent(Graphics g) {
-
-                super.paintComponent(g);
-                g.drawImage(background, 0, 0, null);
-            }
+            exit.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    System.exit(0);
+                }
+            });
 
         }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+
+            super.paintComponent(g);
+            g.drawImage(background, 0, 0, null);
+        }
+
+    }
 
     /**
      * Creates new form MF2
      */
     public MF2() {
-       // MF2 mf = this;
+        // MF2 mf = this;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setSize(screenSize.width-100*screenSize.width/screenSize.height, screenSize.height-100*screenSize.height/screenSize.width);
+        this.setSize(screenSize.width - 100 * screenSize.width / screenSize.height, screenSize.height - 100 * screenSize.height / screenSize.width);
         //this.setSize(1260, 945);
 
         //this.setMinimumSize(new Dimension(1000, 725));
-        
         this.setVisible(true);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -174,24 +175,24 @@ public class MF2 extends javax.swing.JFrame  {
         this.setLayout(null);
         bar = new JMenuBar();
         File = new JMenu("File");
-        save= new JMenuItem("Save game");
-        exit= new JMenuItem("Exit game");
+        save = new JMenuItem("Save game");
+        exit = new JMenuItem("Exit game");
         bar.add(File);
         File.add(save);
         File.add(exit);
         bar.setVisible(false);
         bar.setLocation(0, 0);
-        bar.setSize(this.getWidth(),20);
+        bar.setSize(this.getWidth(), 20);
         bar.setFocusable(false);
         this.add(bar);
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int option = JOptionPane.showConfirmDialog(mf, "Are you Sure want to exit", "Exit game!",JOptionPane.YES_NO_OPTION );
-                if (option==JOptionPane.YES_OPTION ){
-                mp.setVisible(false);
-                setBarVisibality(false);
-                sp.setVisible(true);
+                int option = JOptionPane.showConfirmDialog(mf, "Are you Sure want to exit", "Exit game!", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    mp.setVisible(false);
+                    setBarVisibality(false);
+                    sp.setVisible(true);
                 }
             }
         });
@@ -199,26 +200,26 @@ public class MF2 extends javax.swing.JFrame  {
         sp = new startPanel();
         sp.setLocation(0, 0);
         //KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-       // manager.addKeyEventDispatcher(new MyDispatcher());
+        // manager.addKeyEventDispatcher(new MyDispatcher());
         //this.addKeyListener(this);
-        currentpanel= sp;
+        currentpanel = sp;
         this.add(sp);
         initComponents();
     }
-    private Dimension getDimension()
-    {
+
+    private Dimension getDimension() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        screenSize.width= screenSize.width-100*screenSize.width/screenSize.height;
-        screenSize.height= screenSize.height-100*screenSize.height/screenSize.width;
+        screenSize.width = screenSize.width - 100 * screenSize.width / screenSize.height;
+        screenSize.height = screenSize.height - 100 * screenSize.height / screenSize.width;
         return screenSize;
     }
-    
-    public MonopolyBoardPanel loadGame(FileInputStream fis, ObjectInputStream ois) 
-            throws IOException, ClassNotFoundException{
+
+    public MonopolyBoardPanel loadGame(FileInputStream fis, ObjectInputStream ois)
+            throws IOException, ClassNotFoundException {
         int playersNum = ois.readInt();
         MonopolyBoardPanel board = new MonopolyBoardPanel(playersNum, MF2.this.getContentPane().getHeight());
         board.loadGame(fis, ois);
-        return board;   
+        return board;
     }
 
     /**
@@ -282,22 +283,20 @@ public class MF2 extends javax.swing.JFrame  {
             }
         });
     }
-    public void setBarVisibality(Boolean visability){
-        if (visability && !bar.isVisible())
-        {
-            this.setSize(this.getWidth(), this.getHeight()+bar.getHeight());
+
+    public void setBarVisibality(Boolean visability) {
+        if (visability && !bar.isVisible()) {
+            this.setSize(this.getWidth(), this.getHeight() + bar.getHeight());
             currentpanel.setLocation(0, bar.getHeight());
             bar.setVisible(true);
-        }
-        else if (!visability && bar.isVisible())
-        {
-             this.setSize(this.getWidth(), this.getHeight()-bar.getHeight());
+        } else if (!visability && bar.isVisible()) {
+            this.setSize(this.getWidth(), this.getHeight() - bar.getHeight());
             currentpanel.setLocation(0, 0);
             bar.setVisible(false);
         }
     }
 
-   /* @Override
+    /* @Override
     public void keyTyped(KeyEvent e) {
     }
 

@@ -17,32 +17,33 @@ import javax.swing.JPanel;
  * @author ASUS
  */
 public class MonopolyCenterPanel extends JPanel {
-    
-       private BufferedImage backgroundImage;
+
+    private BufferedImage backgroundImage;
+
     public MonopolyCenterPanel(String imgName) {
         try {
-            backgroundImage = ImageIO.read(new File("Monopoly Board/" 
+            backgroundImage = ImageIO.read(new File("Monopoly Board/"
                     + imgName));
             Dimension size = new Dimension(backgroundImage.getWidth(),
-            backgroundImage.getHeight());
+                    backgroundImage.getHeight());
             setPreferredSize(size);
             setMinimumSize(size);
             setMaximumSize(size);
             setSize(size);
-           
-        } catch(Exception e) {
-          
+
+        } catch (Exception e) {
+
             System.out.println(e.getMessage());
         }
-      //
+        //
     }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
-     g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), 
-              null);
-        
+
+        g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(),
+                null);
+
     }
 }

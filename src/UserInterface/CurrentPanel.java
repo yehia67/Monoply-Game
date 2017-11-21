@@ -40,19 +40,18 @@ import monoply.game.RotatedIcon;
  *
  * @author ASUS
  */
+public class CurrentPanel extends JPanel {
 
-
-public class CurrentPanel extends JPanel{
     private BufferedImage backgroundImage;
     public PlayersContainerPanel playerContainerRef;
-    public JLabel TileImageLabel; 
+    public JLabel TileImageLabel;
     public ImageIcon currImage;
     public JLabel LabelName;
     public static JLabel savinglabel;
     public static JLabel tosavelabel;
     public String test1;
     private JButton saveBtn = new JButton("Save");
-   // private JPanel btnsPanel = new JPanel();
+    // private JPanel btnsPanel = new JPanel();
     JPanel buySellPnl = new JPanel(new GridLayout(1, 2));
     public JButton buyBtn = new JButton("Buy");
     private JButton sellBtn = new JButton("Sell");
@@ -60,133 +59,116 @@ public class CurrentPanel extends JPanel{
     private JButton unmortgageBtn = new JButton("Unmortgage");
     private JPanel mortgageImgPanel;
     private JLabel mortgageImgJLabel;
-     public CurrentPanel() {
-        
-            
+
+    public CurrentPanel() {
+
         init();
     }
-     
-    public void init()
-    {    
-         
-        
+
+    public void init() {
+
         TileImageLabel = new JLabel();
-            LabelName   =   new JLabel("Hello world!");
-            savinglabel =  new JLabel("Saving...");
-            tosavelabel = new JLabel("<html>To save game press \"CTRL+S\" or press <br>  \"ALT\" to view and hide menu bar<html>");
-            savinglabel.setVisible(false);
-         
-        try
-        {
-    backgroundImage = ImageIO.read(new File("Monopoly Board/monopolybg3.jpg" ) );
-        }
-        catch(Exception ex)
-        {
+        LabelName = new JLabel("Hello world!");
+        savinglabel = new JLabel("Saving...");
+        tosavelabel = new JLabel("<html>To save game press \"CTRL+S\" or press <br>  \"ALT\" to view and hide menu bar<html>");
+        savinglabel.setVisible(false);
+
+        try {
+            backgroundImage = ImageIO.read(new File("Monopoly Board/monopolybg3.jpg"));
+        } catch (Exception ex) {
             System.out.println("FAIL");
         }
-        
-               
-            Dimension size = new Dimension(backgroundImage.getWidth(),
-            backgroundImage.getHeight());
-            
-      this.setLayout(new GridLayout(7,1));
-    //  this.setSize(200, 200);
-    // this.setPreferredSize(new Dimension(200,200));
-      
+
+        Dimension size = new Dimension(backgroundImage.getWidth(),
+                backgroundImage.getHeight());
+
+        this.setLayout(new GridLayout(7, 1));
+        //  this.setSize(200, 200);
+        // this.setPreferredSize(new Dimension(200,200));
+
 //     Board.players.get(Board.turn)                                                                                                                                                                                                                                                                                                                                                                                                                                   
-     JPanel sample = new JPanel();
-   
+        JPanel sample = new JPanel();
 
-  TileImageLabel.setSize(new Dimension(200,200));
-  System.out.println("/"+ MonopolyBoardPanel.allTiles[0].imgName+ ".png");
-   try{
-               currImage = new ImageIcon(ImageIO.read(new File("Monopoly Board/" 
+        TileImageLabel.setSize(new Dimension(200, 200));
+        System.out.println("/" + MonopolyBoardPanel.allTiles[0].imgName + ".png");
+        try {
+            currImage = new ImageIcon(ImageIO.read(new File("Monopoly Board/"
                     + MonopolyBoardPanel.allTiles[0].imgName)));
-                       }
-               catch(Exception ex){
-                  System.out.println("Failed man");
-               }
+        } catch (Exception ex) {
+            System.out.println("Failed man");
+        }
 
-           this.TileImageLabel.setIcon(currImage);
-             buySellPnl.setLayout(new GridLayout(2, 2));
-              buySellPnl.add(buyBtn);
-          buySellPnl.add(sellBtn);
-          buySellPnl.add(mortgageBtn);
-          buySellPnl.add(unmortgageBtn);
-        
-          this.TileImageLabel.setHorizontalAlignment(JLabel.CENTER);
-         //  this.TileImageLabel.setVerticalAlignment(JLabel.CENTER);
-           this.TileImageLabel.setAlignmentY(CENTER_ALIGNMENT);
-          this.add(Box.createVerticalGlue());
-         this.add(Box.createVerticalGlue());
+        this.TileImageLabel.setIcon(currImage);
+        buySellPnl.setLayout(new GridLayout(2, 2));
+        buySellPnl.add(buyBtn);
+        buySellPnl.add(sellBtn);
+        buySellPnl.add(mortgageBtn);
+        buySellPnl.add(unmortgageBtn);
+
+        this.TileImageLabel.setHorizontalAlignment(JLabel.CENTER);
+        //  this.TileImageLabel.setVerticalAlignment(JLabel.CENTER);
+        this.TileImageLabel.setAlignmentY(CENTER_ALIGNMENT);
+        this.add(Box.createVerticalGlue());
+        this.add(Box.createVerticalGlue());
         // this.add(buySellPnl);
-           this.add(TileImageLabel);
-          this.add(LabelName);
-         LabelName.setSize(50, 100);
-         LabelName.setText(getCurrentPlayerName());
-         
-         
-    
-     
-        
+        this.add(TileImageLabel);
+        this.add(LabelName);
+        LabelName.setSize(50, 100);
+        LabelName.setText(getCurrentPlayerName());
+
         buyBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{
-                int playerPlace = MonopolyBoardPanel.currentPlayer.place;
-                if(MonopolyBoardPanel.allTiles[playerPlace] instanceof PropertyTile) {
-                    PropertyTile property = (PropertyTile)MonopolyBoardPanel.allTiles[playerPlace];
-                    if(property.getOwner() == null) {
-                        property.setOwner(MonopolyBoardPanel.currentPlayer);
-                        System.out.println(MonopolyBoardPanel.currentPlayer.money);
-                        MonopolyBoardPanel.currentPlayer.addProperty((PropertyTile)MonopolyBoardPanel.allTiles[playerPlace]);
-                       
-                      MainPanel main = (MainPanel) CurrentPanel.this.getParent();
-                        main.getPlayersContainer().updatePanels();
-                      
-                      
+                try {
+                    int playerPlace = MonopolyBoardPanel.currentPlayer.place;
+                    if (MonopolyBoardPanel.allTiles[playerPlace] instanceof PropertyTile) {
+                        PropertyTile property = (PropertyTile) MonopolyBoardPanel.allTiles[playerPlace];
+                        if (property.getOwner() == null) {
+                            property.setOwner(MonopolyBoardPanel.currentPlayer);
+                            System.out.println(MonopolyBoardPanel.currentPlayer.money);
+                            MonopolyBoardPanel.currentPlayer.addProperty((PropertyTile) MonopolyBoardPanel.allTiles[playerPlace]);
+
+                            MainPanel main = (MainPanel) CurrentPanel.this.getParent();
+                            main.getPlayersContainer().updatePanels();
+
+                        } else {
+                            showWarning("Sorry you can't buy this place");
+                        }
                     } else {
                         showWarning("Sorry you can't buy this place");
                     }
-                } else {
-                    showWarning("Sorry you can't buy this place");
+
+                } catch (NullPointerException ex) {
+
                 }
-               
-            }
-                 catch (NullPointerException ex){
-                        
-                        }
             }
         });
-        
-        mortgageBtn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                            System.out.println("Turn: "+MonopolyBoardPanel.turn );
-                            System.out.println("Name: "+MonopolyBoardPanel.getCurrentPlayerName() );
-                            
 
-                    int currentPlayerIndex = MonopolyBoardPanel.players.indexOf(MonopolyBoardPanel.currentPlayer);
-                    MainPanel mp = (MainPanel) CurrentPanel.this.getParent();
-                    playerPanel p = mp.getPlayersContainer().playerPanel.get(currentPlayerIndex);
-                    String x = p.getSelectedItem();
+        mortgageBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Turn: " + MonopolyBoardPanel.turn);
+                System.out.println("Name: " + MonopolyBoardPanel.getCurrentPlayerName());
 
-                    CountriesGroup[] groups = MonopolyBoardPanel.currentPlayer.getGroupsArray();
-                    ArrayList<PropertyTile> props = MonopolyBoardPanel.currentPlayer.getProperties();
-                    for(int i = 0; i < groups.length; i++) {
-                        ArrayList<Country> countries = groups[i].getCountries();
-                        for(int j = 0; j < countries.size(); j++) {
-                            if( x.equalsIgnoreCase(countries.get(j).getName())){
-                                if (countries.get(j).getCountry().mortgaged /*|| countries.get(j).getCountry().available*/){
-                                    showWarning("This Place is already Mortgaged");
-                                }
-                                
-                                else{
-                                    MonopolyBoardPanel.currentPlayer.money += countries.get(j).getPrice()/2;
-                                    countries.get(j).getCountry().mortgaged= true;
-                                    System.out.println("Player after mortage money"+MonopolyBoardPanel.currentPlayer.money);
-                                    //p.updatePanel();
+                int currentPlayerIndex = MonopolyBoardPanel.players.indexOf(MonopolyBoardPanel.currentPlayer);
+                MainPanel mp = (MainPanel) CurrentPanel.this.getParent();
+                playerPanel p = mp.getPlayersContainer().playerPanel.get(currentPlayerIndex);
+                String x = p.getSelectedItem();
 
-                                    /*mortgageImgPanel = new JPanel();
+                CountriesGroup[] groups = MonopolyBoardPanel.currentPlayer.getGroupsArray();
+                ArrayList<PropertyTile> props = MonopolyBoardPanel.currentPlayer.getProperties();
+                for (int i = 0; i < groups.length; i++) {
+                    ArrayList<Country> countries = groups[i].getCountries();
+                    for (int j = 0; j < countries.size(); j++) {
+                        if (x.equalsIgnoreCase(countries.get(j).getName())) {
+                            if (countries.get(j).getCountry().mortgaged /*|| countries.get(j).getCountry().available*/) {
+                                showWarning("This Place is already Mortgaged");
+                            } else {
+                                MonopolyBoardPanel.currentPlayer.money += countries.get(j).getPrice() / 2;
+                                countries.get(j).getCountry().mortgaged = true;
+                                System.out.println("Player after mortage money" + MonopolyBoardPanel.currentPlayer.money);
+                                //p.updatePanel();
+
+                                /*mortgageImgPanel = new JPanel();
                                     mortgageImgPanel.setOpaque(false);
                                     MonopolyBoardPanel.allTiles[MonopolyBoardPanel.currentPlayer.place].add(mortgageImgPanel);
 
@@ -199,97 +181,89 @@ public class CurrentPanel extends JPanel{
 
                                     mortgageImgJLabel.setIcon(mortgageicon);
                                     mortgageImgJLabel.setVisible(false);*/
-                                }
-                                mp.update();
-                               if (MonopolyBoardPanel.currentPlayer.isMortageNotEnoughMoney())
-                               {
-                                if(MonopolyBoardPanel.currentPlayer.money < MonopolyBoardPanel.currentPlayer.getDueMoney()) {
+                            }
+                            mp.update();
+                            if (MonopolyBoardPanel.currentPlayer.isMortageNotEnoughMoney()) {
+                                if (MonopolyBoardPanel.currentPlayer.money < MonopolyBoardPanel.currentPlayer.getDueMoney()) {
                                     MonopolyBoardPanel.currentPlayer.notEnoughMoney(MonopolyBoardPanel.currentPlayer.getDueMoney());
-                                    
-                                } else {
-                                    MonopolyBoardPanel.currentPlayer.payRent(MonopolyBoardPanel.currentPlayer.getPlayerToPayTo(),MonopolyBoardPanel.currentPlayer.getDueMoney());
-                                }
-                               }
-                                return;
-                                
-                            }    
-                        }
-                    }
-                    for(int i = 0; i < props.size(); i++){
-                        if( x.equalsIgnoreCase(props.get(i).getName())){
-                            if (props.get(i).mortgaged /*|| countries.get(j).getCountry().available*/){
-                                    showWarning("This Place is already Mortgaged");
-                                }
-                                
-                                else{
-                                    MonopolyBoardPanel.currentPlayer.money += props.get(i).getPrice()/2;
-                                    props.get(i).mortgaged= true;
-                                }
-                        }
-                    }
-            
-                    mp.update();
-                    if (MonopolyBoardPanel.currentPlayer.isMortageNotEnoughMoney())
-                    {
-                     if(MonopolyBoardPanel.currentPlayer.money < MonopolyBoardPanel.currentPlayer.getDueMoney()) {
-                         MonopolyBoardPanel.currentPlayer.notEnoughMoney(MonopolyBoardPanel.currentPlayer.getDueMoney());
 
-                     } else {
-                         MonopolyBoardPanel.currentPlayer.payRent(MonopolyBoardPanel.currentPlayer.getPlayerToPayTo(),MonopolyBoardPanel.currentPlayer.getDueMoney());
-                     }
+                                } else {
+                                    MonopolyBoardPanel.currentPlayer.payRent(MonopolyBoardPanel.currentPlayer.getPlayerToPayTo(), MonopolyBoardPanel.currentPlayer.getDueMoney());
+                                }
+                            }
+                            return;
+
+                        }
                     }
+                }
+                for (int i = 0; i < props.size(); i++) {
+                    if (x.equalsIgnoreCase(props.get(i).getName())) {
+                        if (props.get(i).mortgaged /*|| countries.get(j).getCountry().available*/) {
+                            showWarning("This Place is already Mortgaged");
+                        } else {
+                            MonopolyBoardPanel.currentPlayer.money += props.get(i).getPrice() / 2;
+                            props.get(i).mortgaged = true;
+                        }
+                    }
+                }
+
+                mp.update();
+                if (MonopolyBoardPanel.currentPlayer.isMortageNotEnoughMoney()) {
+                    if (MonopolyBoardPanel.currentPlayer.money < MonopolyBoardPanel.currentPlayer.getDueMoney()) {
+                        MonopolyBoardPanel.currentPlayer.notEnoughMoney(MonopolyBoardPanel.currentPlayer.getDueMoney());
+
+                    } else {
+                        MonopolyBoardPanel.currentPlayer.payRent(MonopolyBoardPanel.currentPlayer.getPlayerToPayTo(), MonopolyBoardPanel.currentPlayer.getDueMoney());
+                    }
+                }
                 System.out.println(MonopolyBoardPanel.currentPlayer.money);
-                        
+
             }
         });
-        
-        
-        unmortgageBtn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
+
+        unmortgageBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 int currentPlayerIndex = MonopolyBoardPanel.players.indexOf(MonopolyBoardPanel.currentPlayer);
-                    MainPanel mp = (MainPanel) CurrentPanel.this.getParent();
-                    playerPanel p = mp.getPlayersContainer().playerPanel.get(currentPlayerIndex);
-                    String x = p.getSelectedItem();
+                MainPanel mp = (MainPanel) CurrentPanel.this.getParent();
+                playerPanel p = mp.getPlayersContainer().playerPanel.get(currentPlayerIndex);
+                String x = p.getSelectedItem();
 
-                    CountriesGroup[] groups = MonopolyBoardPanel.currentPlayer.getGroupsArray();
-                    ArrayList<PropertyTile> props = MonopolyBoardPanel.currentPlayer.getProperties();
-                    for(int i = 0; i < groups.length; i++) {
-                        ArrayList<Country> countries = groups[i].getCountries();
-                        for(int j = 0; j < countries.size(); j++) {
-                            if( x.equalsIgnoreCase(countries.get(j).getName())){
-                                if (!countries.get(j).getCountry().mortgaged){
-                                   showWarning("This Place is already Yours");
-                                }
-                                
-                                else{
-                                    MonopolyBoardPanel.currentPlayer.money -= countries.get(j).getPrice()/2;
-                                    countries.get(j).getCountry().mortgaged= false;
-                                    //updatePanels();
+                CountriesGroup[] groups = MonopolyBoardPanel.currentPlayer.getGroupsArray();
+                ArrayList<PropertyTile> props = MonopolyBoardPanel.currentPlayer.getProperties();
+                for (int i = 0; i < groups.length; i++) {
+                    ArrayList<Country> countries = groups[i].getCountries();
+                    for (int j = 0; j < countries.size(); j++) {
+                        if (x.equalsIgnoreCase(countries.get(j).getName())) {
+                            if (!countries.get(j).getCountry().mortgaged) {
+                                showWarning("This Place is already Yours");
+                            } else {
+                                MonopolyBoardPanel.currentPlayer.money -= countries.get(j).getPrice() / 2;
+                                countries.get(j).getCountry().mortgaged = false;
+                                //updatePanels();
 
-                                    //MonopolyBoardPanel.allTiles[MonopolyBoardPanel.currentPlayer.place].remove(mortgageImgPanel);
-                                }
-                                mp.update();
-                                return;
+                                //MonopolyBoardPanel.allTiles[MonopolyBoardPanel.currentPlayer.place].remove(mortgageImgPanel);
                             }
+                            mp.update();
+                            return;
                         }
                     }
-                    for(int i = 0; i < props.size(); i++){
-                        if( x.equalsIgnoreCase(props.get(i).getName())){
-                            if (!props.get(i).mortgaged /*|| countries.get(j).getCountry().available*/){
-                                    showWarning("This Place is already Yours");
-                                }
-                                
-                                else{
-                                    MonopolyBoardPanel.currentPlayer.money -= props.get(i).getPrice()/2;
-                                    props.get(i).mortgaged= false;
-                                }
+                }
+                for (int i = 0; i < props.size(); i++) {
+                    if (x.equalsIgnoreCase(props.get(i).getName())) {
+                        if (!props.get(i).mortgaged /*|| countries.get(j).getCountry().available*/) {
+                            showWarning("This Place is already Yours");
+                        } else {
+                            MonopolyBoardPanel.currentPlayer.money -= props.get(i).getPrice() / 2;
+                            props.get(i).mortgaged = false;
                         }
                     }
-                    
-                    mp.update();
-                    System.out.println(MonopolyBoardPanel.currentPlayer.money);
-            }});
-        
+                }
+
+                mp.update();
+                System.out.println(MonopolyBoardPanel.currentPlayer.money);
+            }
+        });
+
         sellBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -298,12 +272,12 @@ public class CurrentPanel extends JPanel{
                 MainPanel mp = (MainPanel) CurrentPanel.this.getParent();
                 playerPanel p = mp.getPlayersContainer().playerPanel.get(currentPlayerIndex);
                 String x = p.getSelectedItem();
-                
+
                 CountriesGroup[] groups = MonopolyBoardPanel.currentPlayer.getGroupsArray();
-                for(int i = 0; i < groups.length; i++) {
+                for (int i = 0; i < groups.length; i++) {
                     ArrayList<Country> countries = groups[i].getCountries();
-                    for(int j = 0; j < countries.size(); j++) {
-                        if( x.equalsIgnoreCase(countries.get(j).getName())) {
+                    for (int j = 0; j < countries.size(); j++) {
+                        if (x.equalsIgnoreCase(countries.get(j).getName())) {
                             MonopolyBoardPanel.currentPlayer.money += countries.get(j).getPrice();
                             countries.get(j).setTax(countries.get(j).getTotalFees());
                             countries.get(j).setOwner(null);
@@ -313,9 +287,9 @@ public class CurrentPanel extends JPanel{
                         }
                     }
                 }
-                
-                for(int i = 0; i < MonopolyBoardPanel.currentPlayer.getProperties().size(); i++) {
-                    if( x.equalsIgnoreCase(MonopolyBoardPanel.currentPlayer.getProperties().get(i).getName())) {
+
+                for (int i = 0; i < MonopolyBoardPanel.currentPlayer.getProperties().size(); i++) {
+                    if (x.equalsIgnoreCase(MonopolyBoardPanel.currentPlayer.getProperties().get(i).getName())) {
                         MonopolyBoardPanel.currentPlayer.money += MonopolyBoardPanel.currentPlayer.getProperties().get(i).getPrice();
                         MonopolyBoardPanel.currentPlayer.getProperties().get(i).setOwner(null);
                         MonopolyBoardPanel.currentPlayer.getProperties().remove(MonopolyBoardPanel.currentPlayer.getProperties().get(i));
@@ -325,10 +299,10 @@ public class CurrentPanel extends JPanel{
                 }
             }
         });
-         this.add(buySellPnl);
-         this.add(tosavelabel);
-         this.add(savinglabel);
-      /*   saveBtn.addActionListener(new ActionListener() {
+        this.add(buySellPnl);
+        this.add(tosavelabel);
+        this.add(savinglabel);
+        /*   saveBtn.addActionListener(new ActionListener() {
            @Override
              public void actionPerformed(ActionEvent ev) {
                 saveGame();
@@ -337,69 +311,55 @@ public class CurrentPanel extends JPanel{
          
          this.add(saveBtn);*/
     }
-    
-   /* public void saveGame() {
+
+    /* public void saveGame() {
         MainPanel p = (MainPanel) this.getParent();
         p.board.save();
     }*/
-   
-    
-    
-    
-    public void UpdateCurrentDetails()
-    {
+    public void UpdateCurrentDetails() {
         int location = MonopolyBoardPanel.players.get(MonopolyBoardPanel.turn).place;
-     try{
-               currImage = new ImageIcon(ImageIO.read(new File("Monopoly Board/" 
+        try {
+            currImage = new ImageIcon(ImageIO.read(new File("Monopoly Board/"
                     + MonopolyBoardPanel.allTiles[location].imgName)));
-                       }
-               catch(Exception ex){
-                   
-               }
-         
-    
-       if(location>=0 && location<11)
-       this.TileImageLabel.setIcon(currImage);
-       
-       else if(location>=11 && location <20)
-       {
-           
-           RotatedIcon ri = new RotatedIcon(currImage, 270.0);
-           this.TileImageLabel.setIcon(ri);
-       
-       }
-       
-       else if(location>=20 && location <=30)
-       {
-           
-           RotatedIcon ri = new RotatedIcon(currImage, 180.0);
-           this.TileImageLabel.setIcon(ri);
-       
-       }
-       else if(location>30 && location<=39)
-       {
+        } catch (Exception ex) {
+
+        }
+
+        if (location >= 0 && location < 11) {
+            this.TileImageLabel.setIcon(currImage);
+        } else if (location >= 11 && location < 20) {
+
+            RotatedIcon ri = new RotatedIcon(currImage, 270.0);
+            this.TileImageLabel.setIcon(ri);
+
+        } else if (location >= 20 && location <= 30) {
+
+            RotatedIcon ri = new RotatedIcon(currImage, 180.0);
+            this.TileImageLabel.setIcon(ri);
+
+        } else if (location > 30 && location <= 39) {
             RotatedIcon ri = new RotatedIcon(currImage, 90.0);
-           this.TileImageLabel.setIcon(ri);
-       
-       }
-     LabelName.setText(getCurrentPlayerName());
- 
+            this.TileImageLabel.setIcon(ri);
+
+        }
+        LabelName.setText(getCurrentPlayerName());
+
     }
-    
-      
-     public JButton getBuyBtn() {
+
+    public JButton getBuyBtn() {
         return buyBtn;
     }
-     private void showWarning(String msg) {
-        JOptionPane.showMessageDialog(null, msg,
-                            "", 3);
-    }
-   @Override
-  protected void paintComponent(Graphics g) {
 
-    super.paintComponent(g);
+    private void showWarning(String msg) {
+        JOptionPane.showMessageDialog(null, msg,
+                "", 3);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+
+        super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, null);
-}
- 
-    
+    }
+
 }
